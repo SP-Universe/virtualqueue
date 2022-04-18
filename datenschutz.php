@@ -7,12 +7,12 @@
     connectmysql();
     $guestid = checkforcookie();
     if($guestid != null){
-        if(get_groupid_of_user($guestid) > get_current_group()){
+        if(get_data_from_guest($guestid, "groupid") > $current_group){
             echo '
                 <p>Deine Gast-ID: <kbd>' . $guestid . '</kbd></p>
-                <p>Deine Position in der Warteschlange: ' . (get_groupid_of_user($guestid)-get_current_group()) . ' </p>
+                <p>Deine Position in der Warteschlange: ' . (get_data_from_guest($guestid, "groupid")-$current_group) . ' </p>
             ';
-        } else if (get_groupid_of_user($guestid) == get_current_group()){
+        } else if (get_data_from_guest($guestid, "groupid") == $current_group){
             echo '
                 <p>Deine Gast-ID: <kbd>' . $guestid . '</kbd></p>
                 <p>Deine Position in der Warteschlange: DU BIST AN DER REIHE!!! </p>

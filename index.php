@@ -66,6 +66,7 @@
                 echo '
 
                 <p>Solltest du einen neuen Platz in der Warteschlange benötigen, klicke hier:</p>
+                <br>
                 <p><a href="new_guest.php" class="button">Neuer Platz in der Warteschlange</a></p>
                 <br>
                 <br>

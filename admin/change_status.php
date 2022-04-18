@@ -1,9 +1,12 @@
 <?php
+    ob_start();
     require '../main.php';
 
+    header("Location: ../admin.php");
+    
     connectmysql();
 
-    header("Location: ../admin.php");
+    
 
     if(checklogin()){
         if(isset($_POST['status'])){

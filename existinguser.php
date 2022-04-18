@@ -1,4 +1,5 @@
 <?php
+    ob_start();
     require 'main.php';
     connectmysql();
     if (isset($_POST['guestid'])) {
