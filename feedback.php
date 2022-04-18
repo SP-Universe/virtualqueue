@@ -21,35 +21,39 @@
 
 <br>
 
-<form>
-  <div class="form-group">
-    <label>Wie hat es dir gefallen?</label> <select class="form-control" name="satisfaction">
-      <option value="5">
-        Es war großartig!
-      </option>
+<form method="post" action="feedback_sent.php">
 
-      <option value="4">
-        Es war toll
-      </option>
-
-      <option value="3">
-        Es war unterhaltsam
-      </option>
-
-      <option value="2">
-        Es war nicht so toll
-      </option>
-
-      <option value="1">
-        Es war schrecklich!
-      </option>
-    </select>
+  <div class="container">
+  <div class="feedback">
+    <p>Wie hat dir die Show gefallen?</p>
+    <div class="rating">
+      <input type="radio" name="rating" id="rating-5" value="5">
+      <label for="rating-5"></label>
+      <input type="radio" name="rating" id="rating-4" value="4">
+      <label for="rating-4"></label>
+      <input type="radio" name="rating" id="rating-3" value="3">
+      <label for="rating-3"></label>
+      <input type="radio" name="rating" id="rating-2" value="2">
+      <label for="rating-2"></label>
+      <input type="radio" name="rating" id="rating-1" value="1">
+      <label for="rating-1"></label>
+      <div class="emoji-wrapper">
+        <div class="emoji">
+          <img class="rating-0" src="images/hw40a_emoji_neutral.svg" alt="Logo des Halloweenhauses">
+          <img class="rating-1" src="images/hw40a_emoji_reallysad.svg" alt="Logo des Halloweenhauses">
+          <img class="rating-2" src="images/hw40a_emoji_sad.svg" alt="Logo des Halloweenhauses">
+          <img class="rating-3" src="images/hw40a_emoji_neutral.svg" alt="Logo des Halloweenhauses">
+          <img class="rating-4" src="images/hw40a_emoji_happy.svg" alt="Logo des Halloweenhauses">
+          <img class="rating-5" src="images/hw40a_emoji_reallyhappy.svg" alt="Logo des Halloweenhauses">
+        </div>
+      </div>
+    </div>
   </div>
+</div>
 
   <div class="form-group">
     <label>Was könnten wir nächstes Jahr verbessern?</label> 
-    <textarea class="form-control" name="betternexttime" placeholder="Gib uns hier dein Feedback">
-</textarea>
+    <textarea rows="3" cols="33" class="form-control" name="text"></textarea>
   </div>
 
   <div class="form-group">

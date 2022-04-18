@@ -37,9 +37,29 @@
                     </div>
                 <?php }
             }
-            
+
             require 'main.php';
             connectmysql();
+
+            if($current_status != "open"){
+                if($current_status === "closedbefore"){
+                    echo'<div class="closed_banner">
+                        <p>Unsere Warteschlange ist zur Zeit geschlossen. Bitte versuch es später erneut!</p>
+                    </div>';
+                } else if($current_status === "maintenance"){
+                    echo'<div class="status_banner">
+                        <p>Wir haben aktuell technische Probleme. Es kann zu etwas längeren Wartezeiten kommen</p>
+                    </div>';
+                } else if($current_status === "closedbefore"){
+                    echo'<div class="closed_banner">
+                        <p>Die Warteschlange ist noch nicht geöffnet. Versuch es später erneut!</p>
+                    </div>';
+                } else if($current_status === "closedafter"){
+                    echo'<div class="closed_banner">
+                        <p>Die Warteschlange ist nicht mehr geöffnet!</p>
+                    </div>';
+                }
+            }
             
             $guestid = checkforcookie();
             if($guestid === null){
@@ -58,13 +78,14 @@
             } else {
                 if(get_data_from_guest($guestid, "groupid") > $current_group){
                     echo '
-                    <p>Deine Gast-ID: <kbd>' . $guestid . '</kbd></p>
-                    <p>Deine Position in der Warteschlange: </p>
+                    <p>Deine ID: <kbd>' . $guestid . '</kbd></p>
+                    <p>Gruppen vor dir: </p>
                     <div class="placeinline_wrap"> 
                         <div class="placeinline">
                             ' . (get_data_from_guest($guestid, "groupid")-$current_group) . ' 
                         </div>
                     </div>
+                    <p><small><b>Tipp</b>: Mache einen Screenshot um deine ID nicht zu vergessen</small></p>
                     <h3>Vorraussichtliche Eintrittszeit: ' . substr(get_data_from_group(get_data_from_guest($guestid, "groupid"), "time"), 0 ,-3) . '</h3>
                     <p><a href="leavequeue.php" class="button">Aus der Warteschlange austreten</a></p>
                     ';

@@ -6,10 +6,10 @@
     header("Location: ../admin.php");
 
     if(checklogin()){
-        if(isset($_POST['group'])){
+        if(isset($_POST['status'])){
 
-            $setgroup = $_POST['group'];
-            set_data_for_settings("current_group", $setgroup);
+            $status = $_POST['status'];
+            set_data_for_settings("current_status", $status);
         }
     } else {
         echo'FORBIDDEN!';

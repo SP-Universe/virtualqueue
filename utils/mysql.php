@@ -11,6 +11,7 @@
         global $table_guests;
         global $table_settings;
         global $table_groups;
+        global $table_feedback;
 
         // Create connection
         $conn = new mysqli($servername, $username, $password);
@@ -43,6 +44,22 @@
         $sql = "CREATE TABLE IF NOT EXISTS " . $table_groups . " (id INT(6) AUTO_INCREMENT PRIMARY KEY, groupid VARCHAR(255) NOT NULL, time TIME, guestcount INT)";
         if ($conn->query($sql) === FALSE) {
             echo "Error creating groupstable: " . $conn->error;
+        }
+
+        $sql = "CREATE TABLE IF NOT EXISTS " . $table_feedback . " (id INT(6) AUTO_INCREMENT PRIMARY KEY, time TIMESTAMP, stars INT, text VARCHAR(255))";
+        if ($conn->query($sql) === FALSE) {
+            echo "Error creating feedbacktable: " . $conn->error;
+        }
+    }
+
+    function add_feedback($stars, $text){
+        global $conn;
+        global $table_feedback;
+
+        $sql = "INSERT INTO " . $table_feedback . "(time, stars, text) VALUES (CURRENT_TIME(), " . $stars . ",  '" . $text . "')";
+
+        if ($conn->query($sql) === FALSE) {
+            echo "Error creating feedback: " . $conn->error;
         }
     }
 
@@ -98,7 +115,7 @@
         global $conn;
         global $table_settings;
 
-        $sql = "UPDATE " . $table_settings . " SET data = '" . $data . "' WHERE identifier = " . $identifier . "";
+        $sql = "UPDATE " . $table_settings . " SET data = '" . $data . "' WHERE identifier = '" . $identifier . "';";
         if(mysqli_query($conn, $sql)){
             return true;
         } else {

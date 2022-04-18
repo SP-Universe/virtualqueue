@@ -133,7 +133,17 @@
   function load_settings()
   {
     global $current_group;
+    global $current_status;
     $current_group = get_data_from_setting("current_group");
+    if($current_group === null){
+      set_data_for_settings("current_group", 0);
+      $current_group = 0;
+    }
+    $current_status = get_data_from_setting("current_status");
+    if($current_status === null){
+      set_data_for_settings("current_status", "closedbefore");
+      $current_status = "closedbefore";
+    }
   }
 
   function sum_the_time($time1, $time2) {
