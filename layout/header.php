@@ -18,11 +18,11 @@
 
     <meta property="og:title" content="HW40a - Virtual Queue" />
     <meta property="og:site_name" content="HW40a - Virtual Queue" />
-    <meta property="og:type" content="article" />
+    <meta property="og:type" content="website" />
     <meta property="og:description" content="Die virtuelle Warteschlange des Halloweenhaus Schmalenbeck">
     <meta property="og:url" content="$Link" />
-    <meta property="og:image" content="https://stormarnschule.de/images/socialMediaImage.jpg" />
-    <meta property="og:image:alt" content="Ein Bild von der Stormarnschule Ahrensburg" />
+    <meta property="og:image" content="https://i.ibb.co/1QDXbC8/HW40a-Profile-Pic.jpg" />
+    <meta property="og:image:alt" content="Das Logo des Halloweenhaus Schmalenbeck" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />

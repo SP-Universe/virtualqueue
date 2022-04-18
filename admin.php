@@ -13,11 +13,14 @@
     echo'<a href="admin/next_group.php" class="button">Nächste Gruppe</a>';
 
     echo'
-    <div class="grouplist">
-        <p>ID</p>
-        <p>Time</p>
-        <p>Guests</p>
-        <p>Frei</p>
+    <div class="groups">
+        <div class="grouplist">
+            <p class="grouplist_entry">ID</p>
+            <p class="grouplist_entry">Time</p>
+            <p class="grouplist_entry">Guests</p>
+            <p class="grouplist_entry">Frei</p>
+            <p class="grouplist_entry double">IDs</p>
+        </div>
     </div>
     ';
 
@@ -25,33 +28,24 @@
     echo'<div class="groups" id=list>';
     if($result != null){
         foreach ($result as $g){
-            if($current_group == $g['groupid']){
-                echo'
-                    <div class="grouplist current">
-                        <p class="grouplist_entry">' . $g['groupid'] . '</p>
-                        <p class="grouplist_entry">' . substr($g['time'],0 ,-3) . '</p>
-                        <p class="grouplist_entry">' . $g['guestcount'] . '</p>
-                        <p class="grouplist_entry">' . ($max_users_per_group - $g['guestcount']) . '</p>
+            $guestids = get_all_ids_from_group($g['groupid']);
+            ?>
+                <div class="grouplist <?php if($current_group == $g['groupid']){ echo 'current';} else if ($current_group > $g['groupid']) { echo 'past';}?>">
+                    <p class="grouplist_entry"><?php echo $g['groupid'];?></p>
+                    <p class="grouplist_entry"><?php echo substr($g['time'],0 ,-3);?></p>
+                    <p class="grouplist_entry"><?php echo $g['guestcount'];?></p>
+                    <p class="grouplist_entry"><?php echo ($max_users_per_group - $g['guestcount']);?></p>
+                    <div class="grouplist_entry double" data-behaviour="showhide">
+                        <?php foreach($guestids as $gid){
+                            ?>
+                                <span data-behaviour="showhide"><kbd><?php echo $gid['guestid']?></kbd></span>
+                            <?php
+                            }
+                        ?>
                     </div>
-                ';
-            } else if ($current_group > $g['groupid']) {
-                echo'
-                    <div class="grouplist past">
-                        <p class="grouplist_entry">' . $g['groupid'] . '</p>
-                        <p class="grouplist_entry">' . substr($g['time'],0 ,-3) . '</p>
-                        <p class="grouplist_entry">' . $g['guestcount'] . '</p>
-                        <p class="grouplist_entry">' . ($max_users_per_group - $g['guestcount']) . '</p>
-                    </div>
-                ';
-            } else {
-                echo'
-                    <div class="grouplist">
-                        <p class="grouplist_entry">' . $g['groupid'] . '</p>
-                        <p class="grouplist_entry">' . substr($g['time'],0 ,-3) . '</p>
-                        <p class="grouplist_entry">' . $g['guestcount'] . '</p>
-                        <p class="grouplist_entry">' . ($max_users_per_group - $g['guestcount']) . '</p>
-                    </div>
-                ';
+                </div>
+            <?php
+            if($current_group < $g['groupid']){
                 $waitingguests += $g['guestcount'];
             }
         }
@@ -82,21 +76,22 @@
     close_connection();
 ?>
 
-<script> 
-$(document).ready(function(){
-setInterval(function(){
-      $("#list").load(window.location.href + " #list" );
-}, 3000);
-});
-</script>
-
 <script>
-        $(window).scroll(function () {
-            sessionStorage.scrollTop = $(this).scrollTop();
-        });
-        $(document).ready(function () {
-            if (sessionStorage.scrollTop != "undefined") {
-                $(window).scrollTop(sessionStorage.scrollTop);
-            }
-        });
+document.addEventListener("DOMContentLoaded", function (event) {
+    //Show hide
+    let showHideElements = [...document.querySelectorAll('[data-behaviour="showhide"]')];
+
+    showHideElements.forEach((element) => {
+        element.addEventListener("click", (e) => {
+            e.preventDefault();
+            element.parentNode.classList.toggle("visible")
+        })
+    });
+});
+
+$(document).ready(function(){
+    setInterval(function(){
+        //$("#list").load(window.location.href + " #list" );
+    }, 3000);
+});
 </script>

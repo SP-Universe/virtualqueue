@@ -8,8 +8,10 @@
 
     if(checklogin()){
         if(isset($_POST['group'])){
-
             $setgroup = $_POST['group'];
+            set_data_for_settings("current_group", $setgroup);
+        } else if(isset($_GET['group'])){
+            $setgroup = $_GET['group'];
             set_data_for_settings("current_group", $setgroup);
         }
     } else {

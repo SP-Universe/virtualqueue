@@ -182,6 +182,19 @@
         }
     }
 
+    function get_all_ids_from_group($groupid){
+        global $conn;
+        global $table_guests;
+
+        $sql = "SELECT * FROM " . $table_guests . " WHERE groupid = '" . $groupid . "'";
+
+        if($result = mysqli_query($conn, $sql)){
+            if(mysqli_num_rows($result) > 0){
+                return $result;
+            }
+        }
+    }
+
     function get_next_group($guestid, $number_of_new_guests)
     {
         global $table_guests;

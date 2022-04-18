@@ -41,6 +41,9 @@
             require 'main.php';
             connectmysql();
 
+            $guestid = checkforcookie();
+            $guestgroup = get_data_from_guest($guestid, "groupid");
+
             ?>
                 <div class="reloadingpart" id="placeinlinereload">
             <?php
@@ -65,7 +68,7 @@
                 }
             }
 
-            $guestid = checkforcookie();
+            
             if($guestid === null){
                 ?>
 
@@ -83,23 +86,27 @@
 
                 <?php
             } else {
+                $guestcount = get_data_from_guest($guestid, "guestcount");
                 ?>
-                    <p>Deine ID: <kbd><?php echo $guestid;?> </kbd> | Deine Gruppe: <kbd><?php echo get_data_from_guest($guestid, "groupid");?> </kbd></p>
-                    <p>Gruppen vor dir: </p>
+                    <p>Deine ID: <kbd><?php echo $guestid;?></kbd> | Gruppe: <kbd><?php echo $guestgroup;?> </kbd></p>
+                    <p>Du hast dich mit <?php echo $guestcount; if($guestcount > 1){echo ' Personen';}else{echo ' Person';}?> angestellt</p>
+                    
                 <?php
                 if(get_data_from_guest($guestid, "groupid") > $current_group){
                     ?>
-
+                    <p>Gruppen vor dir: </p>
                     <div class="placeinline_wrap"> 
                         <div class="placeinline">
                             <?php echo (get_data_from_guest($guestid, "groupid")-$current_group); ?> 
                         </div>
                     </div>
                     <h3>Vorraussichtliche Eintrittszeit: <?php echo substr(get_data_from_group(get_data_from_guest($guestid, "groupid"), "time"), 0 ,-3); ?></h3>
-                    <p><small><b>Tipp</b>: Mache einen Screenshot um deine ID nicht zu vergessen</small></p>
+
+                    <p><a href="leavequeue.php" class="button">Aus der Warteschlange austreten</a></p>
 
                     <?php
                 } else if (get_data_from_guest($guestid, "groupid") == $current_group){
+                    
                     ?>
                     
                     <div class="placeinline_wrap finished"> 
@@ -107,22 +114,32 @@
                             <p>DU BIST AN DER REIHE!</p>
                             <p><small>(<?php echo get_data_from_guest($guestid, "guestcount");?> Personen)</small></p>
                         </div>
-                    </div> 
-                    <p><a href="feedback.php" class="button">ICH WAR IN DER SHOW</a></p>
+                    </div>
+
+                    <p><a href="leavequeue.php" class="button">Aus der Warteschlange austreten</a></p>
                     
                     <?php
                 } else {
                     ?>
+
                     <div class="placeinline_wrap toolate"> 
                         <div class="placeinline">
-                            <p>Etwas lief schief. Melde dich am Eingang! (ERROR <?php echo get_data_from_guest($guestid, "groupid");?> >= <?php echo $current_group;?>)</p>
+                            <h3>VIELEN DANK FÜR DEINEN BESUCH!</h3>
+                            <p>Wir würden uns sehr über eine Spende in den Spendenschädel und eine Bewertung freuen:</p>
+                            <a href="feedback.php" class="button">SHOW BEWERTEN</a>
+                            <div class="socials">
+                                <a href="https://www.instagram.com/halloweenhaus.schmalenbeck/"><img class="title_image" src="images/logo_instagram.png" alt="Instagram"></a>
+                                <a href="https://www.youtube.com/channel/UCmtPYNrj6xp-ed77zzSzUIQ"><img class="title_image" src="images/logo_youtube.png" alt="Youtube"></a>
+                            </div>
                         </div>
                     </div>
+                    <a href="leavequeue.php" class="button">Zur Startseite</a>
+
                     <?php
                 }
                 ?>
                     </div>
-                    <p><a href="leavequeue.php" class="button">Aus der Warteschlange austreten</a></p>
+                    
                 <?php
             }
             close_connection();
@@ -131,6 +148,10 @@
 
 
 <script> 
+var audioplayed = false;
+var guestgroup;
+var currentgroup;
+
 document.addEventListener("DOMContentLoaded", function (event) {
     //Show hide
     let showHideElements = [...document.querySelectorAll('[data-behaviour="showhide"]')];
@@ -141,11 +162,25 @@ document.addEventListener("DOMContentLoaded", function (event) {
             element.parentNode.classList.toggle("hidden")
         })
     });
+
+    currentgroup = "<?php echo"$current_group";?>";
+    guestgroup = "<?php echo "$guestgroup";?>";
 });
 
 $(document).ready(function(){
 setInterval(function(){
-      $("#placeinlinereload").load(location.href + " #placeinlinereload" );
+    $("#placeinlinereload").load(location.href + " #placeinlinereload" );
+    
+    currentgroup = "<?php echo"$current_group";?>";
+    if(guestgroup == currentgroup){
+        if(!audioplayed){
+            console.log("Hello world!");
+            var audio = new Audio('sound/laugh.wav');
+            audio.muted = false;
+            audio.play();
+            audioplayed = true;
+        }
+    }
 }, 10000);
 });
 </script>
