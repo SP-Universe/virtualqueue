@@ -8,7 +8,9 @@
 
     $result = get_all_groups();
 
-    echo'<p>Aktuelle Gruppe: ' . $current_group . '</p>';
+    echo'<p>Aktuelle Gruppe: ' . $current_group . ' | Aktueller Status: ' . $current_status . '</p>';
+
+    echo'<a href="admin/next_group.php" class="button">Nächste Gruppe</a>';
 
     echo'
     <div class="grouplist">
@@ -20,7 +22,7 @@
     ';
 
     $waitingguests = 0;
-
+    echo'<div class="groups" id=list>';
     if($result != null){
         foreach ($result as $g){
             if($current_group == $g['groupid']){
@@ -57,14 +59,12 @@
         echo '<p>- Keine Gruppen gefunden! -</p>';
     }
 
-    echo'<br><p>Currently waiting: ' . $waitingguests . '</p>';
+    echo'</div><br><p>Currently waiting: ' . $waitingguests . '</p>';
 
     echo'<form class="group_change_form" method="post" action="admin/change_group.php">
         <input type="number" value="'.$current_group.'" name="group">
         <input type="submit" value="Change current group" accesskey="s" name="submit">
     </form>';
-
-    echo'<a href="admin/next_group.php" class="button">Nächste Gruppe</a>';
 
 ?>
     
@@ -81,3 +81,22 @@
 <?php
     close_connection();
 ?>
+
+<script> 
+$(document).ready(function(){
+setInterval(function(){
+      $("#list").load(window.location.href + " #list" );
+}, 3000);
+});
+</script>
+
+<script>
+        $(window).scroll(function () {
+            sessionStorage.scrollTop = $(this).scrollTop();
+        });
+        $(document).ready(function () {
+            if (sessionStorage.scrollTop != "undefined") {
+                $(window).scrollTop(sessionStorage.scrollTop);
+            }
+        });
+</script>

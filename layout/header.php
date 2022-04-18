@@ -35,6 +35,7 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon-32x32.png" />
     <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 <body>
     <div class="content_wrap">

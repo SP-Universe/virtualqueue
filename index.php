@@ -41,6 +41,10 @@
             require 'main.php';
             connectmysql();
 
+            ?>
+                <div class="reloadingpart" id="placeinlinereload">
+            <?php
+
             if($current_status != "open"){
                 if($current_status === "closedbefore"){
                     echo'<div class="closed_banner">
@@ -60,73 +64,74 @@
                     </div>';
                 }
             }
-            
+
             $guestid = checkforcookie();
             if($guestid === null){
-                echo '
+                ?>
 
                 <p>Solltest du einen neuen Platz in der Warteschlange benötigen, klicke hier:</p>
                 <br>
                 <p><a href="new_guest.php" class="button">Neuer Platz in der Warteschlange</a></p>
                 <br>
                 <br>
-                <p>Solltest du bereits eine Gast-ID erhalten haben, gebe diese bitte hier ein und klicke dann den Button:</p>';
-                
-                echo'<form method="post" action="existinguser.php">
+                <p>Solltest du bereits eine Gast-ID erhalten haben, gebe diese bitte hier ein und klicke dann den Button:</p>
+                <br>
+                <form method="post" action="existinguser.php">
                     <input type="text" name="guestid">
                     <input type="submit" value="Absenden" accesskey="s" name="submit">
-                </form>';
+                </form>
+
+                <?php
             } else {
-                if(get_data_from_guest($guestid, "groupid") > $current_group){
-                    echo '
-                    <p>Deine ID: <kbd>' . $guestid . '</kbd></p>
+                ?>
+                    <p>Deine ID: <kbd><?php echo $guestid;?> </kbd> | Deine Gruppe: <kbd><?php echo get_data_from_guest($guestid, "groupid");?> </kbd></p>
                     <p>Gruppen vor dir: </p>
+                <?php
+                if(get_data_from_guest($guestid, "groupid") > $current_group){
+                    ?>
+
                     <div class="placeinline_wrap"> 
                         <div class="placeinline">
-                            ' . (get_data_from_guest($guestid, "groupid")-$current_group) . ' 
+                            <?php echo (get_data_from_guest($guestid, "groupid")-$current_group); ?> 
                         </div>
                     </div>
+                    <h3>Vorraussichtliche Eintrittszeit: <?php echo substr(get_data_from_group(get_data_from_guest($guestid, "groupid"), "time"), 0 ,-3); ?></h3>
                     <p><small><b>Tipp</b>: Mache einen Screenshot um deine ID nicht zu vergessen</small></p>
-                    <h3>Vorraussichtliche Eintrittszeit: ' . substr(get_data_from_group(get_data_from_guest($guestid, "groupid"), "time"), 0 ,-3) . '</h3>
-                    <p><a href="leavequeue.php" class="button">Aus der Warteschlange austreten</a></p>
-                    ';
+
+                    <?php
                 } else if (get_data_from_guest($guestid, "groupid") == $current_group){
-                    echo '
-                    <p>Deine Gast-ID: <kbd>' . $guestid . '</kbd></p>
-                    <p>Deine Position in der Warteschlange: </p>
+                    ?>
+                    
                     <div class="placeinline_wrap finished"> 
                         <div class="placeinline">
                             <p>DU BIST AN DER REIHE!</p>
-                            <p><small>(' . get_data_from_guest($guestid, "guestcount") . ' Personen)</small></p>
+                            <p><small>(<?php echo get_data_from_guest($guestid, "guestcount");?> Personen)</small></p>
                         </div>
-                    </div>
-                    <p><a href="feedback.php" class="button">Ich habe die Show gesehen</a></p>
-                    <br>
-                    <p><a href="leavequeue.php" class="button">Aus der Warteschlange austreten</a></p>
+                    </div> 
+                    <p><a href="feedback.php" class="button">ICH WAR IN DER SHOW</a></p>
                     
-                    ';
+                    <?php
                 } else {
-                    echo '
-                    <p>Deine Gast-ID: <kbd>' . $guestid . '</kbd></p>
-                    <p>Deine Position in der Warteschlange: </p>
+                    ?>
                     <div class="placeinline_wrap toolate"> 
                         <div class="placeinline">
-                            <p>Etwas lief schief. Melde dich am Eingang! (ERROR ' . get_data_from_guest($guestid, "groupid") . ' >= ' . $current_group . ')</p>
+                            <p>Etwas lief schief. Melde dich am Eingang! (ERROR <?php echo get_data_from_guest($guestid, "groupid");?> >= <?php echo $current_group;?>)</p>
                         </div>
                     </div>
-                    <p><a href="leavequeue.php" class="button">Aus der Warteschlange austreten</a></p>
-                    ';
+                    <?php
                 }
-                
+                ?>
+                    </div>
+                    <p><a href="leavequeue.php" class="button">Aus der Warteschlange austreten</a></p>
+                <?php
             }
             close_connection();
         include 'layout/footer.php';
     ?>
 
 
-<script>
+<script> 
 document.addEventListener("DOMContentLoaded", function (event) {
-    window.setInterval('refresh()', 30000);
     //Show hide
     let showHideElements = [...document.querySelectorAll('[data-behaviour="showhide"]')];
 
@@ -138,8 +143,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
 });
 
-function refresh() {
-    window.location.reload();
-    window.location.href =  window.location.href.split("?")[0];
-}
+$(document).ready(function(){
+setInterval(function(){
+      $("#placeinlinereload").load(location.href + " #placeinlinereload" );
+}, 10000);
+});
 </script>

@@ -5,7 +5,12 @@
     connectmysql();
 
     if(isset($_POST['rating'])){
-        add_feedback($_POST['rating'], $_POST['text']);
+        if($_POST['rating'] != null){
+            add_feedback($_POST['rating'], $_POST['text']);
+        }
+        else {
+            add_feedback(0, $_POST['text']);
+        }
     }
 ?>
 
