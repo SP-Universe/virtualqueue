@@ -71,6 +71,7 @@
         <form class="group_change_form" method="post" action="admin/change_status.php">
             <select id="status" name="status">
                 <option value="closedbefore" <?php if($current_status === "closedbefore"){echo'selected';}?>>closedbefore</option>
+                <option value="showclosed" <?php if($current_status === "showclosed"){echo'selected';}?>>showclosed</option>
                 <option value="open" <?php if($current_status === "open"){echo'selected';}?>>open</option>
                 <option value="maintenance" <?php if($current_status === "maintenance"){echo'selected';}?>>maintenance</option>
                 <option value="closedafter" <?php if($current_status === "closedafter"){echo'selected';}?>>closedafter</option>
@@ -109,4 +110,25 @@ $(document).ready(function(){
         //$("#list").load(window.location.href + " #list" );
     }, 3000);
 });
+
+
+function showData(data) {
+    
+}
+
+function reloadData(){
+    fetch('status.php')
+    .then(response => response.json())
+    .then(data => {
+        showData(data);
+    });
+}
+
+setInterval(function(){ 
+	reloadData();
+}, 5000);
+
+reloadData();
+
+</script>
 </script>

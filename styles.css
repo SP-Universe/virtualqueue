@@ -6,29 +6,34 @@
     src: local(''),
          url('fonts/cairo-v17-latin-200.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
          url('fonts/cairo-v17-latin-200.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-  /* cairo-regular - latin */
-  @font-face {
+}
+/* cairo-regular - latin */
+@font-face {
     font-family: 'Cairo';
     font-style: normal;
     font-weight: 400;
     src: local(''),
          url('fonts/cairo-v17-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
          url('fonts/cairo-v17-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
-  /* cairo-700 - latin */
-  @font-face {
+}
+/* cairo-700 - latin */
+@font-face {
     font-family: 'Cairo';
     font-style: normal;
     font-weight: 700;
     src: local(''),
          url('fonts/cairo-v17-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
          url('fonts/cairo-v17-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  }
+}
 
-  *{
-      box-sizing: content-box;
-  }
+*{
+    box-sizing: content-box;
+}
+
+:root {
+    --main-button-color: rgb(0, 56, 56);
+    --green-color: rgb(0, 88, 0);
+}
 
 body{
     min-height: 100vh;
@@ -82,7 +87,7 @@ h3{
     right: 0;
     width: 100%;
     margin: 0 -10px;
-    background-color: rgba(145, 94, 0, 0.9);
+    background-color: var(--main-button-color);
     backdrop-filter: blur(3px);
     padding: 15px 10px;
     box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.7);
@@ -169,7 +174,7 @@ kbd {
 }
 
 .grouplist.current{
-    background-color: green;
+    background-color: var(--green-color);
 }
 
 .group_change_form{
@@ -320,7 +325,7 @@ input[type="submit"]:hover{
 }
 
 .button{
-    background-color: rgb(0, 56, 56);
+    background-color: var(--main-button-color);
     padding: 10px 20px;
     border-radius: 20px;
     text-decoration: none;
@@ -375,13 +380,13 @@ input[type="submit"]:hover{
 }
 
 .placeinline_wrap.finished{
-    background-color: green;
+    background-color: var(--green-color);
     font-size: 30px;
     font-weight: 500;
 }
 
 .placeinline_wrap.toolate{
-    background-color: rgb(53, 82, 0);
+    background-color: var(--green-color);
     font-size: 18px;
     line-height: 1.5;
     font-weight: 500;
@@ -461,12 +466,6 @@ input[type="submit"]:hover{
     .placeinline_wrap{
         width: 450px;
         height: 450px;
-        font-size: 400px;
-    }
-    .placeinline_wrap.finished{
-        font-size: 50px;
-    }
-    .placeinline_wrap.toolate{
         font-size: 18px;
     }
 }
@@ -488,7 +487,9 @@ input[type="submit"]:hover{
     }
 }
 
-
+.placeinline_block{
+    overflow: hidden;
+}
 
 
 
@@ -604,4 +605,8 @@ input[type="submit"]:hover{
   flex-wrap: wrap;
   align-items: center;
   box-shadow: 0 4px 30px rgba(0,0,0,.05);
+}
+
+.grouplist_entry span{
+    cursor: pointer;
 }
