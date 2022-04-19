@@ -112,8 +112,6 @@
     global $loggedinkey;
     $cookie_loggedin = "vq_loggedin";
 
-    return true;
-
     if (isset($_COOKIE[$cookie_loggedin])) {
       // true, cookie is set
       $setcookie = $_COOKIE[$cookie_loggedin];

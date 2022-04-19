@@ -227,8 +227,8 @@ input[type="submit"]:hover{
     display: block;
     border-bottom: 1px solid white;
     border-top: 1px solid white;
-    border-left: 1px solid gray;
-    border-right: 1px solid gray;
+    border-left: 1px solid rgb(50, 50, 50);
+    border-right: 1px solid rgb(50, 50, 50);;
     margin: 0;
     padding: 0;
     height: 25px;
