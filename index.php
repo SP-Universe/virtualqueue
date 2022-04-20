@@ -129,6 +129,9 @@
         include 'layout/footer.php';
     ?>
 
+<audio id="sound">
+      <source src="sound/laugh.wav">
+</audio>
 
 <script> 
 var audioplayed = false;
@@ -136,6 +139,8 @@ var guestgroup;
 var currentgroup;
 
 var guestgroup = "<?php echo "$guestgroup";?>";
+
+const sound = document.querySelector('#sound');
 
 const closedbeforeBannerElement = document.querySelector('#closedbefore_banner');
 const showclosedBannerElement = document.querySelector('#showclosed_banner');
@@ -168,9 +173,7 @@ function checkforsound(data){
     if(guestgroup == currentgroup){
         if(!audioplayed){
             console.log("Hello world!");
-            var audio = new Audio('sound/laugh.wav');
-            audio.muted = false;
-            //audio.play();
+            sound.play();
             audioplayed = true;
         }
     }
