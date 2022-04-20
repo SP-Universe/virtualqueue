@@ -31,7 +31,7 @@
         $conn = new mysqli($servername, $username, $password, $dbname);
 
         // Create tables
-        $sql = "CREATE TABLE IF NOT EXISTS " . $table_guests . " (id INT(6) AUTO_INCREMENT PRIMARY KEY, guestid VARCHAR(20) NOT NULL, booktime TIME, groupid INT, guestcount INT)";
+        $sql = "CREATE TABLE IF NOT EXISTS " . $table_guests . " (id INT(6) AUTO_INCREMENT PRIMARY KEY, guestid VARCHAR(20) NOT NULL, booktime TIME, groupid INT, guestcount INT, checkedin VARCHAR(10))";
         if ($conn->query($sql) === FALSE) {
             echo "Error creating guesttable: " . $conn->error;
         }
@@ -89,7 +89,7 @@
         global $conn;
         global $table_groups;
 
-        $sql = "UPDATE " . $table_groups . " SET " . $datakey . " = '" . $datavalue . "' WHERE groupid = " . $groupid . "";
+        $sql = "UPDATE " . $table_groups . " SET " . $datakey . " = '" . $datavalue . "' WHERE groupid = '" . $groupid . "'";
         if(mysqli_query($conn, $sql)){
             return true;
         } else {
@@ -102,7 +102,7 @@
         global $conn;
         global $table_guests;
 
-        $sql = "UPDATE " . $table_guests . " SET " . $datakey . " = '" . $datavalue . "' WHERE guestid = " . $guestid . "";
+        $sql = "UPDATE " . $table_guests . " SET " . $datakey . " = '" . $datavalue . "' WHERE guestid = '" . $guestid . "'";
         if(mysqli_query($conn, $sql)){
             return true;
         } else {
@@ -199,7 +199,7 @@
     {
         global $table_guests;
         global $conn;
-        global $max_users_per_group;
+        global $max_vq_users_per_group;
         global $current_group;
 
         $sql = "SELECT * FROM " . $table_guests;
@@ -219,7 +219,7 @@
                     }
                 }
 
-                if($users_in_highest_groupid + $number_of_new_guests <= $max_users_per_group){
+                if($users_in_highest_groupid + $number_of_new_guests <= $max_vq_users_per_group){
                     if($current_group < $highest_groupid){
                         set_data_for_group($highest_groupid, "guestcount", get_data_from_group($highest_groupid, "guestcount") + $number_of_new_guests);
                         return $highest_groupid;
@@ -242,5 +242,9 @@
     {
         global $conn;
         $conn->close();
+    }
+
+    function recalculateGroups(){
+        //TODO: Recalculate all groups
     }
 ?>

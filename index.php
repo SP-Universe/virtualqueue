@@ -46,16 +46,16 @@
 
             ?>
         
-            <div class="closed_banner" id="closedbefore_banner">
+            <div class="closed_banner" id="closedbefore_banner" style="visibility: hidden;">
                 <p>Unsere Warteschlange ist zur Zeit geschlossen. Bitte versuch es später erneut!</p>
             </div>
-            <div class="status_banner" id="maintenance_banner">
+            <div class="status_banner" id="maintenance_banner" style="visibility: hidden;">
                 <p>Wir haben aktuell technische Probleme. Es kann zu etwas längeren Wartezeiten kommen</p>
             </div>
-            <div class="status_banner" id="showclosed_banner">
+            <div class="status_banner" id="showclosed_banner" style="visibility: hidden;">
                 <p>Die Show ist noch nicht geöffnet, aber die virtuelle Warteschlange ist bereits verfügbar!</p>
             </div>
-            <div class="closed_banner" id="closedafter_banner">
+            <div class="closed_banner" id="closedafter_banner" style="visibility: hidden;">
                 <p>Die Warteschlange ist nicht mehr geöffnet!</p>
             </div>
 
@@ -79,34 +79,34 @@
             } else {
                 $guestcount = get_data_from_guest($guestid, "guestcount");
                 ?>
-                    <p>Deine ID: <kbd><?php echo $guestid;?></kbd> | Gruppe: <kbd><?php echo $guestgroup;?> </kbd></p>
+                    <p>Deine ID: <kbd><?php echo $guestid;?></kbd> | Gruppe: <kbd id="groupid"><?php echo $guestgroup;?> </kbd></p>
                     <p>Du hast dich mit <?php echo $guestcount; if($guestcount > 1){echo ' Personen';}else{echo ' Person';}?> angestellt</p>
                     
-                <div class="placeinline_block" id="placeinline_before">
+                <div class="placeinline_block" id="placeinline_before" style="visibility: hidden;">
                     <p>Gruppen vor dir: </p>
                     <div class="placeinline_wrap"> 
                         <div class="placeinline">
                             <p class="placeinline_number" id="placeinline_number">1</p> 
                         </div>
                     </div>
-                    <h3>Vorraussichtliche Eintrittszeit: <?php echo substr(get_data_from_group(get_data_from_guest($guestid, "groupid"), "time"), 0 ,-3); ?></h3>
+                    <h3 id="estimated_time">Vorraussichtliche Eintrittszeit: <?php echo substr(get_data_from_group(get_data_from_guest($guestid, "groupid"), "time"), 0 ,-3); ?></h3>
 
                     <p><a href="leavequeue.php" class="button">Aus der Warteschlange austreten</a></p>
 
                 </div>
-                <div class="placeinline_block" id="placeinline_finished"> 
-                    
+                <div class="placeinline_block" id="placeinline_finished" style="visibility: hidden;">
+
                     <div class="placeinline_wrap finished"> 
                         <div class="placeinline">
                             <p>DU BIST AN DER REIHE!</p>
-                            <p><small>(<?php echo get_data_from_guest($guestid, "guestcount");?> Personen)</small></p>
+                            <p><small>(<?php echo get_data_from_guest($guestid, "guestcount");?> <?php if(get_data_from_guest($guestid, "guestcount") > 1){echo "Personen";} else {echo "Person";}?>)</small></p>
                         </div>
                     </div>
 
                     <p><a href="leavequeue.php" class="button">Aus der Warteschlange austreten</a></p>
                     
                 </div>
-                <div class="placeinline_block" id="placeinline_feedback">
+                <div class="placeinline_block" id="placeinline_feedback" style="visibility: hidden;">
 
                     <div class="placeinline_wrap toolate"> 
                         <div class="placeinline">
@@ -130,7 +130,7 @@
     ?>
 
 <audio id="sound">
-      <source src="sound/laugh.wav">
+      <source src="sound/laugh.ogg">
 </audio>
 
 <script> 
@@ -150,6 +150,8 @@ const closedafterBannerElement = document.querySelector('#closedafter_banner');
 const placeinlineBeforeElement = document.querySelector('#placeinline_before');
 const placeinlineFinishedElement = document.querySelector('#placeinline_finished');
 const placeinlineFeedbackElement = document.querySelector('#placeinline_feedback');
+
+const estimatedTimeElement = document.querySelector('#estimated_time');
 
 const placeinlineNumberElement = document.querySelector('#placeinline_number');
 
@@ -180,60 +182,70 @@ function checkforsound(data){
 }
 
 function showData(data) {
-    if(data.current_status == "closedbefore"){
-        closedbeforeBannerElement.style.visibility='visible';
-        showclosedBannerElement.style.visibility='hidden';
-        maintenanceBannerElement.style.visibility='hidden';
-        closedafterBannerElement.style.visibility='hidden';
-    } else if(data.current_status == "showclosed"){
-        closedbeforeBannerElement.style.visibility='hidden';
-        showclosedBannerElement.style.visibility='visible';
-        maintenanceBannerElement.style.visibility='hidden';
-        closedafterBannerElement.style.visibility='hidden';
-    } else if(data.current_status == "maintenance"){
-        closedbeforeBannerElement.style.visibility='hidden';
-        showclosedBannerElement.style.visibility='hidden';
-        maintenanceBannerElement.style.visibility='visible';
-        closedafterBannerElement.style.visibility='hidden';
-    } else if(data.current_status == "closedafter"){
-        closedbeforeBannerElement.style.visibility='hidden';
-        showclosedBannerElement.style.visibility='hidden';
-        maintenanceBannerElement.style.visibility='hidden';
-        closedafterBannerElement.style.visibility='visible';
-    } else {
-        closedbeforeBannerElement.style.visibility='hidden';
-        showclosedBannerElement.style.visibility='hidden';
-        maintenanceBannerElement.style.visibility='hidden';
-        closedafterBannerElement.style.visibility='hidden';
-    }
+    if("<?php echo $guestid;?>" != "") {
+        if(data.current_status == "closedbefore"){
+            closedbeforeBannerElement.style.visibility='visible';
+            showclosedBannerElement.style.visibility='hidden';
+            maintenanceBannerElement.style.visibility='hidden';
+            closedafterBannerElement.style.visibility='hidden';
+            estimatedTimeElement.innerText = "Warteschlange geschlossen";
+        } else if(data.current_status == "showclosed"){
+            closedbeforeBannerElement.style.visibility='hidden';
+            showclosedBannerElement.style.visibility='visible';
+            maintenanceBannerElement.style.visibility='hidden';
+            closedafterBannerElement.style.visibility='hidden';
+            estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + "20:00";
+        } else if(data.current_status == "maintenance"){
+            closedbeforeBannerElement.style.visibility='hidden';
+            showclosedBannerElement.style.visibility='hidden';
+            maintenanceBannerElement.style.visibility='visible';
+            closedafterBannerElement.style.visibility='hidden';
+            estimatedTimeElement.innerText = "Es kann aktuell zu Verzögerungen kommen";
+        } else if(data.current_status == "closedafter"){
+            closedbeforeBannerElement.style.visibility='hidden';
+            showclosedBannerElement.style.visibility='hidden';
+            maintenanceBannerElement.style.visibility='hidden';
+            closedafterBannerElement.style.visibility='visible';
+            estimatedTimeElement.innerText = "Warteschlange geschlossen";
+        } else {
+            closedbeforeBannerElement.style.visibility='hidden';
+            showclosedBannerElement.style.visibility='hidden';
+            maintenanceBannerElement.style.visibility='hidden';
+            closedafterBannerElement.style.visibility='hidden';
+            estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + "20:00";
+        }
 
-    if (data.current_group < guestgroup) {
-        placeinlineBeforeElement.style.visibility='visible';
-        placeinlineBeforeElement.style.height='auto';
-        placeinlineFinishedElement.style.visibility='hidden';
-        placeinlineFinishedElement.style.height='0px';
-        placeinlineFeedbackElement.style.visibility='hidden';
-        placeinlineFeedbackElement.style.height='0px';
-    } else if (data.current_group == guestgroup) {
-        placeinlineBeforeElement.style.visibility='hidden';
-        placeinlineBeforeElement.style.height='0px';
-        placeinlineFinishedElement.style.visibility='visible';
-        placeinlineFinishedElement.style.height='auto';
-        placeinlineFeedbackElement.style.visibility='hidden';
-        placeinlineFeedbackElement.style.height='0px';
-    } else {
-        placeinlineBeforeElement.style.visibility='hidden';
-        placeinlineBeforeElement.style.height='0px';
-        placeinlineFinishedElement.style.visibility='hidden';
-        placeinlineFinishedElement.style.height='0px';
-        placeinlineFeedbackElement.style.visibility='visible';
-        placeinlineFeedbackElement.style.height='auto';
-    }
+        if (data.current_group < guestgroup) {
+            placeinlineBeforeElement.style.visibility='visible';
+            placeinlineBeforeElement.style.height='auto';
+            placeinlineFinishedElement.style.visibility='hidden';
+            placeinlineFinishedElement.style.height='0px';
+            placeinlineFeedbackElement.style.visibility='hidden';
+            placeinlineFeedbackElement.style.height='0px';
+            audioplayed = false;
+        } else if (data.current_group == guestgroup) {
+            placeinlineBeforeElement.style.visibility='hidden';
+            placeinlineBeforeElement.style.height='0px';
+            placeinlineFinishedElement.style.visibility='visible';
+            placeinlineFinishedElement.style.height='auto';
+            placeinlineFeedbackElement.style.visibility='hidden';
+            placeinlineFeedbackElement.style.height='0px';
+        } else {
+            audioplayed = false;
+            placeinlineBeforeElement.style.visibility='hidden';
+            placeinlineBeforeElement.style.height='0px';
+            placeinlineFinishedElement.style.visibility='hidden';
+            placeinlineFinishedElement.style.height='0px';
+            placeinlineFeedbackElement.style.visibility='visible';
+            placeinlineFeedbackElement.style.height='auto';
+        }
 
-    placeinlineNumberElement.innerText = guestgroup - data.current_group;
+        placeinlineNumberElement.innerText = guestgroup - data.current_group;
+    }
 }
 
 function reloadData(){
+    window.history.replaceState({}, document.title, "index.php");
     fetch('status.php')
     .then(response => response.json())
     .then(data => {

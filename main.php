@@ -30,7 +30,7 @@
   }
 
   function generate_random_string($length = 4) {
-      $characters = '123456789ABCDEFGHIJKLMNPQRSTUVWXYZ';
+      $characters = '12345679ABCDEFGJKLMNPQRSTUVWXYZ';
       $randomString = '';
       for ($i = 0; $i < $length; $i++) {
           $randomString .= $characters[rand(0, strlen($characters) - 1)];
@@ -38,12 +38,23 @@
       return $randomString;
   }
 
+  function checkforforbiddenword($id){
+    $forbiddenWords = array("ACAB", "NUDE", "GEEZ", "WIXX", "JAVA");
+    foreach ($forbiddenWords as $word){
+      if($id === $word){
+        return true;
+      }
+    }
+    return false;
+  }
+
   function add_new_guest($number_of_new_guests){
     global $conn;
 
     $id = "null";
+    
 
-    while(checkforexistingid($id))
+    while(checkforexistingid($id) || checkforforbiddenword($id))
     {
       $id = generate_random_string();
     }
@@ -51,6 +62,22 @@
     add_guest_to_database($id, $number_of_new_guests);
 
     return $id;
+  }
+
+  function group_next(){
+    global $current_group;
+    if($current_group <= mysqli_num_rows(get_all_groups())){
+      $current_group += 1;
+      set_data_for_settings("current_group", $current_group);
+    }
+  }
+
+  function group_before(){
+    global $current_group;
+    if($current_group > 0){
+      $current_group -= 1;
+      set_data_for_settings("current_group", $current_group);
+    }
   }
 
   function set_planned_time($id)

@@ -184,6 +184,14 @@ kbd {
     justify-content: center;
 }
 
+.group_change_form input[type="number"]{
+    height: 15px;
+}
+
+.group_change_form label{
+    padding: 0 10px;
+}
+
 input[type="number"]{
     padding: 10px;
     width: 40px;
@@ -286,7 +294,7 @@ input[type="submit"]:hover{
     display: inline-block;
     width: auto;
     padding: 20px;
-    background-color: #58510f; /* Red */
+    background-color: var(--main-button-color); /* Red */
     color: white;
     margin-bottom: 15px;
     opacity: 1;
@@ -446,6 +454,7 @@ input[type="submit"]:hover{
 }
 
 @media screen and (min-width:600px) {
+
     .title_wrap{
         padding: 30px;
     }
@@ -459,14 +468,6 @@ input[type="submit"]:hover{
     }
     .placeinline_wrap.toolate{
         font-size: 20px;
-    }
-}
-
-@media screen and (min-width:1000px) {
-    .placeinline_wrap{
-        width: 450px;
-        height: 450px;
-        font-size: 18px;
     }
 }
 
@@ -490,11 +491,6 @@ input[type="submit"]:hover{
 .placeinline_block{
     overflow: hidden;
 }
-
-
-
-
-
 .container {
   display: flex;
   flex-wrap: wrap;

@@ -105,30 +105,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
 });
 
-$(document).ready(function(){
-    setInterval(function(){
-        //$("#list").load(window.location.href + " #list" );
-    }, 3000);
-});
-
-
-function showData(data) {
-    
-}
-
-function reloadData(){
-    fetch('status.php')
-    .then(response => response.json())
-    .then(data => {
-        showData(data);
-    });
-}
-
 setInterval(function(){ 
-	reloadData();
+	window.location.reload();
 }, 5000);
 
-reloadData();
-
-</script>
 </script>
