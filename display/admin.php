@@ -51,7 +51,7 @@
         close_connection();
     } else {
         ?>
-            <form class="login_form" method="post" action="admin/login.php">
+            <form class="login_form" method="post" action="login.php">
                 <label for="password">Passwort</label>    
                 <input type="text" name="password">
                 <input type="submit" value="Einloggen" accesskey="s" name="submit">

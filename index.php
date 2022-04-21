@@ -212,10 +212,14 @@ function showData(data) {
             showclosedBannerElement.style.visibility='hidden';
             maintenanceBannerElement.style.visibility='hidden';
             closedafterBannerElement.style.visibility='hidden';
-            estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + "20:00";
+            let options = {hour: "2-digit", minute: "2-digit"}; 
+            var time = new Date ("1970-01-01 " + data.estimatedtime);
+            estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + time.toLocaleTimeString('de-de', options);
         }
 
-        if (data.current_group < guestgroup) {
+        console.log("Current Group: " + data.current_group + " | Guest Group: " + guestgroup);
+
+        if (parseInt(data.current_group) < parseInt(guestgroup)) {
             placeinlineBeforeElement.style.visibility='visible';
             placeinlineBeforeElement.style.height='auto';
             placeinlineFinishedElement.style.visibility='hidden';
@@ -223,14 +227,15 @@ function showData(data) {
             placeinlineFeedbackElement.style.visibility='hidden';
             placeinlineFeedbackElement.style.height='0px';
             audioplayed = false;
-        } else if (data.current_group == guestgroup) {
+        } else if (parseInt(data.current_group) === parseInt(guestgroup)) {
             placeinlineBeforeElement.style.visibility='hidden';
             placeinlineBeforeElement.style.height='0px';
             placeinlineFinishedElement.style.visibility='visible';
             placeinlineFinishedElement.style.height='auto';
             placeinlineFeedbackElement.style.visibility='hidden';
             placeinlineFeedbackElement.style.height='0px';
-        } else {
+        } else if (parseInt(data.current_group) > parseInt(guestgroup)){
+            console.log("I am stupid!");
             audioplayed = false;
             placeinlineBeforeElement.style.visibility='hidden';
             placeinlineBeforeElement.style.height='0px';
