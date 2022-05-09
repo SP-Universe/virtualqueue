@@ -21,7 +21,7 @@
                     if($guestids != null){
                         foreach($guestids as $gid){
                             ?>
-                                <kbd class="<?php echo get_data_from_guest($gid['guestid'], "checkedin");?>"><?php echo $gid['guestid']?> (<?php echo get_data_from_guest($gid['guestid'], "guestcount");?>)</kbd>
+                                <p class="groupid large_number <?php echo get_data_from_guest($gid['guestid'], "checkedin");?>"><?php echo $gid['guestid']?> (<?php echo get_data_from_guest($gid['guestid'], "guestcount");?>)</p>
                             <?php
                         }
                     } else {
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="display_row_block">
-                <p class="big_number"><?php echo $max_guests_per_show - get_data_from_group($current_group, "guestcount") - get_data_from_setting("current_guest_count");?></p>
+                <p class="big_number"><?php echo ($max_vq_users_per_group + $min_sq_users_per_group) - get_data_from_group($current_group, "vq_guests") - get_data_from_setting("current_guest_count");?></p>
                 <p>Gäste aus der standby Queue</p>
             </div>
         </div>

@@ -18,7 +18,11 @@
         echo'FORBIDDEN!';
     }
 
-    header("Location: admin.php");
+    if(isset($_GET['view'])){
+        header("Location: index.php?view=" . $_GET['view']);
+    } else {
+        header("Location: index.php?view=groups");
+    }
 
     close_connection();
 ?>

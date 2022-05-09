@@ -183,6 +183,8 @@ function checkforsound(data){
 
 function showData(data) {
     if("<?php echo $guestid;?>" != "") {
+        let options = {hour: "2-digit", minute: "2-digit"}; 
+        var time = new Date ("1970-01-01 " + data.estimatedtime);
         if(data.current_status == "closedbefore"){
             closedbeforeBannerElement.style.visibility='visible';
             showclosedBannerElement.style.visibility='hidden';
@@ -194,7 +196,7 @@ function showData(data) {
             showclosedBannerElement.style.visibility='visible';
             maintenanceBannerElement.style.visibility='hidden';
             closedafterBannerElement.style.visibility='hidden';
-            estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + "20:00";
+            estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + time.toLocaleTimeString('de-de', options);
         } else if(data.current_status == "maintenance"){
             closedbeforeBannerElement.style.visibility='hidden';
             showclosedBannerElement.style.visibility='hidden';
@@ -212,8 +214,7 @@ function showData(data) {
             showclosedBannerElement.style.visibility='hidden';
             maintenanceBannerElement.style.visibility='hidden';
             closedafterBannerElement.style.visibility='hidden';
-            let options = {hour: "2-digit", minute: "2-digit"}; 
-            var time = new Date ("1970-01-01 " + data.estimatedtime);
+            
             estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + time.toLocaleTimeString('de-de', options);
         }
 

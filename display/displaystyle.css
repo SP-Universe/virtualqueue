@@ -82,10 +82,6 @@ kbd {
     white-space: nowrap;
 }
 
-kbd.checkedin{
-    background-color: green;
-}
-
 /* Display Page */
 .display{
     background-image: url("../images/displaybackground.jpg");
@@ -136,6 +132,10 @@ kbd.checkedin{
     font-size: 100px;
 }
 
+.large_number{
+    font-size: 50px;
+}
+
 .display kbd{
     font-size: 50px;
     width: auto;
@@ -156,6 +156,19 @@ kbd.checkedin{
     color: #4d4d4d;
 }
 
+.groupid {
+    background-color: #eee;
+    border-radius: 3px;
+    color: #333;
+    display: block;
+    font-weight: 700;
+    line-height: 1;
+    padding: 1px 4px;
+    margin: 0px 5px 5px 0;
+    width: auto;
+    cursor: pointer;
+}
+
 .current_group.admin{
     font-size: 2vh;
     color: white;
@@ -173,7 +186,7 @@ kbd.checkedin{
     padding: 0 20px;
 }
 
-.button{
+.roundbutton{
     padding: 20px;
     display: block;
     background-color: var(--main-button-color);
@@ -186,38 +199,39 @@ kbd.checkedin{
     line-height: 1;
 }
 
-.textbutton{
-    padding: 20px;
-    display: inline-block;
-    background-color: var(--main-button-color);
-    color: white;
-    text-decoration: none;
-    font-size: 40px;
-    border-radius: 20px;
-    line-height: 1;
-    width: auto;
-    margin: 20px 0;
-}
-
 .next_group{
-    background-color: rgba(0, 0, 0, 0.308);
-    margin: 40px auto;
+    display: block;
+    margin: 20px auto;
     position: relative;
     font-size: 20px;
-    padding: 50px;
 }
 
 .next_group .textbutton{
-    position: absolute;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.5s ease-in-out;
-    bottom: -200px;
-    left: 0;
-    right: 0;
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    background-color: green;
+    display: block;
+    padding: 10px;
+    width: auto;
+    max-height: 0px;
+    overflow: hidden;
+}
+
+.groupid.checkedin{
+    background-color: green;
+    color: white;
 }
 
 .next_group.visible .textbutton{
     pointer-events: all;
     opacity: 1;
+    max-height: 200px;
+}
+
+.showhide_nextgroup{
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.308);
+    padding: 10px;
+    width: auto;
 }

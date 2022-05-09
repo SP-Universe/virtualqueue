@@ -52,7 +52,6 @@
     global $conn;
 
     $id = "null";
-    
 
     while(checkforexistingid($id) || checkforforbiddenword($id))
     {
@@ -78,13 +77,6 @@
       $current_group -= 1;
       set_data_for_settings("current_group", $current_group);
     }
-  }
-
-  function set_planned_time($id)
-  {
-    $joinedtime = get_data_from_guest($id, "booktime");
-    $dateTime = new DateTime('2011-11-17 05:05');
-    $dateTime = $joinedtime;
   }
 
   function checkforcookie(){
@@ -135,12 +127,14 @@
     echo "</pre>\n";  
   }
 
+  /*
+  * Checks if a user is logged in
+  */
   function checklogin(){
     global $loggedinkey;
     $cookie_loggedin = "vq_loggedin";
 
     if (isset($_COOKIE[$cookie_loggedin])) {
-      // true, cookie is set
       $setcookie = $_COOKIE[$cookie_loggedin];
       if($setcookie === $loggedinkey) {
         return true;
@@ -159,6 +153,12 @@
   {
     global $current_group;
     global $current_status;
+    global $max_vq_users_per_group;
+    global $min_sq_users_per_group;
+
+    $max_vq_users_per_group = get_data_from_setting("max_vq");
+    $min_sq_users_per_group = get_data_from_setting("min_sq");
+
     $current_group = get_data_from_setting("current_group");
     if($current_group === null){
       set_data_for_settings("current_group", 0);
@@ -187,15 +187,15 @@
     $seconds -= $minutes*60;
     if($seconds < 9)
     {
-    $seconds = "0".$seconds;
+      $seconds = "0".$seconds;
     }
     if($minutes < 9)
     {
-    $minutes = "0".$minutes;
+      $minutes = "0".$minutes;
     }
       if($hours < 9)
     {
-    $hours = "0".$hours;
+      $hours = "0".$hours;
     }
     return "{$hours}:{$minutes}:{$seconds}";
   }

@@ -2,11 +2,13 @@
     ob_start();
     require '../main.php';
 
-    header("Location: ../admin.php");
+    if(isset($_GET['view'])){
+        header("Location: index.php?view=" . $_GET['view']);
+    } else {
+        header("Location: index.php?view=groups");
+    }
     
     connectmysql();
-
-    
 
     if(checklogin()){
         if(isset($_POST['status'])){

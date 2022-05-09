@@ -145,51 +145,10 @@ kbd {
     white-space: nowrap;
 }
 
-.groups{
-    margin: 10px auto;
-}
+
 
 .content_wrap{
     padding: 0 20px;
-}
-
-.grouplist{
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0;
-    display: flex;
-    justify-content: flex-start;
-    font-size: 14px;
-    align-items: center;
-    height: auto;
-}
-
-.grouplist.visible{
-    max-height: 135px;
-    background-color: black;
-}
-
-.grouplist.visible .grouplist_entry{
-    height: 135px;
-}
-
-.grouplist.current{
-    background-color: var(--green-color);
-}
-
-.group_change_form{
-    height: 30px;
-    margin: 40px 0; 
-    display: flex;
-    justify-content: center;
-}
-
-.group_change_form input[type="number"]{
-    height: 15px;
-}
-
-.group_change_form label{
-    padding: 0 10px;
 }
 
 input[type="number"]{
@@ -229,39 +188,6 @@ input[type="submit"]{
 input[type="submit"]:hover{
     background-color: rgb(0, 94, 94);
     cursor: pointer;
-}
-
-.grouplist.past{
-    background-color: gray;
-}
-
-.grouplist_entry{
-    width: 30%;
-    display: block;
-    border-bottom: 1px solid white;
-    border-top: 1px solid white;
-    border-left: 1px solid rgb(50, 50, 50);
-    border-right: 1px solid rgb(50, 50, 50);;
-    margin: 0;
-    padding: 0;
-    height: 25px;
-    overflow: hidden;
-}
-
-.grouplist_entry.double{
-    width: 40%;
-}
-
-.grouplist_button{
-    background-color: rgb(0, 56, 56);
-    padding: 0px 5px;
-    margin-left: 1px;
-    border-radius: 50px;
-    text-decoration: none;
-    color: white;
-    display: inline-block;
-    cursor: pointer;
-    font-size: 10px;
 }
 
 .numberlist{
@@ -601,8 +527,4 @@ input[type="submit"]:hover{
   flex-wrap: wrap;
   align-items: center;
   box-shadow: 0 4px 30px rgba(0,0,0,.05);
-}
-
-.grouplist_entry span{
-    cursor: pointer;
 }

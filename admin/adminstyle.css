@@ -1,0 +1,267 @@
+/* cairo-200 - latin */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 200;
+    src: local(''),
+         url('../fonts/cairo-v17-latin-200.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../fonts/cairo-v17-latin-200.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* cairo-regular - latin */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+         url('../fonts/cairo-v17-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../fonts/cairo-v17-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* cairo-700 - latin */
+@font-face {
+    font-family: 'Cairo';
+    font-style: normal;
+    font-weight: 700;
+    src: local(''),
+         url('../fonts/cairo-v17-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../fonts/cairo-v17-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+*{
+    box-sizing: border-box;
+}
+
+:root {
+    --main-button-color: rgb(0, 56, 56);
+    --green-color: rgb(0, 88, 0);
+}
+
+body{
+    min-height: 100vh;
+    display: block;
+    margin: 0;
+    background-color: rgb(41, 41, 41);
+    color: white;
+    font-family: "Cairo", sans-serif;
+    font-size: 16px;
+    text-align: center;
+}
+
+p{
+    margin-top: 0;
+}
+
+h1{
+    margin-top: 0;
+    padding-top: 30px;
+}
+
+h2{
+    margin: 0;
+    padding-top: 10px;
+    text-align: center;
+    line-height: 1;
+}
+
+h3{
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.title_wrap{
+    display: flex;
+    width: auto;
+    justify-content: center;
+    padding: 10px;
+}
+
+.title_image{
+    width: 50px;
+    height: auto;
+    padding-right: 10px;
+}
+
+.title{
+    display: inline;
+    flex-shrink: 0;
+    text-align: left;
+    font-size: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+p{
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+kbd {
+    background-color: #eee;
+    border-radius: 3px;
+    border: 1px solid #b4b4b4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset;
+    color: #333;
+    display: inline-block;
+    font-size: .85em;
+    font-weight: 700;
+    line-height: 1;
+    padding: 2px 4px;
+    white-space: nowrap;
+}
+
+input[type="number"]{
+    padding: 10px;
+    width: 40px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 50px;
+    border-style: none;
+    height: 100%;
+    box-sizing: content-box;
+}
+
+input[type="text"]{
+    padding: 10px;
+    width: 60px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 50px;
+    border-style: none;
+    height: 20px;
+    box-sizing: content-box;
+}
+
+input[type="submit"]{
+    background-color: rgb(0, 56, 56);
+    padding: 10px;
+    border-radius: 50px;
+    text-decoration: none;
+    color: white;
+    border-style: none;
+    height: 20px;
+    box-sizing: content-box;
+    margin-left: 10px;
+}
+
+input[type="submit"]:hover{
+    background-color: rgb(0, 94, 94);
+    cursor: pointer;
+}
+
+.button{
+    background-color: var(--main-button-color);
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+    margin: 5px 0;
+}
+
+.button:hover{
+    background-color: rgb(0, 94, 94);
+}
+
+.current_status_screen{
+    margin: 20px auto;
+}
+
+.togglebutton_group{
+    border-radius: 50px;
+    overflow: hidden;
+    display: inline-block;
+    width: auto;
+}
+
+.togglebutton.active{
+    background-color: var(--green-color);
+    padding: 10px 20px;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    box-shadow: inset 0px 0px 10px rgb(32, 32, 32);
+}
+
+.togglebutton.inactive{
+    background-color: var(--main-button-color);
+    padding: 10px 20px;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgb(32, 32, 32);
+}
+
+.toggleview{
+    overflow: hidden;
+}
+
+.groupslist{
+    margin: 10px auto;
+}
+
+.groupslist_row{
+    display: grid;
+    grid-template-columns: 15% 15% 15% 15% 40%;
+    max-width: 480px;
+    height: 30px;
+    border: 1px solid white;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.groupslist_row.past{
+    color: gray;
+    border: 1px solid gray;
+}
+
+.groupslist_row.current{
+    border: 4px solid green;
+}
+
+.groupslist_row.visible{
+    height: auto;
+}
+
+.groupslist_entry{
+    padding: 5px;
+}
+
+.groupslist_entry.groupids{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.groupslist_row.past .groupid {
+    background-color: gray;
+}
+
+.groupslist_row.past .groupid.checkedin {
+    background-color: rgb(46, 82, 48);
+    color: lightgray;
+}
+
+.options{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 300px;
+    gap: 5px;
+    margin: 10px auto;
+}
+
+.options input[type="number"]{
+    height: auto;
+}
+
+.group_change_form{
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid black;
+}
