@@ -199,5 +199,27 @@
     }
     return "{$hours}:{$minutes}:{$seconds}";
   }
+
+  function recalculateTimes($groupid){
+    global $current_group;
+
+    if(get_data_from_setting("current_status") === "showclosed" || time() < strtotime(get_data_from_setting("start_time"))){
+      $now = strtotime(get_data_from_setting("start_time"));
+    } else {
+        $now = strtotime("+0 hours", time());
+    }
+
+    $time_between_groups = get_data_from_setting("time_between_groups");
+    $time_between_groups_in_seconds = strtotime("1970-01-01 $time_between_groups UTC");
+
+    $maritime = get_data_from_setting("time_between_groups");
+    $seconds = strtotime("1970-01-01 $maritime UTC");
+    $multiply = $seconds * ($groupid - $current_group);  #Here you can multiply with your dynamic value
+    $newTime = strtotime("+{$multiply} seconds", $now);
+
+    set_data_for_group($groupid, "time", date('H:i:s', $newTime));
+
+    echo get_data_from_group($groupid, "time") . "<br>";
+  }
 ?>
 

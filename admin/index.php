@@ -103,7 +103,7 @@
                             $waitingguests += $g['vq_guests'];
                             ?>
                         
-                            <div class="groupslist_row current">
+                            <div class="groupslist_row current" id="current_group">
                                 <p class="groupslist_entry"><?php echo $g['groupid'];?></p>
                                 <p class="groupslist_entry"><?php echo substr($g['time'],0 ,-3);?></p>
                                 <p class="groupslist_entry"><?php echo $g['vq_guests'];?></p>
