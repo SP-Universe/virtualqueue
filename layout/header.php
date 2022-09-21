@@ -11,10 +11,10 @@
     <meta name="audience" content="Everyone">
     <meta charset="utf-8"/>
     <title>HW40a - Virtual Queue</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="apple-touch-icon" sizes="180x180" href="app/client/src/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="app/client/src/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="app/client/src/images/favicon-16x16.png">
+    <link rel="mask-icon" href="app/client/src/images/safari-pinned-tab.svg" color="#5bbad5">
 
     <meta property="og:title" content="HW40a - Virtual Queue" />
     <meta property="og:site_name" content="HW40a - Virtual Queue" />
@@ -33,8 +33,8 @@
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#102C4D">
 
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon-32x32.png" />
-    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" type="image/x-icon" href="app/client/src/images/favicon-32x32.png" />
+    <link rel="stylesheet" href="app/client/dist/css/styles.css">
 
     <script>
         window.onload = function() {
@@ -46,6 +46,6 @@
     <div class="content_wrap">
 
         <div class="title_wrap">
-            <img class="title_image" src="images/hw40a_logo.svg" alt="Logo des Halloweenhauses">
+            <img class="title_image" src="app/client/src/images/hw40a_logo.svg" alt="Logo des Halloweenhauses">
             <h1 class="title">Virtual Queue</h1>
         </div>

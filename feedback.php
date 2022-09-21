@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="styles.css">
-
 <?php
     include 'layout/header.php';
 
@@ -39,12 +37,12 @@
       <label for="rating-1"></label>
       <div class="emoji-wrapper">
         <div class="emoji">
-          <img class="rating-0" src="images/hw40a_emoji_neutral.svg" alt="Logo des Halloweenhauses">
-          <img class="rating-1" src="images/hw40a_emoji_reallysad.svg" alt="Logo des Halloweenhauses">
-          <img class="rating-2" src="images/hw40a_emoji_sad.svg" alt="Logo des Halloweenhauses">
-          <img class="rating-3" src="images/hw40a_emoji_neutral.svg" alt="Logo des Halloweenhauses">
-          <img class="rating-4" src="images/hw40a_emoji_happy.svg" alt="Logo des Halloweenhauses">
-          <img class="rating-5" src="images/hw40a_emoji_reallyhappy.svg" alt="Logo des Halloweenhauses">
+          <img class="rating-0" src="app/client/src/images/hw40a_emoji_neutral.svg" alt="Logo des Halloweenhauses">
+          <img class="rating-1" src="app/client/src/images/hw40a_emoji_reallysad.svg" alt="Logo des Halloweenhauses">
+          <img class="rating-2" src="app/client/src/images/hw40a_emoji_sad.svg" alt="Logo des Halloweenhauses">
+          <img class="rating-3" src="app/client/src/images/hw40a_emoji_neutral.svg" alt="Logo des Halloweenhauses">
+          <img class="rating-4" src="app/client/src/images/hw40a_emoji_happy.svg" alt="Logo des Halloweenhauses">
+          <img class="rating-5" src="app/client/src/images/hw40a_emoji_reallyhappy.svg" alt="Logo des Halloweenhauses">
         </div>
       </div>
     </div>
