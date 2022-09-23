@@ -35,7 +35,7 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="../images/favicon-32x32.png" />
     <link rel="stylesheet" href="adminstyle.css">
-    <link rel="stylesheet" href="../display/displaystyle.css">
+    <link rel="stylesheet" href="../app/client/dist/css/styles.css">
 </head>
 <body>
 <?php

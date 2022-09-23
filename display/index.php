@@ -3,7 +3,9 @@
 ?>
 
 <head>
-    <link rel="stylesheet" href="displaystyle.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../app/client/src/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../app/client/src/images/favicon-16x16.png">
+    <link rel="stylesheet" href="../app/client/dist/css/styles.css">
 </head>
 <body>
 
@@ -31,7 +33,7 @@
                 </div>
             </div>
             <div class="display_row_block">
-                <p class="big_number"><?php echo ($max_vq_users_per_group + $min_sq_users_per_group) - get_data_from_group($current_group, "vq_guests") - get_data_from_setting("current_guest_count");?></p>
+                <p class="big_number"><?php echo ($max_vq_users_per_group + $min_sq_users_per_group) - get_data_from_group($current_group, "vq_guests") - get_data_from_setting("display_guest_count");?></p>
                 <p>Gäste aus der standby Queue</p>
             </div>
         </div>
@@ -42,6 +44,7 @@
 
 <script>
     setInterval(function(){ 
-	window.location.reload();
-}, 4000);
+	    window.location.reload();
+    }, 4000);
+
 </script>
