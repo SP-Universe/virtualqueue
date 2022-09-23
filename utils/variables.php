@@ -1,10 +1,5 @@
 <?php
-    //DATABASE
-    $conn = new mysqli();
-    $servername = "localhost";
-    $username = "silverstripe";
-    $password = "password";
-    $dbname = "virtualqueue";
+    require 'config.php';
 
     //TABLE NAMES
     $table_guests = "guests";
@@ -21,6 +16,4 @@
     $current_status = "closedbefore";
     $duration_per_group = new DateInterval('PT' . $minutes_per_group . 'M');
     $starttime = "18:00:00";
-
-    $standarddomain = "sp-universe.com/hw40a/virtualqueue/";
 ?>

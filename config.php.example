@@ -1,0 +1,10 @@
+<?php
+    //DATABASE
+    $conn = new mysqli();
+    $servername = "localhost";
+    $username = "<username>";
+    $password = "<password>";
+    $dbname = "<virtualqueue>";
+
+    $standarddomain = "<address>";
+?>
