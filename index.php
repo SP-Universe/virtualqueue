@@ -61,7 +61,7 @@
             if($guestid === null){
                 ?>
 
-                <p>Solltest du einen neuen Platz in der Warteschlange benötigen, klicke hier:</p>
+                <p>Klicke hier, um der virtuellen Warteschlange beizutreten:</p>
                 <br>
                 <p><a href="new_guest.php" class="button">Neuer Platz in der Warteschlange</a></p>
                 <br>

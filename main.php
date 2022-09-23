@@ -59,6 +59,7 @@
     }
 
     add_guest_to_database($id, $number_of_new_guests);
+    recalculateTimes($id);
 
     return $id;
   }
