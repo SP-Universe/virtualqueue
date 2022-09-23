@@ -8,7 +8,7 @@
 <body>
 
 <div class="display">
-    <img src="app/client/src/images/displaybackground.jpg">
+    <img src="../app/client/src/images/displaybackground.jpg">
     <h1>Willkommen beim Halloweenhaus Schmalenbeck!</h1>
     <h2 class="current_group">Aktuelle Gruppe: <?php echo $current_group;?></h2>
 
