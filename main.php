@@ -59,7 +59,7 @@
     }
 
     add_guest_to_database($id, $number_of_new_guests);
-    recalculateTimes($id);
+    recalculateTimes(get_data_from_guest($id, "groupid"));
 
     return $id;
   }
@@ -107,7 +107,7 @@
     global $table_guests;
 
     setcookie($cookie_name, null, -1, '/'); 
-    if(!checkforexistingid($id)){
+    if(checkforexistingid($id)){
       $sql = "DELETE FROM " . $table_guests . " WHERE guestid = '" . $id . "'";
       if ($conn->query($sql) === TRUE) {
         echo "User removed successfully";
@@ -201,7 +201,7 @@
     return "{$hours}:{$minutes}:{$seconds}";
   }
 
-  function recalculateTimes($groupid){
+  function recalculateTimes($groupnum){
     global $current_group;
 
     if(get_data_from_setting("current_status") === "showclosed" || time() < strtotime(get_data_from_setting("start_time"))){
@@ -215,12 +215,13 @@
 
     $maritime = get_data_from_setting("time_between_groups");
     $seconds = strtotime("1970-01-01 $maritime UTC");
-    $multiply = $seconds * ($groupid - $current_group);  #Here you can multiply with your dynamic value
+    echo "GroupID: " . $groupnum . " | Current Group: " . $current_group;
+    $multiply = $seconds * ($groupnum - $current_group);  #Here you can multiply with your dynamic value
     $newTime = strtotime("+{$multiply} seconds", $now);
 
-    set_data_for_group($groupid, "time", date('H:i:s', $newTime));
+    set_data_for_group($groupnum, "time", date('H:i:s', $newTime));
 
-    echo get_data_from_group($groupid, "time") . "<br>";
+    echo get_data_from_group($groupnum, "time") . "<br>";
   }
 ?>
 

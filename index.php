@@ -249,7 +249,7 @@
     }
 
     function reloadData(){
-        window.history.replaceState({}, document.title, "index.php?guestid=<?php echo $guestid;?>");
+        window.history.replaceState({}, document.title, "index.php");
         fetch('status.php')
         .then(response => response.json())
         .then(data => {

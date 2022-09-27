@@ -6,7 +6,7 @@
     if($guestid === null)
     {
         if (isset($_GET['new_guests'])) {
-            header("Location: index.php?hint=new_user");
+            header("Location: index.php?hint=new_user&guestid=" . $guestid);
             $guestid = add_new_guest($_GET['new_guests']);
             setusercookie($guestid);
         }

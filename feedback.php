@@ -59,7 +59,8 @@
   </div>
 </form>
 
-<p><a href="index.php" class="button">Neu anstellen</a></p>
+<p><a href="new_guest.php" class="button">Neu anstellen</a></p>
+<p><a href="index.php" class="button">Zur Startseite</a></p>
 
 <?php
     include 'layout/footer.php';

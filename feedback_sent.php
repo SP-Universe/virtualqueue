@@ -16,7 +16,7 @@
 
 <h2>Danke für dein Feedback!</h2>
 
-<p><a href="index.php" class="button">Neu anstellen</a></p>
+<a href="new_guest.php" class="button">Neu anstellen</a>
 
 <?php
 close_connection();
