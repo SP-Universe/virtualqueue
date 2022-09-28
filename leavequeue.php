@@ -6,6 +6,12 @@ $guestid = checkforcookie();
 if($guestid != null)
 {
     header("Location: index.php?hint=logout");
+    $groupid = get_data_from_guest($guestid, "groupid");
+    $groupsize = get_data_from_group($groupid, "vq_guests");
+    set_data_for_group($groupid, "vq_guests", $groupsize - get_data_from_guest($guestid, "guestcount"));
+    if(get_data_from_group($groupid, "vq_guests") <= 0){
+        remove_group($groupid);
+    }
     remove_guest($guestid);
     close_connection();
     exit;

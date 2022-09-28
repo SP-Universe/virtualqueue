@@ -89,12 +89,16 @@
                                 <p class="groupslist_entry"><?php echo $g['vq_guests'];?></p>
                                 <p class="groupslist_entry"><?php echo (($min_sq_users_per_group + $max_vq_users_per_group) - $g['vq_guests']);?></p>
                                 <div class="groupslist_entry groupids" data-behaviour="showhide">
-                                    <?php foreach($guestids as $gid){
-                                        ?>
-                                            <p data-behaviour="showhide" class="groupid <?php echo get_data_from_guest($gid['guestid'], "checkedin")?>"><?php echo $gid['guestid']?></p>
-                                        <?php
+                                    <?php if ($guestids != null) {
+                                        foreach($guestids as $gid){
+                                            ?>
+                                                <p data-behaviour="showhide" class="groupid <?php echo get_data_from_guest($gid['guestid'], "checkedin")?>"><?php echo $gid['guestid']?></p>
+                                            <?php
                                         }
-                                    ?>
+                                        
+                                    } else { ?>
+                                        <p data-behaviour="showhide" class="groupid">Empty</p>
+                                    <?php } ?>
                                 </div>
                             </div>
 
@@ -109,12 +113,16 @@
                                 <p class="groupslist_entry"><?php echo $g['vq_guests'];?></p>
                                 <p class="groupslist_entry"><?php echo get_data_from_setting("display_guest_count") . "/" . (($min_sq_users_per_group + $max_vq_users_per_group) - $g['vq_guests']);?></p>
                                 <div class="groupslist_entry groupids" data-behaviour="showhide">
-                                    <?php foreach($guestids as $gid){
-                                        ?>
-                                            <p data-behaviour="showhide" class="groupid <?php echo get_data_from_guest($gid['guestid'], "checkedin")?>"><?php echo $gid['guestid']?></p>
-                                        <?php
+                                    <?php if ($guestids != null) {
+                                        foreach($guestids as $gid){
+                                            ?>
+                                                <p data-behaviour="showhide" class="groupid <?php echo get_data_from_guest($gid['guestid'], "checkedin")?>"><?php echo $gid['guestid']?></p>
+                                            <?php
                                         }
-                                    ?>
+                                        
+                                    } else { ?>
+                                        <p data-behaviour="showhide" class="groupid">Empty</p>
+                                    <?php } ?>
                                 </div>
                             </div>
 
@@ -128,12 +136,16 @@
                                 <p class="groupslist_entry"><?php echo $g['vq_guests'];?></p>
                                 <p class="groupslist_entry"><?php echo $g['sq_guests'];?></p>
                                 <div class="groupslist_entry groupids" data-behaviour="showhide">
-                                    <?php foreach($guestids as $gid){
-                                        ?>
-                                            <p data-behaviour="showhide" class="groupid <?php echo get_data_from_guest($gid['guestid'], "checkedin")?>"><?php echo $gid['guestid']?></p>
-                                        <?php
+                                    <?php if ($guestids != null) {
+                                        foreach($guestids as $gid){
+                                            ?>
+                                                <p data-behaviour="showhide" class="groupid <?php echo get_data_from_guest($gid['guestid'], "checkedin")?>"><?php echo $gid['guestid']?></p>
+                                            <?php
                                         }
-                                    ?>
+                                        
+                                    } else { ?>
+                                        <p data-behaviour="showhide" class="groupid">Empty</p>
+                                    <?php } ?>
                                 </div>
                             </div>
 
