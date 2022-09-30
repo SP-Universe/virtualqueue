@@ -126,7 +126,7 @@
     align-items: center;
     justify-content: center;
     width: 30vh;
-    height: 30vh;
+    aspect-ratio: 1;
     max-height: 500px;
     max-width: 100%;
     padding: 0;
@@ -196,11 +196,6 @@
     .title_wrap{
         padding: 30px;
     }
-    .placeinline_wrap{
-        width: 350px;
-        aspect-ratio: 1;
-        font-size: 300px;
-    }
     .placeinline_wrap.finished{
         font-size: 40px;
     }
@@ -208,4 +203,9 @@
 
 .placeinline_block{
     overflow: hidden;
+    width: 100;
+}
+
+.socials{
+    margin: 10px 0;
 }

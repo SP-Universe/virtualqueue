@@ -51,8 +51,8 @@
         ?>
 
         <div class="togglebutton_group" data-behaviour="toggleview">
-            <span class="togglebutton" id="togglebutton_groups">Groups</span>
-            <span class="togglebutton" id="togglebutton_display">Display</span>
+            <span class="togglebutton" id="togglebutton_groups">Overview</span>
+            <span class="togglebutton" id="togglebutton_display">Entrance</span>
         </div>
 
         <div class="current_status_screen">
