@@ -18,7 +18,7 @@ if($guestid != null)
         remove_guest($guestid);
     }
     if(get_data_from_group($groupid, "vq_guests") <= 0){
-        remove_group($groupid);
+        //remove_group($groupid);
     }
     close_connection();
     exit;
