@@ -191,6 +191,8 @@
         global $conn;
         global $table_groups;
 
+        echo "Get Groups...";
+
         $sql = "SELECT * FROM " . $table_groups . " ORDER BY groupid ASC";
 
         if($result = mysqli_query($conn, $sql)){
