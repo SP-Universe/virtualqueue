@@ -108,12 +108,12 @@
                             ?>
 
                             <?php 
-                                $checkedin_vqs;
+                                $checkedin_vqs = 0;
                                 if ($guestids != null) {
                                     foreach($guestids as $gid){
                                         if(get_data_from_guest($gid['guestid'], "checkedin") == "checkedin")
                                         {
-                                            $checkedin_vqs + get_data_from_guest($gid['guestid'], "guestcount");
+                                            $checkedin_vqs += get_data_from_guest($gid['guestid'], "guestcount");
                                         }
                                     }
                                 }
