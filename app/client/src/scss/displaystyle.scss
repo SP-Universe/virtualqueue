@@ -145,6 +145,7 @@ kbd {
 .display_guests{
     display: flex;
     flex-direction: column;
+    gap: 5px;
 }
 
 .current_group{
