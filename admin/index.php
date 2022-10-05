@@ -145,7 +145,7 @@
                             <div class="groupslist_row past">
                                 <p class="groupslist_entry"><?php echo $g['groupid'];?></p>
                                 <p class="groupslist_entry"><?php echo substr($g['time'],0 ,-3);?></p>
-                                <p class="groupslist_entry"><?php echo $g['vq_guests'];?></p>
+                                <p class="groupslist_entry"><?php echo $checkedin_vqs;?></p>
                                 <p class="groupslist_entry"><?php echo $g['sq_guests'];?></p>
                                 <div class="groupslist_entry groupids" data-behaviour="showhide">
                                     <?php if ($guestids != null) {

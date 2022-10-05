@@ -1,6 +1,7 @@
 <?php 
     include 'layout/header.php';
     require 'main.php';
+    
 ?>
 
     <h2>Wieviele Personen sind in deiner Gruppe?</h2>

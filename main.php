@@ -213,10 +213,9 @@
 
     $time_between_groups = get_data_from_setting("time_between_groups");
     $time_between_groups_in_seconds = strtotime("1970-01-01 $time_between_groups UTC");
-
     $maritime = get_data_from_setting("time_between_groups");
+    
     $seconds = strtotime("1970-01-01 $maritime UTC");
-    echo "GroupID: " . $groupnum . " | Current Group: " . $current_group;
     $multiply = $seconds * ($groupnum - $current_group - 1);  #Here you can multiply with your dynamic value
     $newTime = strtotime("+{$multiply} seconds", $now);
 
