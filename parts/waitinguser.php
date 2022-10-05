@@ -22,8 +22,8 @@
                         <p class="placeinline_number" id="placeinline_number">1</p> 
                     </div>
                 </div>
-                <h3 id="estimated_time">(OLD)Vorraussichtliche Eintrittszeit: <?php echo substr(get_data_from_group(get_data_from_guest($guestid, "groupid"), "time"), 0 ,-3); ?></h3>
-
+                <h3 id="estimated_time">(OLD)Vorraussichtliche Showzeit: <?php echo substr(get_data_from_group(get_data_from_guest($guestid, "groupid"), "time"), 0 ,-3); ?></h3>
+                <p>(Bitte 5 Minuten vor Showstart am Eingang einfinden)</p>
                 <p>
                     <a href="leavequeue.php" class="button">Aus der Warteschlange austreten</a>
                 </p>
