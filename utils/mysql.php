@@ -260,13 +260,13 @@
                 foreach(get_all_groups() as $group){
                     if($group['groupid'] > $current_group){
                         if(get_data_from_group($group['groupid'], "vq_guests") + $number_of_new_guests <= $max_vq_users_per_group){
-                            set_data_for_group($group['groupid'], "vq_guests", get_data_from_group($highest_groupid, "vq_guests") + $number_of_new_guests);
+                            set_data_for_group($group['groupid'], "vq_guests", get_data_from_group($group['groupid'], "vq_guests") + $number_of_new_guests);
                             return $group['groupid'];
                         }
                     }
                 }
 
-                /* foreach ($all_guests as $g){
+                /*foreach ($all_guests as $g){
                     if ($g['groupid'] > $highest_groupid){
                         $highest_groupid = $g['groupid'];
                         //$users_in_highest_groupid = $g['guestcount'];
