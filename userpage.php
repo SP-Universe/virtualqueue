@@ -12,7 +12,7 @@
                 echo $guestid;
                 setusercookie($guestid);
             } else {
-                header("Location: index.php?error=Too many people in your group!");
+                //header("Location: index.php?error=Too many people in your group!");
                 close_connection();
                 exit;
             }
@@ -20,9 +20,9 @@
     }
     else if(checkforexistingid($guestid))
     {
-        header("Location: index.php?hint=existing_user");
+        //header("Location: index.php?hint=existing_user");
     } else {
-        header("Location: index.php?error=Unbekannter Gast! " . $guestid);
+        //header("Location: index.php?error=Unbekannter Gast! " . $guestid);
     }
     close_connection();
     exit;
