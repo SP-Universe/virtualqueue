@@ -79,6 +79,16 @@
                     foreach ($all_groups as $g){
                         $guestids = get_all_ids_from_group($g['groupid']);
                         
+                        $checkedin_vqs = 0;
+                        if ($guestids != null) {
+                            foreach($guestids as $gid){
+                                if(get_data_from_guest($gid['guestid'], "checkedin") == "checkedin")
+                                {
+                                    $checkedin_vqs += get_data_from_guest($gid['guestid'], "guestcount");
+                                }
+                            }
+                        }
+                        
                         if($current_group < $g['groupid']){
                             $waitingguests += $g['vq_guests'];
                             ?>
@@ -105,18 +115,6 @@
                             <?php
                         } else if($current_group == $g['groupid']){
                             $waitingguests += $g['vq_guests'];
-                            ?>
-
-                            <?php 
-                                $checkedin_vqs = 0;
-                                if ($guestids != null) {
-                                    foreach($guestids as $gid){
-                                        if(get_data_from_guest($gid['guestid'], "checkedin") == "checkedin")
-                                        {
-                                            $checkedin_vqs += get_data_from_guest($gid['guestid'], "guestcount");
-                                        }
-                                    }
-                                }
                             ?>
                         
                             <div class="groupslist_row current" id="current_group">
