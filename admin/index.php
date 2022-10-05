@@ -49,6 +49,7 @@
 
         foreach(get_all_groups() as $group){
             if($group['groupid'] > $current_group){
+                echo $group['groupid'];
                 recalculateTimes($group['id']);
             }
         }
