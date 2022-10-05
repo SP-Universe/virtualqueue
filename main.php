@@ -106,14 +106,17 @@
     global $cookie_name;
     global $conn;
     global $table_guests;
+    global $current_group;
 
-    setcookie($cookie_name, null, -1, '/'); 
+    setcookie($cookie_name, null, -1, '/');
     if(checkforexistingid($id)){
-      $sql = "DELETE FROM " . $table_guests . " WHERE guestid = '" . $id . "'";
-      if ($conn->query($sql) === TRUE) {
-        echo "User removed successfully";
-      } else {
-        echo "Error removing user: " . $conn->error;
+      if(get_data_from_guest($id, "groupid") > $current_group){
+        $sql = "DELETE FROM " . $table_guests . " WHERE guestid = '" . $id . "'";
+        if ($conn->query($sql) === TRUE) {
+          echo "User removed successfully";
+        } else {
+          echo "Error removing user: " . $conn->error;
+        }
       }
     }
   }

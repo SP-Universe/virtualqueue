@@ -190,6 +190,11 @@
                 
                 <input type="submit" value="Change values" accesskey="s" name="submit">
             </form>
+
+            <form class="add_guest_form" method="post" action="add_guest.php">
+                <input type="number" value="1" name="new_guests">
+                <input type="submit" value="Add guest" accesskey="s" name="submit">
+            </form>
             
             <form class="group_change_form" method="post" action="change_status.php">
                 <select id="status" name="status">
@@ -201,6 +206,8 @@
                 </select>
                 <input type="submit" value="Change status" accesskey="s" name="submit">
             </form>
+
+            
         </div>
 
         <div class="toggleview displayadmin" id="displayadmin">
@@ -272,7 +279,6 @@ const guestcountDisplayElement = document.querySelector('#guestcount_display');
 let showHideElements = [...document.querySelectorAll('[data-behaviour="showhide"]')];
 
 var countDownDate = new Date("Oct 5, <?php echo get_data_from_group($current_group + 1, 'time');?>").getTime();
-console.log(countDownDate);
 
 setInterval(function() {
     var now = new Date().getTime();
@@ -282,7 +288,6 @@ setInterval(function() {
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
     document.getElementById("admin_next_group_countdown").innerHTML = "<p>" + hours + ":" + minutes + ":" + seconds + " Sekunden bis zum nächstem Einlass</p>";
-    console.log(countDownDate);
 }, 1000);
 
 function calculateTotalShowSize(){

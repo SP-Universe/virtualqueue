@@ -1,7 +1,12 @@
 <?php 
     include 'layout/header.php';
     require 'main.php';
-    
+
+    $guestid = checkforcookie();
+    if($guestid){
+        remove_guest($guestid);
+    }
+
 ?>
 
     <h2>Wieviele Personen sind in deiner Gruppe?</h2>

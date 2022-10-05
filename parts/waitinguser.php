@@ -102,7 +102,7 @@
                         </form>
 
                         <p><a href="new_guest.php" class="button">Neu anstellen</a></p>
-                        <p><a href="index.php" class="button">Zur Startseite</a></p>
+                        <p><a href="leavequeue.php" class="button">Zur Startseite</a></p>
                         <div class="socials">
                             <a href="https://www.instagram.com/halloweenhaus.schmalenbeck/"><img class="title_image" src="app/client/src/images/logo_instagram.png" alt="Instagram"></a>
                             <a href="https://www.youtube.com/channel/UCmtPYNrj6xp-ed77zzSzUIQ"><img class="title_image" src="app/client/src/images/logo_youtube.png" alt="Youtube"></a>
