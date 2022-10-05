@@ -10,6 +10,7 @@
             echo'<a href="userpage.php?new_guests=' . $i . '" class="button">' . $i . '</a>';
         } ?>
     </div>
+    <p>(Wenn ihr mehr als 10 Personen seid, müsst ihr euch bitte aufteilen)</p>
 
 <?php
     include 'layout/footer.php';
