@@ -7,8 +7,14 @@
     {
         if (isset($_GET['new_guests'])) {
             header("Location: index.php?hint=new_user&guestid=" . $guestid);
-            $guestid = add_new_guest($_GET['new_guests']);
-            setusercookie($guestid);
+            if($_GET['new_guests'] < get_data_from_setting("max_vq")){
+                $guestid = add_new_guest($_GET['new_guests']);
+                setusercookie($guestid);
+            } else {
+                header("Location: index.php?error=Too many people in your group!");
+                close_connection();
+                exit;
+            }
         }
     }
     else if(checkforexistingid($guestid))

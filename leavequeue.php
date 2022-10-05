@@ -9,10 +9,13 @@ if($guestid != null)
     $groupid = get_data_from_guest($guestid, "groupid");
     $groupsize = get_data_from_group($groupid, "vq_guests");
     set_data_for_group($groupid, "vq_guests", $groupsize - get_data_from_guest($guestid, "guestcount"));
+    if($currentGroup < $groupid) 
+    {
+        remove_guest($guestid);
+    }
     if(get_data_from_group($groupid, "vq_guests") <= 0){
         remove_group($groupid);
     }
-    remove_guest($guestid);
     close_connection();
     exit;
 }
