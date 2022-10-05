@@ -204,11 +204,11 @@
         global $conn;
         global $table_groups;
 
-        $sql = "SELECT * FROM " . $table_groups . " ORDER BY groupid DESC LIMIT 1";
+        $sql = "SELECT groupid FROM " . $table_groups . " ORDER BY groupid DESC LIMIT 1";
 
         if($result = mysqli_query($conn, $sql)){
             if(mysqli_num_rows($result) > 0){
-                $assoc = $result->fetch_assoc();
+                $assoc = $result->fetch_row()[0];
                 return $assoc;
             }
         }
