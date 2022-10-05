@@ -106,11 +106,23 @@
                         } else if($current_group == $g['groupid']){
                             $waitingguests += $g['vq_guests'];
                             ?>
+
+                            <?php 
+                                $checkedin_vqs;
+                                if ($guestids != null) {
+                                    foreach($guestids as $gid){
+                                        if(get_data_from_guest($gid['guestid'], "checkedin") == "checkedin")
+                                        {
+                                            $checkedin_vqs + get_data_from_guest($gid['guestid'], "guestcount");
+                                        }
+                                    }
+                                }
+                            ?>
                         
                             <div class="groupslist_row current" id="current_group">
                                 <p class="groupslist_entry"><?php echo $g['groupid'];?></p>
                                 <p class="groupslist_entry"><?php echo substr($g['time'],0 ,-3);?></p>
-                                <p class="groupslist_entry"><?php echo $g['vq_guests'];?></p>
+                                <p class="groupslist_entry"><?php echo $checkedin_vqs . "/" . $g['vq_guests'];?></p>
                                 <p class="groupslist_entry"><?php echo get_data_from_setting("display_guest_count") . "/" . (($min_sq_users_per_group + $max_vq_users_per_group) - $g['vq_guests']);?></p>
                                 <div class="groupslist_entry groupids" data-behaviour="showhide">
                                     <?php if ($guestids != null) {
