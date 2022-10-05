@@ -261,7 +261,7 @@
                     if($group['groupid'] > $current_group){
                         if(get_data_from_group($group['groupid'], "vq_guests") + $number_of_new_guests <= $max_vq_users_per_group){
                             set_data_for_group($group['groupid'], "vq_guests", get_data_from_group($highest_groupid, "vq_guests") + $number_of_new_guests);
-                            return $current_group;
+                            return $group['groupid'];
                         }
                     }
                 }
