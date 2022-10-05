@@ -17,7 +17,7 @@
     set_data_for_settings("current_group", $current_group + 1);
 
     foreach(get_all_groups() as $group){
-        if($group['id'] > $current_group){
+        if($group['groupid'] > $current_group){
             recalculateTimes($group['id']);
         }
     }
