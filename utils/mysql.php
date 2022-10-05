@@ -208,7 +208,8 @@
 
         if($result = mysqli_query($conn, $sql)){
             if(mysqli_num_rows($result) > 0){
-                return $result[0];
+                $assoc = $result->fetch_assoc();
+                return $assoc;
             }
         }
     }
