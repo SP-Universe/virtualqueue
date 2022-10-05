@@ -34,7 +34,6 @@
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#102C4D">
 
     <link rel="shortcut icon" type="image/x-icon" href="../images/favicon-32x32.png" />
-    <link rel="stylesheet" href="adminstyle.css">
     <link rel="stylesheet" href="../app/client/dist/css/styles.css">
 </head>
 <body>
@@ -211,7 +210,7 @@
                 <a href="next_group.php?view=display" class="textbutton">Ja wirklich!</a>
             </div>
 
-            <p class="next_group_time" id="next_group_countdown">00:00 till next group</p>
+            <p class="next_group_time" id="admin_next_group_countdown">00:00 till next group</p>
 
             <div class="display_cards">
                 <div class="display_row admin">
@@ -241,7 +240,6 @@
         </div>
 
         <?php
-        close_connection();
     } else {
         ?>
             <form class="login_form" method="post" action="login.php">
@@ -273,12 +271,15 @@ const guestcountDisplayElement = document.querySelector('#guestcount_display');
 
 let showHideElements = [...document.querySelectorAll('[data-behaviour="showhide"]')];
 
-var countDownDate = new Date("<?php echo get_data_from_group($current_group + 1, "time");?>").getTime();
+var countDownDate = new Date("Oct 5, <?php echo get_data_from_group($current_group + 1, 'time');?>").getTime();
+console.log(countDownDate);
 
-var x = setInterval(function() {
+setInterval(function() {
     var now = new Date().getTime();
     var distance = countDownDate - now;
-    document.getElementById("next_group_countdown").innerHTML = distance + " Sekunden bis zum nächstem Einlass";
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById("admin_next_group_countdown").innerHTML = "<p>" + seconds + " Sekunden bis zum nächstem Einlass</p>";
+    console.log(countDownDate);
 }, 1000);
 
 function calculateTotalShowSize(){
@@ -360,3 +361,4 @@ updateDisplay();
 calculateTotalShowSize();
 
 </script>
+<?php close_connection(); ?>
