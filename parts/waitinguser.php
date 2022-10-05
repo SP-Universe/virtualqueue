@@ -15,20 +15,20 @@
     //WAITING USER LAYOUT:
     function waitingUser($guestid){
         ?>
-        <div class="placeinline_block" id="placeinline_before" style="visibility: hidden;">
-            <p>Gruppen vor dir: </p>
-            <div class="placeinline_wrap"> 
-                <div class="placeinline">
-                    <p class="placeinline_number" id="placeinline_number">1</p> 
+            <div class="placeinline_block" id="placeinline_before" style="visibility: hidden;">
+                <p>Gruppen vor dir: </p>
+                <div class="placeinline_wrap"> 
+                    <div class="placeinline">
+                        <p class="placeinline_number" id="placeinline_number">1</p> 
+                    </div>
                 </div>
+                <h3 id="estimated_time">(OLD)Vorraussichtliche Eintrittszeit: <?php echo substr(get_data_from_group(get_data_from_guest($guestid, "groupid"), "time"), 0 ,-3); ?></h3>
+
+                <p>
+                    <a href="leavequeue.php" class="button">Aus der Warteschlange austreten</a>
+                </p>
+
             </div>
-            <h3 id="estimated_time">(OLD)Vorraussichtliche Eintrittszeit: <?php echo substr(get_data_from_group(get_data_from_guest($guestid, "groupid"), "time"), 0 ,-3); ?></h3>
-
-            <p>
-                <a href="leavequeue.php" class="button">Aus der Warteschlange austreten</a>
-            </p>
-
-        </div>
         <?php
     }
 

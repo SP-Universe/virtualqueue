@@ -77,7 +77,8 @@
     function showData(data) {
         if("<?php echo $guestid;?>" != "") {
             let options = {hour: "2-digit", minute: "2-digit"}; 
-            var time = new Date ("1970-01-01 " + data.estimatedtime);
+            //var time = new Date ("1970-01-01 " + data.estimatedtime);
+            var time = data.estimatedtime;
             if(data.current_status == "closedbefore"){
                 closedbeforeBannerElement.style.visibility='visible';
                 showclosedBannerElement.style.visibility='hidden';
@@ -89,7 +90,8 @@
                 showclosedBannerElement.style.visibility='visible';
                 maintenanceBannerElement.style.visibility='hidden';
                 closedafterBannerElement.style.visibility='hidden';
-                estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + time.toLocaleTimeString('de-de', options);
+                //estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + time.toLocaleTimeString('de-de', options);
+                estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + time;
             } else if(data.current_status == "maintenance"){
                 closedbeforeBannerElement.style.visibility='hidden';
                 showclosedBannerElement.style.visibility='hidden';
@@ -108,7 +110,8 @@
                 maintenanceBannerElement.style.visibility='hidden';
                 closedafterBannerElement.style.visibility='hidden';
                 
-                estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + time.toLocaleTimeString('de-de', options);
+                //estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + time.toLocaleTimeString('de-de', options);
+                estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + time;
             }
 
             if (parseInt(data.current_group) < parseInt(guestgroup)) {
