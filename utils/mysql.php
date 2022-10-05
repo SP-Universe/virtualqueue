@@ -191,11 +191,24 @@
         global $conn;
         global $table_groups;
 
-        $sql = "SELECT * FROM " . $table_groups;
+        $sql = "SELECT * FROM " . $table_groups . " ORDER BY groupid ASC";
 
         if($result = mysqli_query($conn, $sql)){
             if(mysqli_num_rows($result) > 0){
                 return $result;
+            }
+        }
+    }
+
+    function get_last_group(){
+        global $conn;
+        global $table_groups;
+
+        $sql = "SELECT * FROM " . $table_groups . " ORDER BY groupid DESC LIMIT 1";
+
+        if($result = mysqli_query($conn, $sql)){
+            if(mysqli_num_rows($result) > 0){
+                return $result[0];
             }
         }
     }
@@ -240,19 +253,28 @@
         if($all_guests = mysqli_query($conn, $sql)){
 
             if(mysqli_num_rows($all_guests) > 0){
-                $highest_groupid = 0;
-                $users_in_highest_groupid = 0;
+                $highest_groupid = get_last_group();
+                //$users_in_highest_groupid = 0;
 
-                foreach ($all_guests as $g){
-                    if ($g['groupid'] > $highest_groupid){
-                        $highest_groupid = $g['groupid'];
-                        $users_in_highest_groupid = $g['guestcount'];
-                    } else if($g['groupid'] === $highest_groupid) {
-                        $users_in_highest_groupid += $g['guestcount'];
+                foreach(get_all_groups() as $group){
+                    if($group['groupid'] > $current_group){
+                        if(get_data_from_group($group['groupid'], "vq_guests") + $number_of_new_guests <= $max_vq_users_per_group){
+                            set_data_for_group($group['groupid'], "vq_guests", get_data_from_group($highest_groupid, "vq_guests") + $number_of_new_guests);
+                            return $current_group;
+                        }
                     }
                 }
 
-                if($users_in_highest_groupid + $number_of_new_guests <= $max_vq_users_per_group){
+                /* foreach ($all_guests as $g){
+                    if ($g['groupid'] > $highest_groupid){
+                        $highest_groupid = $g['groupid'];
+                        //$users_in_highest_groupid = $g['guestcount'];
+                    } else if($g['groupid'] === $highest_groupid) {
+                        //$users_in_highest_groupid += $g['guestcount'];
+                    }
+                } */
+
+                /* if($users_in_highest_groupid + $number_of_new_guests <= $max_vq_users_per_group){
                     if($current_group < $highest_groupid){
                         set_data_for_group($highest_groupid, "vq_guests", get_data_from_group($highest_groupid, "vq_guests") + $number_of_new_guests);
                         return $highest_groupid;
@@ -260,10 +282,10 @@
                         add_group_to_database($current_group + 1, $number_of_new_guests);
                         return $current_group + 1;
                     }
-                } else {
+                } else { */
                     add_group_to_database($highest_groupid + 1, $number_of_new_guests);
                     return $highest_groupid + 1;
-                }
+                //}
             } else {
                 add_group_to_database($current_group + 1, $number_of_new_guests);
                 return $current_group + 1;
