@@ -41,7 +41,7 @@
             echo "Error creating settingstable: " . $conn->error;
         }
 
-        $sql = "CREATE TABLE IF NOT EXISTS " . $table_groups . " (id INT(6) AUTO_INCREMENT PRIMARY KEY, groupid VARCHAR(255) NOT NULL, time TIME, vq_guests INT, sq_guests INT)";
+        $sql = "CREATE TABLE IF NOT EXISTS " . $table_groups . " (id INT(6) AUTO_INCREMENT PRIMARY KEY, groupid INT NOT NULL, time TIME, vq_guests INT, sq_guests INT)";
         if ($conn->query($sql) === FALSE) {
             echo "Error creating groupstable: " . $conn->error;
         }

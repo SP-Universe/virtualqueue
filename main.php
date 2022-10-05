@@ -60,6 +60,7 @@
 
     add_guest_to_database($id, $number_of_new_guests);
     recalculateTimes(get_data_from_guest($id, "groupid"));
+    echo get_data_from_guest($id, "groupid");
 
     return $id;
   }
