@@ -67,7 +67,6 @@
         currentgroup = data.current_group;
         if(guestgroup == currentgroup){
             if(!audioplayed){
-                console.log("Hello world!");
                 sound.play();
                 audioplayed = true;
             }
@@ -130,7 +129,6 @@
                 placeinlineFeedbackElement.style.visibility='hidden';
                 placeinlineFeedbackElement.style.height='0px';
             } else if (parseInt(data.current_group) > parseInt(guestgroup)){
-                console.log("I am stupid!");
                 audioplayed = false;
                 placeinlineBeforeElement.style.visibility='hidden';
                 placeinlineBeforeElement.style.height='0px';

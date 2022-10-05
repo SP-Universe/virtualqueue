@@ -78,7 +78,7 @@
                 if($all_groups != null){
                     foreach ($all_groups as $g){
                         $guestids = get_all_ids_from_group($g['groupid']);
-                        
+
                         $checkedin_vqs = 0;
                         if ($guestids != null) {
                             foreach($guestids as $gid){
@@ -211,6 +211,8 @@
                 <a href="next_group.php?view=display" class="textbutton">Ja wirklich!</a>
             </div>
 
+            <p class="next_group_time" id="next_group_countdown">00:00 till next group</p>
+
             <div class="display_cards">
                 <div class="display_row admin">
                     <div class="display_row_block admin">
@@ -270,6 +272,14 @@ var guestcountForm = document.forms["guestcount_form"];
 const guestcountDisplayElement = document.querySelector('#guestcount_display');
 
 let showHideElements = [...document.querySelectorAll('[data-behaviour="showhide"]')];
+
+var countDownDate = new Date("<?php echo get_data_from_group($current_group + 1, "time");?>").getTime();
+
+var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    document.getElementById("next_group_countdown").innerHTML = distance + " Sekunden bis zum nächstem Einlass";
+}, 1000);
 
 function calculateTotalShowSize(){
     var minSQ = guestcountForm.elements["min_sq"];
