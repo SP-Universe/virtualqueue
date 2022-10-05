@@ -5,7 +5,11 @@ connectmysql();
 $guestid = checkforcookie();
 if($guestid != null)
 {
-    header("Location: https://halloweenhaus-schmalenbeck.de/");
+    ?>
+        <script type="text/javascript">
+            window.location.href = "http://halloweenhaus-schmalenbeck.de/"
+        </script>
+    <?php
     $groupid = get_data_from_guest($guestid, "groupid");
     $groupsize = get_data_from_group($groupid, "vq_guests");
     set_data_for_group($groupid, "vq_guests", $groupsize - get_data_from_guest($guestid, "guestcount"));

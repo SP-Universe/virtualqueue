@@ -16,7 +16,7 @@
 
 <h2>Danke für dein Feedback!</h2>
 
-<a href="new_guest.php" class="button">Neu anstellen</a>
+<p><a href="leavequeuetowebsite.php" class="button">Besuche unsere Webseite!</a></p>
 
 <?php
 close_connection();
