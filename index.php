@@ -90,7 +90,7 @@
                 maintenanceBannerElement.style.visibility='hidden';
                 closedafterBannerElement.style.visibility='hidden';
                 //estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + time.toLocaleTimeString('de-de', options);
-                estimatedTimeElement.innerText = "Vorraussichtliche Showzeit " + time.substring(0, time.length - 3);
+                estimatedTimeElement.innerText = "Vorraussichtlicher Einlass: " + time.substring(0, time.length - 3);
             } else if(data.current_status == "maintenance"){
                 closedbeforeBannerElement.style.visibility='hidden';
                 showclosedBannerElement.style.visibility='hidden';
@@ -110,7 +110,7 @@
                 closedafterBannerElement.style.visibility='hidden';
                 
                 //estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + time.toLocaleTimeString('de-de', options);
-                estimatedTimeElement.innerText = "Vorraussichtliche Showzeit: " + time.substring(0, time.length - 3);
+                estimatedTimeElement.innerText = "Vorraussichtlicher Einlass: " + time.substring(0, time.length - 3);
             }
 
             if (parseInt(data.current_group) < parseInt(guestgroup)) {
