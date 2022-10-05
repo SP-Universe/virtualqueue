@@ -13,14 +13,14 @@
     getHint();
     getBanner();
 
-            if($guestid === null){
-                getLayoutForNewUser();
-            } else {
-                getLayoutForWaitingUser($guestid, $guestgroup);
-            }
-            close_connection();
-        include 'layout/footer.php';
-    ?>
+    if($guestid === null){
+        getLayoutForNewUser();
+    } else {
+        getLayoutForWaitingUser($guestid, $guestgroup);
+    }
+    close_connection();
+    include 'layout/footer.php';
+?>
 
 <audio id="sound">
     <source src="sound/laugh.ogg">
@@ -74,17 +74,26 @@
     }
 
     function showData(data) {
+
+        if(data.current_status == "closedbefore"){
+            closedbeforeBannerElement.style.visibility='visible';
+            showclosedBannerElement.style.visibility='hidden';
+            maintenanceBannerElement.style.visibility='hidden';
+            closedafterBannerElement.style.visibility='hidden';
+            estimatedTimeElement.innerText = "Warteschlange geschlossen";
+        } else if(data.current_status == "closedafter"){
+            closedbeforeBannerElement.style.visibility='hidden';
+            showclosedBannerElement.style.visibility='hidden';
+            maintenanceBannerElement.style.visibility='hidden';
+            closedafterBannerElement.style.visibility='visible';
+            estimatedTimeElement.innerText = "Warteschlange geschlossen";
+        }
+
         if("<?php echo $guestid;?>" != "") {
             let options = {hour: "2-digit", minute: "2-digit"}; 
             //var time = new Date ("1970-01-01 " + data.estimatedtime);
             var time = data.estimatedtime;
-            if(data.current_status == "closedbefore"){
-                closedbeforeBannerElement.style.visibility='visible';
-                showclosedBannerElement.style.visibility='hidden';
-                maintenanceBannerElement.style.visibility='hidden';
-                closedafterBannerElement.style.visibility='hidden';
-                estimatedTimeElement.innerText = "Warteschlange geschlossen";
-            } else if(data.current_status == "showclosed"){
+            if(data.current_status == "showclosed"){
                 closedbeforeBannerElement.style.visibility='hidden';
                 showclosedBannerElement.style.visibility='visible';
                 maintenanceBannerElement.style.visibility='hidden';
