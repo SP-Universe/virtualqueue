@@ -39,7 +39,7 @@
   }
 
   function checkforforbiddenword($id){
-    $forbiddenWords = array("ACAB", "NUDE", "GEEZ", "WIXX", "JAVA");
+    $forbiddenWords = array("ACAB", "NUDE", "GEEZ", "WIXX", "JAVA", "HH88");
     foreach ($forbiddenWords as $word){
       if($id === $word){
         return true;
@@ -216,7 +216,7 @@
     $maritime = get_data_from_setting("time_between_groups");
     $seconds = strtotime("1970-01-01 $maritime UTC");
     echo "GroupID: " . $groupnum . " | Current Group: " . $current_group;
-    $multiply = $seconds * ($groupnum - $current_group);  #Here you can multiply with your dynamic value
+    $multiply = $seconds * ($groupnum - $current_group - 1);  #Here you can multiply with your dynamic value
     $newTime = strtotime("+{$multiply} seconds", $now);
 
     set_data_for_group($groupnum, "time", date('H:i:s', $newTime));

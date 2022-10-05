@@ -111,8 +111,6 @@
                 estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + time.toLocaleTimeString('de-de', options);
             }
 
-            console.log("Current Group: " + data.current_group + " | Guest Group: " + guestgroup);
-
             if (parseInt(data.current_group) < parseInt(guestgroup)) {
                 placeinlineBeforeElement.style.visibility='visible';
                 placeinlineBeforeElement.style.height='auto';
