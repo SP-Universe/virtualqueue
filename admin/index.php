@@ -47,12 +47,6 @@
         $all_groups = get_all_groups();
         $waitingguests = 0;
 
-        foreach(get_all_groups() as $group){
-            if($group['groupid'] > $current_group){
-                recalculateTimes($group['groupid']);
-            }
-        }
-
         ?>
 
         <div class="togglebutton_group" data-behaviour="toggleview">
