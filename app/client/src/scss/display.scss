@@ -1,0 +1,125 @@
+/* Display Page */
+.display{
+    background-image: url("../images/displaybackground.jpg");
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.507);
+    position: relative;
+
+    .display_cards{
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    img{
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        z-index: -10;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+    }
+
+    kbd{
+        font-size: 50px;
+    }
+
+    .display_guests{
+        display: flex;
+        flex-direction: column;
+        gap: 17px;
+    }
+
+    .current_group{
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        font-size: 18px;
+        color: #4d4d4d;
+    }
+
+    .groupid {
+        background-color: #eee;
+        border-radius: 3px;
+        color: #333;
+        display: block;
+        font-weight: 700;
+        line-height: 1;
+        padding: 1px 4px;
+        margin: 0px 5px 5px 0;
+        width: auto;
+        cursor: pointer;
+    }
+
+    .current_group.admin{
+        font-size: 2vh;
+        color: white;
+        bottom: 20px;
+    }
+
+    .display_row_block{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .display_row_block.admin{
+        padding: 0 20px;
+    }
+
+    .roundbutton{
+        padding: 20px;
+        display: block;
+        background-color: $main-button-color;
+        color: white;
+        text-decoration: none;
+        font-size: 60px;
+        width: 80px;
+        height: 80px;
+        border-radius: 100%;
+        line-height: 1;
+    }
+
+    .next_group{
+        display: block;
+        margin: 20px auto;
+        position: relative;
+        font-size: 20px;
+    }
+
+    .next_group .textbutton{
+        opacity: 0;
+        pointer-events: none;
+        transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        background-color: green;
+        display: block;
+        padding: 10px;
+        width: auto;
+        max-height: 0px;
+        overflow: hidden;
+    }
+
+    .groupid.checkedin{
+        background-color: green;
+        color: white;
+    }
+
+    .next_group.visible .textbutton{
+        pointer-events: all;
+        opacity: 1;
+        max-height: 200px;
+    }
+
+    .showhide_nextgroup{
+        display: inline-block;
+        background-color: rgba(0, 0, 0, 0.308);
+        padding: 10px;
+        width: auto;
+    }
+}

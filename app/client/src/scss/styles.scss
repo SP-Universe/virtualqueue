@@ -1,17 +1,12 @@
 @import "fonts";
-@import "displaystyle";
-@import "adminstyle";
+@import "normalize";
+@import "variables";
+@import "typography";
 @import "forms";
 @import "animations";
 
-*{
-    box-sizing: content-box;
-}
-
-:root {
-    --main-button-color: rgb(0, 56, 56);
-    --green-color: rgb(0, 88, 0);
-}
+@import "display";
+@import "admin";
 
 .title_wrap{
     display: flex;
@@ -33,7 +28,7 @@
     right: 0;
     width: 100%;
     margin: 0 -10px;
-    background-color: var(--main-button-color);
+    background-color: $main-button-color;
     backdrop-filter: blur(3px);
     padding: 15px 10px;
     box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.7);
@@ -82,10 +77,10 @@
 }
 
 .hint{
-    display: inline-block;
+    display: flex;
     width: auto;
     padding: 20px;
-    background-color: var(--main-button-color); /* Red */
+    background-color: $main-button-color; /* Red */
     color: white;
     margin-bottom: 15px;
     opacity: 1;
@@ -106,12 +101,7 @@
 }
 
 .closebtn {
-    margin-left: 15px;
-    color: white;
-    font-weight: bold;
-    float: right;
-    font-size: 22px;
-    line-height: 20px;
+    width: 10px;
     cursor: pointer;
     transition: 0.3s;
 
@@ -138,7 +128,7 @@
     animation: wobble 10s infinite;
 
     &.finished {
-        background-color: var(--green-color);
+        background-color: $green-color;
         font-size: 30px;
         font-weight: 500;
 
@@ -149,7 +139,7 @@
     }
 
     &.toolate {
-        background-color: var(--green-color);
+        background-color: $green-color;
         font-size: 18px;
         line-height: 1.5;
         font-weight: 500;

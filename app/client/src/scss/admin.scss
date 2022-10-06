@@ -1,0 +1,140 @@
+.section.section--admin{
+    margin-bottom: 70px;
+    .title_wrap{
+        display: flex;
+        width: auto;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .title_image{
+        width: 50px;
+        height: auto;
+        padding-right: 10px;
+    }
+
+    .title{
+        display: inline;
+        flex-shrink: 0;
+        text-align: left;
+        font-size: 40px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .current_status_screen{
+        margin: 10px auto;
+    }
+
+    .togglebutton_group{
+        position: fixed;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        background-color: $colorPrimaryLight;
+
+        .togglebutton{
+            padding: 10px 20px;
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+
+            &.active{
+                border: 1px solid $green-color;
+                background-color: $green-color;
+            }
+
+            &.inactive{
+                background-color: $main-button-color;
+            }
+
+            &:first-of-type{
+                border-radius: 20px 0 0 20px;
+            }
+
+            &:last-of-type{
+                border-radius: 0 20px 20px 0;
+            }
+        }
+    }
+
+    .toggleview{
+        overflow: hidden;
+    }
+
+    .groupslist{
+        margin: 10px auto;
+
+        &.groupids{
+            width: 30%;
+            flex-shrink: 0;
+        }
+    }
+
+    .groupslist_row{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        max-width: 480px;
+        height: 40px;
+        border: 1px solid white;
+        overflow: hidden;
+        margin: 0 auto;
+
+        &.past{
+            color: gray;
+            border: 1px solid gray;
+        }
+
+        &.current{
+            border: 1px solid green;
+            background-color: darkgreen;
+        }
+
+        &.visible{
+            height: auto;
+        }
+
+        .groupslist_entry{
+            &.groupids{
+                width: 140px;
+                flex-shrink: 0;
+                display: flex;
+                flex-wrap: wrap;
+            }
+        }
+    }
+
+    .groupslist_row.past .groupid {
+        background-color: gray;
+    }
+
+    .groupslist_row.past .groupid.checkedin {
+        background-color: rgb(46, 82, 48);
+        color: lightgray;
+    }
+
+    .options{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 300px;
+        gap: 5px;
+        margin: 10px auto;
+    }
+
+    .options input[type="number"]{
+        height: auto;
+    }
+
+    .group_change_form{
+        margin: 20px 0;
+        padding: 10px;
+        border: 1px solid black;
+    }
+}

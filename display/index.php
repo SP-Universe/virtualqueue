@@ -15,45 +15,34 @@
     <h2 class="current_group">Aktuelle Gruppe: <?php echo $current_group;?></h2>
 
     <div class="display_cards" id="reloading">
-        <div class="display_row">
-            <div class="display_row_block">
-                <div class="display_guests">
-                    <?php
-                    $guestids = get_all_ids_from_group($current_group); 
-                    if($guestids != null){
-                        foreach($guestids as $gid){
-                            ?>
-                                <p class="groupid large_number <?php echo get_data_from_guest($gid['guestid'], "checkedin");?>"><?php echo $gid['guestid']?> (<?php echo get_data_from_guest($gid['guestid'], "guestcount");?>)</p>
-                            <?php
-                        }
-                    } else {
-                        echo 'Die Virtual Queue ist leer';
-                    }
+        <div class="display_card guestids">
+            <?php
+            $guestids = get_all_ids_from_group($current_group); 
+            if($guestids != null){
+                foreach($guestids as $gid){
                     ?>
-                </div>
-            </div>
-            <div class="display_row_block" >
-                <p class="big_number"><?php 
-                    if(($max_vq_users_per_group + $min_sq_users_per_group) - get_data_from_group($current_group, "vq_guests") - get_data_from_setting("display_guest_count") > 0){
-                        echo ($max_vq_users_per_group + $min_sq_users_per_group) - get_data_from_group($current_group, "vq_guests") - get_data_from_setting("display_guest_count");
-                    } else {
-                        echo 0;
-                    }
-                ?></p>
-                <p>Gäste aus der standby Queue</p>
-            </div>
+                        <p class="groupid large_number <?php echo get_data_from_guest($gid['guestid'], "checkedin");?>"><?php echo $gid['guestid']?> (<?php echo get_data_from_guest($gid['guestid'], "guestcount");?>)</p>
+                    <?php
+                }
+            } else {
+                echo 'Die Virtual Queue ist leer';
+            }
+            ?>
+        </div>
+        <div class="display_card standby" >
+            <p class="big_number"><?php 
+                if(($max_vq_users_per_group + $min_sq_users_per_group) - get_data_from_group($current_group, "vq_guests") - get_data_from_setting("display_guest_count") > 0){
+                    echo ($max_vq_users_per_group + $min_sq_users_per_group) - get_data_from_group($current_group, "vq_guests") - get_data_from_setting("display_guest_count");
+                } else {
+                    echo 0;
+                }
+            ?></p>
+            <p>Gäste aus der standby Queue</p>
         </div>
     </div>
 </div>
 
 </body>
-
-<!-- <script>
-    setInterval(function(){ 
-	    window.location.reload();
-    }, 4000);
-
-</script> -->
 <script src="jquery-3.6.0.min.js"></script>
 <script>
    $(document).ready(function(){

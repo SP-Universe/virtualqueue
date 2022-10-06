@@ -43,207 +43,209 @@
     connectmysql();
 
     if(checklogin()){
-
         $all_groups = get_all_groups();
         $waitingguests = 0;
-
+        foreach ($all_groups as $g) {
+            $waitingguests += $g['vq_guests'];
+        }
         ?>
 
-        <div class="togglebutton_group" data-behaviour="toggleview">
-            <span class="togglebutton" id="togglebutton_groups">Overview</span>
-            <span class="togglebutton" id="togglebutton_display">Entrance</span>
-        </div>
-
-        <div class="current_status_screen">
-            <h2>Admin-Bereich</h2>
-            <p>Gruppe: <?php echo $current_group; ?> | Status: <?php echo $current_status; ?></p>
-        </div>
-
-        <div class="toggleview groupsadmin" id="groupsadmin">        
-            <a href="next_group.php?view=groups" class="button">Nächste Gruppe</a>
-            
-            <div class="groupslist">
-                <div class="groupslist_row">
-                    <p class="groupslist_entry">ID</p>
-                    <p class="groupslist_entry">Time</p>
-                    <p class="groupslist_entry">VQ</p>
-                    <p class="groupslist_entry">SQ</p>
-                    <p class="groupslist_entry double">IDs</p>
-                </div>
+        <div class="section section--admin">
+            <div class="togglebutton_group" data-behaviour="toggleview">
+                <span class="togglebutton" id="togglebutton_groups">Groups</span>
+                <span class="togglebutton" id="togglebutton_display">Entrance</span>
             </div>
-            <div class="groupslist" id=groupslist>
 
-                <?php
-                if($all_groups != null){
-                    foreach ($all_groups as $g){
-                        $guestids = get_all_ids_from_group($g['groupid']);
-
-                        $checkedin_vqs = 0;
-                        if ($guestids != null) {
-                            foreach($guestids as $gid){
-                                if(get_data_from_guest($gid['guestid'], "checkedin") == "checkedin")
-                                {
-                                    $checkedin_vqs += get_data_from_guest($gid['guestid'], "guestcount");
-                                }
-                            }
-                        }
-                        
-                        if($current_group < $g['groupid']){
-                            $waitingguests += $g['vq_guests'];
-                            ?>
-                        
-                            <div class="groupslist_row">
-                                <p class="groupslist_entry"><?php echo $g['groupid'];?></p>
-                                <p class="groupslist_entry"><?php echo substr($g['time'],0 ,-3);?></p>
-                                <p class="groupslist_entry"><?php echo $g['vq_guests'];?></p>
-                                <p class="groupslist_entry"><?php echo (($min_sq_users_per_group + $max_vq_users_per_group) - $g['vq_guests']);?></p>
-                                <div class="groupslist_entry groupids" data-behaviour="showhide">
-                                    <?php if ($guestids != null) {
-                                        foreach($guestids as $gid){
-                                            ?>
-                                                <p data-behaviour="showhide" class="groupid <?php echo get_data_from_guest($gid['guestid'], "checkedin")?>"><?php echo $gid['guestid']?></p>
-                                            <?php
-                                        }
-                                        
-                                    } else { ?>
-                                        <p data-behaviour="showhide" class="groupid">Empty</p>
-                                    <?php } ?>
-                                </div>
-                            </div>
-
-                            <?php
-                        } else if($current_group == $g['groupid']){
-                            $waitingguests += $g['vq_guests'];
-                            ?>
-                        
-                            <div class="groupslist_row current" id="current_group">
-                                <p class="groupslist_entry"><?php echo $g['groupid'];?></p>
-                                <p class="groupslist_entry"><?php echo substr($g['time'],0 ,-3);?></p>
-                                <p class="groupslist_entry"><?php echo $checkedin_vqs . "/" . $g['vq_guests'];?></p>
-                                <p class="groupslist_entry"><?php echo get_data_from_setting("display_guest_count") . "/" . (($min_sq_users_per_group + $max_vq_users_per_group) - $g['vq_guests']);?></p>
-                                <div class="groupslist_entry groupids" data-behaviour="showhide">
-                                    <?php if ($guestids != null) {
-                                        foreach($guestids as $gid){
-                                            ?>
-                                                <p data-behaviour="showhide" class="groupid <?php echo get_data_from_guest($gid['guestid'], "checkedin")?>"><?php echo $gid['guestid']?></p>
-                                            <?php
-                                        }
-                                        
-                                    } else { ?>
-                                        <p data-behaviour="showhide" class="groupid">Empty</p>
-                                    <?php } ?>
-                                </div>
-                            </div>
-
-                            <?php
-                        } else{
-                            ?>
-                        
-                            <div class="groupslist_row past">
-                                <p class="groupslist_entry"><?php echo $g['groupid'];?></p>
-                                <p class="groupslist_entry"><?php echo substr($g['time'],0 ,-3);?></p>
-                                <p class="groupslist_entry"><?php echo $checkedin_vqs;?></p>
-                                <p class="groupslist_entry"><?php echo $g['sq_guests'];?></p>
-                                <div class="groupslist_entry groupids" data-behaviour="showhide">
-                                    <?php if ($guestids != null) {
-                                        foreach($guestids as $gid){
-                                            ?>
-                                                <p data-behaviour="showhide" class="groupid <?php echo get_data_from_guest($gid['guestid'], "checkedin")?>"><?php echo $gid['guestid']?></p>
-                                            <?php
-                                        }
-                                        
-                                    } else { ?>
-                                        <p data-behaviour="showhide" class="groupid">Empty</p>
-                                    <?php } ?>
-                                </div>
-                            </div>
-
-                            <?php
-                        }
-                    }
-                } else {
-                    echo '<p>- Keine Gruppen gefunden! -</p>';
-                }
-                ?>
+            <div class="current_status_screen">
+                <h2>Admin-Bereich</h2>
+                <p>Gruppe: <?php echo $current_group; ?> | Status: <?php echo $current_status; ?></p>
             </div>
-            <br>
+
             <p>Gerade warten <b><?php echo $waitingguests;?></b> Gäste </p>
 
-            <form id="guestcount_form" class="group_change_form" method="post" action="change_group.php">
-                <div class="options">
-                    <div class="options_value">
-                        <p>Gruppe</p>
-                        <input type="number" value="<?php echo $current_group;?>" name="group">
-                    </div>
-                    <div class="options_value">
-                        <p>Max VQ</p>
-                        <input onchange="calculateTotalShowSize()" type="number" value="<?php echo $max_vq_users_per_group;?>" id="max_vq" name="max_vq">
-                    </div>
-                    <div class="options_value">
-                        <p>Min SQ</p>
-                        <input onchange="calculateTotalShowSize()" type="number" value="<?php echo $min_sq_users_per_group;?>" id="min_sq" name="min_sq">
-                    </div>
-                    <div class="options_value">
-                        <p id="guestcount_display">(20 People per Show)</p>
+            <!-- Groups Admin -->
+            <div class="toggleview groupsadmin" id="groupsadmin">        
+                <a href="next_group.php?view=groups" class="button">Nächste Gruppe</a>
+                
+                <div class="groupslist">
+                    <div class="groupslist_row">
+                        <p class="groupslist_entry">ID</p>
+                        <p class="groupslist_entry">Time</p>
+                        <p class="groupslist_entry">VQ</p>
+                        <p class="groupslist_entry">SQ</p>
+                        <p class="groupslist_entry groupids">IDs</p>
                     </div>
                 </div>
-                
-                <input type="submit" value="Change values" accesskey="s" name="submit">
-            </form>
+                <div class="groupslist" id=groupslist>
 
-            <form class="add_guest_form" method="post" action="add_guest.php">
-                <input type="number" value="1" name="new_guests">
-                <input type="submit" value="Add guest" accesskey="s" name="submit">
-            </form>
-            
-            <form class="group_change_form" method="post" action="change_status.php">
-                <select id="status" name="status">
-                    <option value="closedbefore" <?php if($current_status === "closedbefore"){echo'selected';}?>>closedbefore</option>
-                    <option value="showclosed" <?php if($current_status === "showclosed"){echo'selected';}?>>showclosed</option>
-                    <option value="open" <?php if($current_status === "open"){echo'selected';}?>>open</option>
-                    <option value="maintenance" <?php if($current_status === "maintenance"){echo'selected';}?>>maintenance</option>
-                    <option value="closedafter" <?php if($current_status === "closedafter"){echo'selected';}?>>closedafter</option>
-                </select>
-                <input type="submit" value="Change status" accesskey="s" name="submit">
-            </form>
+                    <?php
+                    if($all_groups != null){
+                        foreach ($all_groups as $g){
+                            $guestids = get_all_ids_from_group($g['groupid']);
 
-            
-        </div>
-
-        <div class="toggleview displayadmin" id="displayadmin">
-
-            <div class="next_group">
-                <p data-behaviour="showhide_nextgroup" class="showhide_nextgroup">Nächste Gruppe</p>
-                <a href="next_group.php?view=display" class="textbutton">Ja wirklich!</a>
-            </div>
-
-            <p class="next_group_time" id="admin_next_group_countdown">00:00 till next group</p>
-
-            <div class="display_cards">
-                <div class="display_row admin">
-                    <div class="display_row_block admin">
-                        <div class="display_guests">
-                            <?php
-                            $guestids = get_all_ids_from_group($current_group); 
-                            if($guestids != null){
+                            $checkedin_vqs = 0;
+                            if ($guestids != null) {
                                 foreach($guestids as $gid){
-                                    ?>
-                                        <a href="checkin.php?view=display&&guestid=<?php echo $gid['guestid'];?>"><p class="groupid <?php echo get_data_from_guest($gid['guestid'], "checkedin");?>"><?php echo $gid['guestid']?> (<?php echo get_data_from_guest($gid['guestid'], "guestcount");?>)</p></a>
-                                    <?php
+                                    if(get_data_from_guest($gid['guestid'], "checkedin") == "checkedin")
+                                    {
+                                        $checkedin_vqs += get_data_from_guest($gid['guestid'], "guestcount");
+                                    }
                                 }
-                            } else {
-                                echo 'Die Virtual Queue ist leer';
                             }
-                            ?>
+                            
+                            if($current_group < $g['groupid']){
+                                ?>
+                            
+                                <div class="groupslist_row" data-behaviour="showhide">
+                                    <p class="groupslist_entry"><?php echo $g['groupid'];?></p>
+                                    <p class="groupslist_entry"><?php echo substr($g['time'],0 ,-3);?></p>
+                                    <p class="groupslist_entry"><?php echo $g['vq_guests'];?></p>
+                                    <p class="groupslist_entry"><?php echo (($min_sq_users_per_group + $max_vq_users_per_group) - $g['vq_guests']);?></p>
+                                    <div class="groupslist_entry groupids" >
+                                        <?php if ($guestids != null) {
+                                            foreach($guestids as $gid){
+                                                ?>
+                                                    <kbd class="<?php echo get_data_from_guest($gid['guestid'], "checkedin")?>"><?php echo $gid['guestid']?></kbd>
+                                                <?php
+                                            }
+                                            
+                                        } else { ?>
+                                            <kbd class="empty">-Empty-</kbd>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+
+                                <?php
+                            } else if($current_group == $g['groupid']){
+                                $waitingguests += $g['vq_guests'];
+                                ?>
+                            
+                                <div class="groupslist_row current" id="current_group" data-behaviour="showhide">
+                                    <p class="groupslist_entry"><?php echo $g['groupid'];?></p>
+                                    <p class="groupslist_entry"><?php echo substr($g['time'],0 ,-3);?></p>
+                                    <p class="groupslist_entry"><?php echo $checkedin_vqs . "/" . $g['vq_guests'];?></p>
+                                    <p class="groupslist_entry"><?php echo get_data_from_setting("display_guest_count") . "/" . (($min_sq_users_per_group + $max_vq_users_per_group) - $g['vq_guests']);?></p>
+                                    <div class="groupslist_entry groupids" >
+                                        <?php if ($guestids != null) {
+                                            foreach($guestids as $gid){
+                                                ?>
+                                                    <kbd class="<?php echo get_data_from_guest($gid['guestid'], "checkedin")?>"><?php echo $gid['guestid']?></kbd>
+                                                <?php
+                                            }
+                                            
+                                        } else { ?>
+                                            <kbd class="empty">-Empty-</kbd>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+
+                                <?php
+                            } else{
+                                ?>
+                            
+                                <div class="groupslist_row past" data-behaviour="showhide">
+                                    <p class="groupslist_entry"><?php echo $g['groupid'];?></p>
+                                    <p class="groupslist_entry"><?php echo substr($g['time'],0 ,-3);?></p>
+                                    <p class="groupslist_entry"><?php echo $checkedin_vqs;?></p>
+                                    <p class="groupslist_entry"><?php echo $g['sq_guests'];?></p>
+                                    <div class="groupslist_entry groupids">
+                                        <?php if ($guestids != null) {
+                                            foreach($guestids as $gid){
+                                                ?>
+                                                    <kbd class="<?php echo get_data_from_guest($gid['guestid'], "checkedin")?>"><?php echo $gid['guestid']?></kbd>
+                                                <?php
+                                            }
+                                            
+                                        } else { ?>
+                                            <kbd class="empty">-Empty-</kbd>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+
+                                <?php
+                            }
+                        }
+                    } else {
+                        echo '<p>- Keine Gruppen gefunden! -</p>';
+                    }
+                    ?>
+                </div>
+
+                <form id="guestcount_form" class="group_change_form" method="post" action="change_group.php">
+                    <div class="options">
+                        <div class="options_value">
+                            <p>Gruppe</p>
+                            <input type="number" value="<?php echo $current_group;?>" name="group">
+                        </div>
+                        <div class="options_value">
+                            <p>Max VQ</p>
+                            <input onchange="calculateTotalShowSize()" type="number" value="<?php echo $max_vq_users_per_group;?>" id="max_vq" name="max_vq">
+                        </div>
+                        <div class="options_value">
+                            <p>Min SQ</p>
+                            <input onchange="calculateTotalShowSize()" type="number" value="<?php echo $min_sq_users_per_group;?>" id="min_sq" name="min_sq">
+                        </div>
+                        <div class="options_value">
+                            <p id="guestcount_display">(20 People per Show)</p>
                         </div>
                     </div>
-                    <div class="display_row_block admin">
-                        <a href="change_guestcount.php?method=decrease" class="roundbutton">+</a>
-                        <p class="big_number admin"><?php echo ($min_sq_users_per_group + $max_vq_users_per_group) - get_data_from_group($current_group, "vq_guests") - get_data_from_setting("display_guest_count");?></p>
-                        <a href="change_guestcount.php?method=increase" class="roundbutton">-</a>
+                    
+                    <input type="submit" value="Change values" accesskey="s" name="submit">
+                </form>
+
+                <form class="add_guest_form" method="post" action="add_guest.php">
+                    <input type="number" value="1" name="new_guests">
+                    <input type="submit" value="Add guest" accesskey="s" name="submit">
+                </form>
+                
+                <form class="group_change_form" method="post" action="change_status.php">
+                    <select id="status" name="status">
+                        <option value="closedbefore" <?php if($current_status === "closedbefore"){echo'selected';}?>>closedbefore</option>
+                        <option value="showclosed" <?php if($current_status === "showclosed"){echo'selected';}?>>showclosed</option>
+                        <option value="open" <?php if($current_status === "open"){echo'selected';}?>>open</option>
+                        <option value="maintenance" <?php if($current_status === "maintenance"){echo'selected';}?>>maintenance</option>
+                        <option value="closedafter" <?php if($current_status === "closedafter"){echo'selected';}?>>closedafter</option>
+                    </select>
+                    <input type="submit" value="Change status" accesskey="s" name="submit">
+                </form>
+            </div>
+
+            <!-- Entrance Admin -->
+            <div class="toggleview displayadmin" id="displayadmin">
+                <div class="next_group">
+                    <p data-behaviour="showhide_nextgroup" class="showhide_nextgroup">Nächste Gruppe</p>
+                    <a href="next_group.php?view=display" class="textbutton">Ja wirklich!</a>
+                </div>
+
+                <p class="next_group_time" id="admin_next_group_countdown">00:00 till next group</p>
+
+                <div class="display_cards">
+                    <div class="display_row admin">
+                        <div class="display_row_block admin">
+                            <div class="display_guests">
+                                <?php
+                                $guestids = get_all_ids_from_group($current_group); 
+                                if($guestids != null){
+                                    foreach($guestids as $gid){
+                                        ?>
+                                            <a href="checkin.php?view=display&&guestid=<?php echo $gid['guestid'];?>"><p class="groupid <?php echo get_data_from_guest($gid['guestid'], "checkedin");?>"><?php echo $gid['guestid']?> (<?php echo get_data_from_guest($gid['guestid'], "guestcount");?>)</p></a>
+                                        <?php
+                                    }
+                                } else {
+                                    echo 'Die Virtual Queue ist leer';
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <div class="display_row_block admin">
+                            <a href="change_guestcount.php?method=decrease" class="roundbutton">+</a>
+                            <p class="big_number admin"><?php echo ($min_sq_users_per_group + $max_vq_users_per_group) - get_data_from_group($current_group, "vq_guests") - get_data_from_setting("display_guest_count");?></p>
+                            <a href="change_guestcount.php?method=increase" class="roundbutton">-</a>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <?php
@@ -327,7 +329,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     showHideElements.forEach((element) => {
         element.addEventListener("click", (e) => {
             e.preventDefault();
-            element.parentNode.classList.toggle("visible")
+            element.classList.toggle("visible")
         })
     });
 
