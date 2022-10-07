@@ -10,14 +10,14 @@
     <meta name="copyright" content="SP Universe">
     <meta name="audience" content="Everyone">
     <meta charset="utf-8"/>
-    <title>HW40a - Virtual Queue</title>
+    <title>HWHS - Virtual Queue</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../app/client/src/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../app/client/src/images/favicon-16x16.png">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
-    <meta property="og:title" content="HW40a - Virtual Queue" />
-    <meta property="og:site_name" content="HW40a - Virtual Queue" />
+    <meta property="og:title" content="HWHS - Virtual Queue" />
+    <meta property="og:site_name" content="HWHS - Virtual Queue" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content="Die virtuelle Warteschlange des Halloweenhaus Schmalenbeck">
     <meta property="og:url" content="$Link" />
@@ -211,39 +211,35 @@
             </div>
 
             <!-- Entrance Admin -->
-            <div class="toggleview displayadmin" id="displayadmin">
+            <div class="toggleview entranceadmin" id="entranceadmin">
                 <div class="next_group">
-                    <p data-behaviour="showhide_nextgroup" class="showhide_nextgroup">Nächste Gruppe</p>
-                    <a href="next_group.php?view=display" class="textbutton">Ja wirklich!</a>
+                    <p data-behaviour="showhide_nextgroup" class="button showhide_nextgroup">Nächste Gruppe</p>
+                    <a href="next_group.php?view=display" class="button textbutton"><p>Ja wirklich!</p></a>
+                </div>
+
+                <div class="entrance_cards">
+                    <div class="entrance_card guestids">
+                        <?php
+                        $guestids = get_all_ids_from_group($current_group); 
+                        if($guestids != null){
+                            foreach($guestids as $gid){
+                                ?>
+                                    <a href="checkin.php?view=display&&guestid=<?php echo $gid['guestid'];?>"><kbd class="groupid <?php echo get_data_from_guest($gid['guestid'], "checkedin");?>"><?php echo $gid['guestid']?> (<?php echo get_data_from_guest($gid['guestid'], "guestcount");?>)</kbd></a>
+                                <?php
+                            }
+                        } else {
+                            echo 'Die Virtual Queue ist leer';
+                        }
+                        ?>
+                    </div>
+                    <div class="entrance_card admin">
+                        <a href="change_guestcount.php?method=decrease" class="roundbutton">-</a>
+                        <p class="big_number admin"><?php echo get_data_from_setting("display_guest_count");?>/<?php echo ($min_sq_users_per_group + $max_vq_users_per_group) - get_data_from_group($current_group, "vq_guests");?> SQ</p>
+                        <a href="change_guestcount.php?method=increase" class="roundbutton">+</a>
+                    </div>
                 </div>
 
                 <p class="next_group_time" id="admin_next_group_countdown">00:00 till next group</p>
-
-                <div class="display_cards">
-                    <div class="display_row admin">
-                        <div class="display_row_block admin">
-                            <div class="display_guests">
-                                <?php
-                                $guestids = get_all_ids_from_group($current_group); 
-                                if($guestids != null){
-                                    foreach($guestids as $gid){
-                                        ?>
-                                            <a href="checkin.php?view=display&&guestid=<?php echo $gid['guestid'];?>"><p class="groupid <?php echo get_data_from_guest($gid['guestid'], "checkedin");?>"><?php echo $gid['guestid']?> (<?php echo get_data_from_guest($gid['guestid'], "guestcount");?>)</p></a>
-                                        <?php
-                                    }
-                                } else {
-                                    echo 'Die Virtual Queue ist leer';
-                                }
-                                ?>
-                            </div>
-                        </div>
-                        <div class="display_row_block admin">
-                            <a href="change_guestcount.php?method=decrease" class="roundbutton">+</a>
-                            <p class="big_number admin"><?php echo ($min_sq_users_per_group + $max_vq_users_per_group) - get_data_from_group($current_group, "vq_guests") - get_data_from_setting("display_guest_count");?></p>
-                            <a href="change_guestcount.php?method=increase" class="roundbutton">-</a>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </div>
@@ -261,6 +257,8 @@
 ?>
 </body>
 
+
+<!-- Javascript -->
 <script>
 var view="groups";
 
@@ -270,7 +268,7 @@ var view="groups";
 ?>
 
 const groupviewElement = document.querySelector('#groupsadmin');
-const displayviewElement = document.querySelector('#displayadmin');
+const displayviewElement = document.querySelector('#entranceadmin');
 
 const togglebuttonDisplayElement = document.querySelector('#togglebutton_display');
 const togglebuttonGroupsElement = document.querySelector('#togglebutton_groups');

@@ -451,7 +451,7 @@ a {
 kbd {
   background-color: rgb(0, 60, 60);
   border-radius: 5px;
-  border: 1px solid rgb(0, 40, 40);
+  border: 1px solid rgb(0, 60, 60);
   color: rgb(255, 255, 255);
   display: block;
   font-size: 0.85em;
@@ -459,6 +459,11 @@ kbd {
   padding: 0px 6px;
   margin: 1px;
   white-space: nowrap;
+}
+kbd.checkedin {
+  border: 0;
+  background-color: green;
+  box-shadow: 0 0 5px 2px lightgreen;
 }
 
 .button {
@@ -699,120 +704,188 @@ input[type=submit]:hover {
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.2);
   }
 }
+@-webkit-keyframes slideleftright {
+  0% {
+    left: -2px;
+  }
+  50% {
+    left: 3px;
+  }
+  100% {
+    left: -2px;
+  }
+}
+@keyframes slideleftright {
+  0% {
+    left: -2px;
+  }
+  50% {
+    left: 3px;
+  }
+  100% {
+    left: -2px;
+  }
+}
+@-webkit-keyframes perspectiveslide {
+  0% {
+    perspective-origin: 40% 50%;
+  }
+  50% {
+    perspective-origin: 60% 50%;
+  }
+  100% {
+    perspective-origin: 40% 50%;
+  }
+}
+@keyframes perspectiveslide {
+  0% {
+    perspective-origin: 40% 50%;
+  }
+  50% {
+    perspective-origin: 60% 50%;
+  }
+  100% {
+    perspective-origin: 40% 50%;
+  }
+}
 /* Display Page */
-.display {
-  background-image: url(../images/displaybackground.jpg?7fc7ff37699f1f8b1cdfe4b768e4d9f5);
+.section.section--display {
   height: 100%;
-  background-size: cover;
-  background-position: center;
+  overflow: hidden;
   background-color: rgba(0, 0, 0, 0.507);
   position: relative;
 }
-.display .display_cards {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.display img {
+.section.section--display .background_img {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
   top: 0;
   z-index: -10;
-  width: 100vw;
-  height: 100vh;
+  display: block;
+  perspective: 8px;
+  perspective-origin: 50%;
+  -webkit-animation: perspectiveslide 10s infinite;
+          animation: perspectiveslide 10s infinite;
+}
+.section.section--display .background_img img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.display kbd {
-  font-size: 50px;
+.section.section--display .background_img img:nth-of-type(2) {
+  transform: translateZ(0.1px);
 }
-.display .display_guests {
-  display: flex;
-  flex-direction: column;
-  gap: 17px;
+.section.section--display .background_img img:nth-of-type(3) {
+  transform: translateZ(0.2px);
 }
-.display .current_group {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-  font-size: 18px;
-  color: #4d4d4d;
+.section.section--display .background_img img:nth-of-type(4) {
+  transform: translateZ(0.3px);
 }
-.display .groupid {
-  background-color: #eee;
-  border-radius: 3px;
-  color: #333;
-  display: block;
-  font-weight: 700;
-  line-height: 1;
-  padding: 1px 4px;
-  margin: 0px 5px 5px 0;
-  width: auto;
-  cursor: pointer;
+.section.section--display .background_img img:nth-of-type(5) {
+  transform: translateZ(0.4px);
 }
-.display .current_group.admin {
-  font-size: 2vh;
-  color: white;
-  bottom: 20px;
+.section.section--display .background_img img:nth-of-type(6) {
+  transform: translateZ(0.5px);
 }
-.display .display_row_block {
+.section.section--display .background_img img:nth-of-type(7) {
+  transform: translateZ(0.6px);
+}
+.section.section--display .background_img img:nth-of-type(8) {
+  transform: translateZ(0.7px);
+}
+.section.section--display .background_img img:nth-of-type(9) {
+  transform: translateZ(0.8px);
+}
+.section.section--display .background_img img:nth-of-type(10) {
+  transform: translateZ(0.9px);
+}
+.section.section--display .display_cards {
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.display .display_row_block.admin {
-  padding: 0 20px;
-}
-.display .roundbutton {
+.section.section--display .display_cards .display_card {
+  width: 50%;
+  flex-shrink: 0;
   padding: 20px;
-  display: block;
-  background-color: rgb(0, 56, 56);
-  color: white;
-  text-decoration: none;
-  font-size: 60px;
-  width: 80px;
-  height: 80px;
-  border-radius: 100%;
-  line-height: 1;
+  opacity: 0.9;
 }
-.display .next_group {
-  display: block;
-  margin: 20px auto;
-  position: relative;
-  font-size: 20px;
+.section.section--display .display_cards .display_card.entrance {
+  color: black;
 }
-.display .next_group .textbutton {
-  opacity: 0;
-  pointer-events: none;
-  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
-  background-color: green;
-  display: block;
-  padding: 10px;
-  width: auto;
-  max-height: 0px;
-  overflow: hidden;
+.section.section--display .display_cards .display_card.entrance .guest_ids {
+  background-color: white;
+  border-radius: 20px 20px 0 0;
+  padding: 30px 20px;
 }
-.display .groupid.checkedin {
-  background-color: green;
-  color: white;
-}
-.display .next_group.visible .textbutton {
-  pointer-events: all;
-  opacity: 1;
-  max-height: 200px;
-}
-.display .showhide_nextgroup {
+.section.section--display .display_cards .display_card.entrance .guest_ids kbd {
+  font-size: 30px;
+  padding: 5px 20px;
   display: inline-block;
-  background-color: rgba(0, 0, 0, 0.308);
-  padding: 10px;
+}
+.section.section--display .display_cards .display_card.entrance .guest_ids kbd.checkedin {
+  opacity: 0.3;
+}
+.section.section--display .display_cards .display_card.entrance .guest_ids .qrcode {
+  aspect-ratio: 1;
+  width: 70%;
+  margin: 0 auto;
+}
+.section.section--display .display_cards .display_card.entrance .guest_ids h2 {
+  margin-bottom: 20px;
+}
+.section.section--display .display_cards .display_card.entrance .guest_ids h2.warning {
+  background-color: darkred;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  transform: scale(1.2) translateY(-10px);
+}
+.section.section--display .display_cards .display_card.entrance .big_number_wrap {
+  background-color: white;
+  border-radius: 0 0 20px 20px;
+  padding: 10px 20px;
+}
+.section.section--display .display_cards .display_card.entrance .big_number_wrap .big_number {
+  font-size: 150px;
+  line-height: 1.2;
+}
+.section.section--display .display_cards .display_card.entrance img {
+  display: block;
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.section.section--display .social_medias {
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  color: white;
+  margin-top: 20px;
+}
+.section.section--display .social_medias .social_media_icon {
+  width: 30px;
+}
+.section.section--display .social_medias .social_media_icon img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.section.section--display .social_medias p {
+  display: block;
   width: auto;
+  padding-left: 10px;
 }
 
 .section.section--admin {
-  margin-bottom: 70px;
+  margin-top: 70px;
 }
 .section.section--admin .title_wrap {
   display: flex;
@@ -838,7 +911,7 @@ input[type=submit]:hover {
 }
 .section.section--admin .togglebutton_group {
   position: fixed;
-  bottom: -1px;
+  top: -1px;
   left: 0;
   width: 100%;
   display: flex;
@@ -846,6 +919,7 @@ input[type=submit]:hover {
   align-items: center;
   padding: 10px;
   background-color: rgb(0, 80, 80);
+  z-index: 1;
 }
 .section.section--admin .togglebutton_group .togglebutton {
   padding: 10px 20px;
@@ -857,6 +931,8 @@ input[type=submit]:hover {
 .section.section--admin .togglebutton_group .togglebutton.active {
   border: 1px solid rgb(0, 88, 0);
   background-color: rgb(0, 88, 0);
+  box-shadow: 0 0 5px 2px lightgreen;
+  z-index: 1;
 }
 .section.section--admin .togglebutton_group .togglebutton.inactive {
   background-color: rgb(0, 56, 56);
@@ -870,14 +946,14 @@ input[type=submit]:hover {
 .section.section--admin .toggleview {
   overflow: hidden;
 }
-.section.section--admin .groupslist {
+.section.section--admin .toggleview.groupsadmin .groupslist {
   margin: 10px auto;
 }
-.section.section--admin .groupslist.groupids {
+.section.section--admin .toggleview.groupsadmin .groupslist.groupids {
   width: 30%;
   flex-shrink: 0;
 }
-.section.section--admin .groupslist_row {
+.section.section--admin .toggleview.groupsadmin .groupslist .groupslist_row {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -887,29 +963,98 @@ input[type=submit]:hover {
   overflow: hidden;
   margin: 0 auto;
 }
-.section.section--admin .groupslist_row.past {
+.section.section--admin .toggleview.groupsadmin .groupslist .groupslist_row.past {
   color: gray;
   border: 1px solid gray;
 }
-.section.section--admin .groupslist_row.current {
+.section.section--admin .toggleview.groupsadmin .groupslist .groupslist_row.current {
   border: 1px solid green;
   background-color: darkgreen;
 }
-.section.section--admin .groupslist_row.visible {
+.section.section--admin .toggleview.groupsadmin .groupslist .groupslist_row.visible {
   height: auto;
 }
-.section.section--admin .groupslist_row .groupslist_entry.groupids {
+.section.section--admin .toggleview.groupsadmin .groupslist .groupslist_row .groupslist_entry.groupids {
   width: 140px;
   flex-shrink: 0;
   display: flex;
   flex-wrap: wrap;
 }
-.section.section--admin .groupslist_row.past .groupid {
-  background-color: gray;
+.section.section--admin .toggleview.groupsadmin .groupslist .groupslist_row.past kbd {
+  opacity: 0.5;
+  background-color: lightgray;
 }
-.section.section--admin .groupslist_row.past .groupid.checkedin {
+.section.section--admin .toggleview.groupsadmin .groupslist .groupslist_row.past kbd.checkedin {
   background-color: rgb(46, 82, 48);
   color: lightgray;
+}
+.section.section--admin .toggleview.groupsadmin .group_change_form {
+  margin: 20px 0;
+  padding: 10px;
+  border: 1px solid black;
+}
+.section.section--admin .toggleview.entranceadmin {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.section.section--admin .toggleview.entranceadmin .next_group .textbutton {
+  display: block;
+  opacity: 0;
+  max-height: 0px;
+  overflow: hidden;
+  pointer-events: none;
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, margin 0.5s ease-in-out;
+}
+.section.section--admin .toggleview.entranceadmin .next_group.visible .textbutton {
+  pointer-events: all;
+  opacity: 1;
+  max-height: 100px;
+  margin-bottom: 50px;
+}
+.section.section--admin .toggleview.entranceadmin .entrance_cards {
+  padding: 0px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.section.section--admin .toggleview.entranceadmin .entrance_cards .entrance_card.guestids {
+  width: 30%;
+}
+.section.section--admin .toggleview.entranceadmin .entrance_cards .entrance_card.guestids a {
+  display: block;
+  margin: 20px 0;
+}
+.section.section--admin .toggleview.entranceadmin .entrance_cards .entrance_card.guestids a kbd {
+  font-size: 16px;
+}
+.section.section--admin .toggleview.entranceadmin .entrance_cards .entrance_card.admin {
+  width: 65%;
+}
+.section.section--admin .toggleview.entranceadmin .entrance_cards .entrance_card.admin .roundbutton {
+  display: block;
+  background-color: rgb(0, 60, 60);
+  padding: 20px 20px;
+  font-size: 25px;
+}
+.section.section--admin .toggleview.entranceadmin .entrance_cards .entrance_card.admin .roundbutton:first-of-type {
+  border-radius: 20px 20px 0 0;
+}
+.section.section--admin .toggleview.entranceadmin .entrance_cards .entrance_card.admin .roundbutton:last-of-type {
+  border-radius: 0 0 20px 20px;
+}
+.section.section--admin .toggleview.entranceadmin .entrance_cards .entrance_card.admin .roundbutton:hover {
+  background-color: rgb(0, 80, 80);
+}
+.section.section--admin .toggleview.entranceadmin .entrance_cards .entrance_card.admin .big_number {
+  display: block;
+  background-color: rgb(0, 80, 80);
+  padding: 10px 20px;
+  font-size: 25px;
+}
+.section.section--admin .toggleview.entranceadmin .next_group_time {
+  margin: 20px 0;
+  display: block;
+  text-align: center;
 }
 .section.section--admin .options {
   display: flex;
@@ -919,13 +1064,75 @@ input[type=submit]:hover {
   gap: 5px;
   margin: 10px auto;
 }
-.section.section--admin .options input[type=number] {
-  height: auto;
+
+.infoslider {
+  display: block;
+  height: 100%;
 }
-.section.section--admin .group_change_form {
-  margin: 20px 0;
-  padding: 10px;
-  border: 1px solid black;
+.infoslider #slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  margin: 0 auto;
+}
+.infoslider #slider ul {
+  position: relative;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.infoslider #slider ul li {
+  position: relative;
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 500px;
+  aspect-ratio: 1/1.4;
+  background: #ccc;
+  text-align: center;
+  line-height: 300px;
+}
+.infoslider #slider ul li img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.infoslider a.control_prev, .infoslider a.control_next {
+  position: absolute;
+  top: 40%;
+  z-index: 999;
+  display: block;
+  padding: 4% 3%;
+  width: auto;
+  height: auto;
+  background: #2a2a2a;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+.infoslider a.control_prev:hover, .infoslider a.control_next:hover {
+  opacity: 1;
+  -webkit-transition: all 0.2s ease;
+}
+.infoslider a.control_prev {
+  border-radius: 0 2px 2px 0;
+}
+.infoslider a.control_next {
+  right: 0;
+  border-radius: 2px 0 0 2px;
+}
+.infoslider .slider_option {
+  position: relative;
+  margin: 10px auto;
+  width: 160px;
+  font-size: 18px;
 }
 
 .title_wrap {

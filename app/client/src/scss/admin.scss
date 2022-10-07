@@ -1,5 +1,5 @@
 .section.section--admin{
-    margin-bottom: 70px;
+    margin-top: 70px;
     .title_wrap{
         display: flex;
         width: auto;
@@ -28,7 +28,7 @@
 
     .togglebutton_group{
         position: fixed;
-        bottom: -1px;
+        top: -1px;
         left: 0;
         width: 100%;
         display: flex;
@@ -36,6 +36,7 @@
         align-items: center;
         padding: 10px;
         background-color: $colorPrimaryLight;
+        z-index: 1;
 
         .togglebutton{
             padding: 10px 20px;
@@ -47,6 +48,8 @@
             &.active{
                 border: 1px solid $green-color;
                 background-color: $green-color;
+                box-shadow: 0 0 5px 2px lightgreen;
+                z-index: 1;
             }
 
             &.inactive{
@@ -65,58 +68,151 @@
 
     .toggleview{
         overflow: hidden;
-    }
 
-    .groupslist{
-        margin: 10px auto;
+        &.groupsadmin{
+            .groupslist{
+                margin: 10px auto;
+        
+                &.groupids{
+                    width: 30%;
+                    flex-shrink: 0;
+                }
 
-        &.groupids{
-            width: 30%;
-            flex-shrink: 0;
-        }
-    }
+                .groupslist_row{
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    max-width: 480px;
+                    height: 40px;
+                    border: 1px solid white;
+                    overflow: hidden;
+                    margin: 0 auto;
+            
+                    &.past{
+                        color: gray;
+                        border: 1px solid gray;
+                    }
+            
+                    &.current{
+                        border: 1px solid green;
+                        background-color: darkgreen;
+                    }
+            
+                    &.visible{
+                        height: auto;
+                    }
+            
+                    .groupslist_entry{
+                        &.groupids{
+                            width: 140px;
+                            flex-shrink: 0;
+                            display: flex;
+                            flex-wrap: wrap;
+                        }
+                    }
+    
+                    &.past{
+    
+                        kbd {
+                            opacity: 0.5;
+                            background-color: lightgray;
+    
+                            &.checkedin{
+                                background-color: rgb(46, 82, 48);
+                                color: lightgray;
+                            }
+                        } 
+                    }
+                }
+            }
 
-    .groupslist_row{
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        max-width: 480px;
-        height: 40px;
-        border: 1px solid white;
-        overflow: hidden;
-        margin: 0 auto;
-
-        &.past{
-            color: gray;
-            border: 1px solid gray;
-        }
-
-        &.current{
-            border: 1px solid green;
-            background-color: darkgreen;
-        }
-
-        &.visible{
-            height: auto;
-        }
-
-        .groupslist_entry{
-            &.groupids{
-                width: 140px;
-                flex-shrink: 0;
-                display: flex;
-                flex-wrap: wrap;
+            .group_change_form{
+                margin: 20px 0;
+                padding: 10px;
+                border: 1px solid black;
             }
         }
-    }
 
-    .groupslist_row.past .groupid {
-        background-color: gray;
-    }
+        &.entranceadmin{
+            max-width: 600px;
+            margin: 0 auto;
+            .next_group{
+                .textbutton {
+                    display: block;
+                    opacity: 0;
+                    max-height: 0px;
+                    overflow: hidden;
+                    pointer-events: none;
+                    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, margin 0.5s ease-in-out;
+                }
 
-    .groupslist_row.past .groupid.checkedin {
-        background-color: rgb(46, 82, 48);
-        color: lightgray;
+                &.visible{
+                    .textbutton{
+                        pointer-events: all;
+                        opacity: 1;
+                        max-height: 100px;
+                        margin-bottom: 50px;
+                    }
+                }
+            }
+
+            .entrance_cards{
+                padding: 0px 40px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .entrance_card{
+                    &.guestids{
+                        width: 30%;
+
+                        a{
+                            display: block;
+                            margin: 20px 0;
+
+                            kbd{
+                                font-size: 16px;
+                            }
+                        }
+                    }
+                    &.admin{
+                        width: 65%;
+                        
+                        .roundbutton{
+                            display: block;
+                            background-color: $colorPrimary;
+                            padding: 20px 20px;
+                            font-size: 25px;
+
+                            &:first-of-type{
+                                border-radius: 20px 20px 0 0;
+                            }
+
+                            &:last-of-type{
+                                border-radius: 0 0 20px 20px;
+                            }
+
+                            &:hover{
+                                background-color: $colorPrimaryLight;
+                            }
+                        }
+
+                        .big_number{
+                            display: block;
+                            background-color: $colorPrimaryLight;
+                            padding: 10px 20px;
+                            font-size: 25px;
+                        }
+                    }
+                }
+            }
+
+            .next_group_time{
+                margin: 20px 0;
+                display: block;
+                text-align: center;
+            }
+        }
     }
 
     .options{
@@ -126,15 +222,5 @@
         max-width: 300px;
         gap: 5px;
         margin: 10px auto;
-    }
-
-    .options input[type="number"]{
-        height: auto;
-    }
-
-    .group_change_form{
-        margin: 20px 0;
-        padding: 10px;
-        border: 1px solid black;
     }
 }
