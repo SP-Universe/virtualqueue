@@ -125,7 +125,7 @@
                 </div>
                 <div class="social_medias">
                     <div class="social_media_icon">
-                        <img class="logo" src="../app/client/src/images/logo_youtube.png" alt="logo_youtube">
+                        <img class="logo" src="../app/client/src/images/logo_youtube.png" alt="logo_youtube ">
                     </div>
                     <p>Halloweenhaus Schmalenbeck</p>
                 </div>

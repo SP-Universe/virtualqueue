@@ -8,6 +8,7 @@
 @import "display";
 @import "admin";
 @import "slider";
+@import "queue";
 
 .title_wrap{
     display: flex;
@@ -27,8 +28,8 @@
     top: 0;
     left: 0;
     right: 0;
-    width: 100%;
-    margin: 0 -10px;
+    width: 100vw;
+    margin: 0;
     background-color: $main-button-color;
     backdrop-filter: blur(3px);
     padding: 15px 10px;
@@ -41,8 +42,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    width: 100%;
-    margin: 0 -10px;
+    width: 100vw;
+    margin: 0;
     height: 100vh;
     background-color: rgba(29, 0, 0, 0.9);
     backdrop-filter: blur(4px);
@@ -50,6 +51,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 50;
 }
 
 .title{
@@ -111,64 +113,6 @@
     }
 }
 
-.placeinline_wrap{
-    background-color: gray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30vh;
-    aspect-ratio: 1;
-    max-height: 500px;
-    max-width: 100%;
-    padding: 0;
-    text-align: center;
-    font-size: 30vh;
-    font-weight: 700;
-    border-radius: 20px;
-    margin: 30px auto;
-    animation: wobble 10s infinite;
-
-    &.finished {
-        background-color: $green-color;
-        font-size: 30px;
-        font-weight: 500;
-
-        &::before{
-            background: rgb(0,88,2);
-            background: radial-gradient(circle, rgba(0,88,2,1) 15%, rgba(0,56,7,1) 100%);
-        }
-    }
-
-    &.toolate {
-        background-color: $green-color;
-        font-size: 18px;
-        line-height: 1.5;
-        font-weight: 500;
-        height: auto;
-        width: 100%;
-        padding: 40px 0px;
-        box-sizing: content-box;
-        animation: none;
-
-        &::before{
-            background: rgb(4, 121, 0);
-            background: radial-gradient(circle, rgb(4, 121, 0) 15%, rgba(43,43,43,1) 100%);
-        }
-    }
-
-    &::before{
-        content: '';
-        z-index: -100;
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: rgb(41, 41, 41);
-        transition: background-color 0.5s;
-    }
-}
-
 .footer{
     border-top: 1px solid white;
     margin-top: 40px;
@@ -186,9 +130,6 @@
 
     .title_wrap{
         padding: 30px;
-    }
-    .placeinline_wrap.finished{
-        font-size: 40px;
     }
 }
 
