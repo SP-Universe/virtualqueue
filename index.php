@@ -121,7 +121,7 @@ console.log("Test");
             time = time.substring(0, time.length - 3);
 
             if(data.current_group == <?php echo $guestgroup;?>){
-                placeinlineNumberElement.innerText = "Komm herein!";
+                placeinlineNumberElement.innerText = "Du bist dran!";
                 placeinlineNumberElement.parentElement.classList.add("your_turn");
                 estimatedTimeElement.innerText = "Jetzt!";
                 feedbackCard.classList.remove("visible");
