@@ -217,6 +217,8 @@
                     <a href="next_group.php?view=display" class="button textbutton"><p>Ja wirklich!</p></a>
                 </div>
 
+                <p class="next_group_time" id="admin_next_group_countdown">00:00 till next group</p>
+
                 <div class="entrance_cards">
                     <div class="entrance_card guestids">
                         <?php
@@ -239,7 +241,7 @@
                     </div>
                 </div>
 
-                <p class="next_group_time" id="admin_next_group_countdown">00:00 till next group</p>
+                
             </div>
 
         </div>
@@ -287,7 +289,7 @@ setInterval(function() {
     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    document.getElementById("admin_next_group_countdown").innerHTML = "<p>" + hours + ":" + minutes + ":" + seconds + " Sekunden bis zum nächstem Einlass</p>";
+    document.getElementById("admin_next_group_countdown").innerHTML = "<p>" + minutes + ":" + seconds + " bis zum nächstem Einlass</p>";
 }, 1000);
 
 function calculateTotalShowSize(){

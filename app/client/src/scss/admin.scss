@@ -157,14 +157,14 @@
             }
 
             .entrance_cards{
-                padding: 0px 40px;
+                padding: 0px 10px;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
 
                 .entrance_card{
                     &.guestids{
-                        width: 30%;
+                        width: 35%;
 
                         a{
                             display: block;
@@ -176,12 +176,12 @@
                         }
                     }
                     &.admin{
-                        width: 65%;
+                        width: 60%;
                         
                         .roundbutton{
                             display: block;
                             background-color: $colorPrimary;
-                            padding: 20px 20px;
+                            padding: 30px 20px;
                             font-size: 25px;
 
                             &:first-of-type{

@@ -1034,13 +1034,13 @@ input[type=submit]:hover {
   margin-bottom: 50px;
 }
 .section.section--admin .toggleview.entranceadmin .entrance_cards {
-  padding: 0px 40px;
+  padding: 0px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .section.section--admin .toggleview.entranceadmin .entrance_cards .entrance_card.guestids {
-  width: 30%;
+  width: 35%;
 }
 .section.section--admin .toggleview.entranceadmin .entrance_cards .entrance_card.guestids a {
   display: block;
@@ -1050,12 +1050,12 @@ input[type=submit]:hover {
   font-size: 16px;
 }
 .section.section--admin .toggleview.entranceadmin .entrance_cards .entrance_card.admin {
-  width: 65%;
+  width: 60%;
 }
 .section.section--admin .toggleview.entranceadmin .entrance_cards .entrance_card.admin .roundbutton {
   display: block;
   background-color: rgb(0, 60, 60);
-  padding: 20px 20px;
+  padding: 30px 20px;
   font-size: 25px;
 }
 .section.section--admin .toggleview.entranceadmin .entrance_cards .entrance_card.admin .roundbutton:first-of-type {
