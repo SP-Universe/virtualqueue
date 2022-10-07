@@ -31,7 +31,7 @@
         $conn = new mysqli($servername, $username, $password, $dbname);
 
         // Create tables
-        $sql = "CREATE TABLE IF NOT EXISTS " . $table_guests . " (id INT(6) AUTO_INCREMENT PRIMARY KEY, guestid VARCHAR(20) NOT NULL, booktime TIME, groupid INT, guestcount INT, checkedin VARCHAR(10))";
+        $sql = "CREATE TABLE IF NOT EXISTS " . $table_guests . " (id INT(6) AUTO_INCREMENT PRIMARY KEY, guestid VARCHAR(20) NOT NULL, booktime TIME, groupid INT, guestcount INT, checkedin VARCHAR(10), initgroupsbefore INT)";
         if ($conn->query($sql) === FALSE) {
             echo "Error creating guesttable: " . $conn->error;
         }
@@ -84,8 +84,11 @@
     function add_guest_to_database($guestid, $number_of_new_guests){
         global $conn;
         global $table_guests;
+        global $current_group;
 
-        $sql = "INSERT INTO " . $table_guests . "(guestid, booktime, groupid, guestcount) VALUES ('" . $guestid . "', CURRENT_TIME(), " . get_next_group($number_of_new_guests) . ", " . $number_of_new_guests . ")";
+        $guestgroup = get_next_group($number_of_new_guests);
+        $groupsbefore = $guestgroup - $current_group;
+        $sql = "INSERT INTO " . $table_guests . "(guestid, booktime, groupid, guestcount, initgroupsbefore) VALUES ('" . $guestid . "', CURRENT_TIME(), " . $guestgroup . ", " . $number_of_new_guests . ", " . $groupsbefore . ")";
 
         if ($conn->query($sql) === FALSE) {
             echo "Error creating user: " . $conn->error;

@@ -18,7 +18,6 @@
     } else {
         getLayoutForWaitingUser($guestid, $guestgroup);
     }
-    close_connection();
     include 'layout/footer.php';
 ?>
 
@@ -27,6 +26,7 @@
 </audio>
 
 <script> 
+console.log("Test");
     var audioplayed = false;
     var guestgroup;
     var currentgroup;
@@ -40,13 +40,14 @@
     const maintenanceBannerElement = document.querySelector('#maintenance_banner');
     const closedafterBannerElement = document.querySelector('#closedafter_banner');
 
-    const placeinlineBeforeElement = document.querySelector('#placeinline_before');
-    const placeinlineFinishedElement = document.querySelector('#placeinline_finished');
-    const placeinlineFeedbackElement = document.querySelector('#placeinline_feedback');
+    const feedbackCard = document.querySelector('#feedback_card');
+    const walkingOtto = document.querySelector('#walking_otto');
 
     const estimatedTimeElement = document.querySelector('#estimated_time');
+    const placeinlineNumberElement = document.querySelector('#queue_number');
 
-    const placeinlineNumberElement = document.querySelector('#placeinline_number');
+    var ottosPosition = 0;
+    var percentCompleted = 0;
 
     document.addEventListener("DOMContentLoaded", function (event) {
         //Show hide
@@ -73,81 +74,106 @@
         }
     }
 
-    function showData(data) {
-
-        if(data.current_status == "closedbefore"){
-            closedbeforeBannerElement.style.visibility='visible';
-            showclosedBannerElement.style.visibility='hidden';
-            maintenanceBannerElement.style.visibility='hidden';
-            closedafterBannerElement.style.visibility='hidden';
-            estimatedTimeElement.innerText = "Warteschlange geschlossen";
-        } else if(data.current_status == "closedafter"){
-            closedbeforeBannerElement.style.visibility='hidden';
-            showclosedBannerElement.style.visibility='hidden';
-            maintenanceBannerElement.style.visibility='hidden';
-            closedafterBannerElement.style.visibility='visible';
-            estimatedTimeElement.innerText = "Warteschlange geschlossen";
-        }
-
-        if("<?php echo $guestid;?>" != "") {
-            let options = {hour: "2-digit", minute: "2-digit"}; 
-            //var time = new Date ("1970-01-01 " + data.estimatedtime);
-            var time = data.estimatedtime;
-            if(data.current_status == "showclosed"){
+    function showBanners(data) {
+        switch (data.current_status) {
+            case "closedbefore":
+                closedbeforeBannerElement.style.visibility='visible';
+                showclosedBannerElement.style.visibility='hidden';
+                maintenanceBannerElement.style.visibility='hidden';
+                closedafterBannerElement.style.visibility='hidden';
+                estimatedTimeElement.innerText = "--:--";
+                break;
+            case "showclosed":
                 closedbeforeBannerElement.style.visibility='hidden';
                 showclosedBannerElement.style.visibility='visible';
                 maintenanceBannerElement.style.visibility='hidden';
                 closedafterBannerElement.style.visibility='hidden';
-                //estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + time.toLocaleTimeString('de-de', options);
-                estimatedTimeElement.innerText = "Vorraussichtlicher Einlass: " + time.substring(0, time.length - 3);
-            } else if(data.current_status == "maintenance"){
+                estimatedTimeElement.innerText = "--:--";
+                break;
+            case "open":
+                closedbeforeBannerElement.style.visibility='hidden';
+                showclosedBannerElement.style.visibility='hidden';
+                maintenanceBannerElement.style.visibility='hidden';
+                closedafterBannerElement.style.visibility='hidden';
+                estimatedTimeElement.innerText = "--:--";
+                break;
+            case "maintenance":
                 closedbeforeBannerElement.style.visibility='hidden';
                 showclosedBannerElement.style.visibility='hidden';
                 maintenanceBannerElement.style.visibility='visible';
                 closedafterBannerElement.style.visibility='hidden';
-                estimatedTimeElement.innerText = "Es kann aktuell zu Verzögerungen kommen";
-            } else if(data.current_status == "closedafter"){
+                estimatedTimeElement.innerText = "--:--";
+                break;
+            case "closedafter":
                 closedbeforeBannerElement.style.visibility='hidden';
                 showclosedBannerElement.style.visibility='hidden';
                 maintenanceBannerElement.style.visibility='hidden';
                 closedafterBannerElement.style.visibility='visible';
-                estimatedTimeElement.innerText = "Warteschlange geschlossen";
+                estimatedTimeElement.innerText = "--:--";
+                break;
+        }
+    }
+
+    function showData(data) {
+        if("<?php echo $guestid;?>" != "") {
+            let options = {hour: "2-digit", minute: "2-digit"};
+            var time = data.estimatedtime;
+            time = time.substring(0, time.length - 3);
+
+            if(data.current_group == <?php echo $guestgroup;?>){
+                placeinlineNumberElement.innerText = "Du bist dran!";
+                placeinlineNumberElement.parentElement.classList.add("your_turn");
+                estimatedTimeElement.innerText = "Jetzt!";
+                feedbackCard.classList.remove("visible");
+            } else if (data.current_group < <?php echo $guestgroup;?>){
+                placeinlineNumberElement.innerText = guestgroup - data.current_group;
+                placeinlineNumberElement.parentElement.classList.remove("your_turn");
+                estimatedTimeElement.innerText = time;
+                feedbackCard.classList.remove("visible");
+            } else if (data.current_group > <?php echo $guestgroup;?>){
+                placeinlineNumberElement.innerText = guestgroup - data.current_group;
+                placeinlineNumberElement.parentElement.classList.remove("your_turn");
+                estimatedTimeElement.innerText = time;
+                feedbackCard.classList.add("visible");
             } else {
-                closedbeforeBannerElement.style.visibility='hidden';
-                showclosedBannerElement.style.visibility='hidden';
-                maintenanceBannerElement.style.visibility='hidden';
-                closedafterBannerElement.style.visibility='hidden';
-                
-                //estimatedTimeElement.innerText = "Vorraussichtliche Eintrittszeit: " + time.toLocaleTimeString('de-de', options);
-                estimatedTimeElement.innerText = "Vorraussichtlicher Einlass: " + time.substring(0, time.length - 3);
+                placeinlineNumberElement.innerText = guestgroup - data.current_group;
+                feedbackCard.classList.remove("visible");
+            }
+
+            if(data.current_status == "showclosed"){
+                estimatedTimeElement.innerText = time;
+            } else if(data.current_status == "maintenance"){
+                estimatedTimeElement.innerText = "(" + time + ")";
+            } else if(data.current_status == "closedafter"){
+                estimatedTimeElement.innerText = "--:--";
             }
 
             if (parseInt(data.current_group) < parseInt(guestgroup)) {
-                placeinlineBeforeElement.style.visibility='visible';
-                placeinlineBeforeElement.style.height='auto';
-                placeinlineFinishedElement.style.visibility='hidden';
-                placeinlineFinishedElement.style.height='0px';
-                placeinlineFeedbackElement.style.visibility='hidden';
-                placeinlineFeedbackElement.style.height='0px';
                 audioplayed = false;
             } else if (parseInt(data.current_group) === parseInt(guestgroup)) {
-                placeinlineBeforeElement.style.visibility='hidden';
-                placeinlineBeforeElement.style.height='0px';
-                placeinlineFinishedElement.style.visibility='visible';
-                placeinlineFinishedElement.style.height='auto';
-                placeinlineFeedbackElement.style.visibility='hidden';
-                placeinlineFeedbackElement.style.height='0px';
+
             } else if (parseInt(data.current_group) > parseInt(guestgroup)){
                 audioplayed = false;
-                placeinlineBeforeElement.style.visibility='hidden';
-                placeinlineBeforeElement.style.height='0px';
-                placeinlineFinishedElement.style.visibility='hidden';
-                placeinlineFinishedElement.style.height='0px';
-                placeinlineFeedbackElement.style.visibility='visible';
-                placeinlineFeedbackElement.style.height='auto';
             }
+            var groupsbefore = guestgroup - data.current_group;
+            var groupsbeforeinitially = <?php echo get_data_from_guest($guestid, "initgroupsbefore");?>;
+            percentCompleted = 100 - ((groupsbefore/groupsbeforeinitially)*100);
+            if(percentCompleted > 100){
+                percentCompleted = 100;
+            } else if(percentCompleted < 0){
+                percentCompleted = 0;
+            }
+        }
+    }
 
-            placeinlineNumberElement.innerText = guestgroup - data.current_group;
+    function ottoWalking(){
+        if(percentCompleted > ottosPosition)
+        {
+            ottosPosition++;
+            walkingOtto.style.left = ottosPosition + "%";
+        } else if(percentCompleted < ottosPosition){
+            ottosPosition--;
+            walkingOtto.style.left = ottosPosition + "%";
         }
     }
 
@@ -156,6 +182,7 @@
         fetch('status.php')
         .then(response => response.json())
         .then(data => {
+            showBanners(data);
             showData(data);
             checkforsound(data);
         });
@@ -163,8 +190,13 @@
 
     setInterval(function(){ 
         reloadData();
-    }, 5000);
+    }, 3000);
+
+    setInterval(function(){ 
+        ottoWalking();
+    }, 10);
 
     reloadData();
 
 </script>
+<?php close_connection(); ?>

@@ -1,0 +1,125 @@
+.section.section--queue{
+    .queue_card{
+        color: black;
+        display: flex;
+        flex-direction: column;
+        max-width: 500px;
+        margin: 0 auto;
+
+        .queue_card_top{
+            background-color: white;
+            padding: 20px 10px;
+            border-radius: 20px 20px 0 0;
+
+            .big_number{
+                font-size: 100px;
+                line-height: 1;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+
+            &.your_turn{
+                background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgb(0, 100, 3) 100%);
+                .big_number{
+                    font-size: 50px;
+                    color: white;
+                }
+            }
+        }
+
+        .queue_card_center{
+            width: 100%;
+
+            img{
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+
+        .queue_card_bottom{
+            background-color: white;
+            border-radius: 0 0 20px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            padding-bottom: 40px;
+
+            .card_section{
+                width: 50%;
+                line-height: 1.2;
+                padding: 20px 0 10px 0;
+
+                .big_number{
+                    font-size: 40px;
+                    line-height: 1.3;
+                }
+            }
+        }
+
+        .leavequeue{
+            margin: -20px auto 0 auto;
+            width: 90%;
+        }
+    }
+
+    .feedback_card{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $colorPrimaryDark;
+        padding: 20px 10px;
+        height: 100%;
+        max-height: 0px;
+        opacity: 0;
+        transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        z-index: 20;
+        pointer-events: none;
+
+        .socials{
+            display: block;
+            padding: 20px 0 5px 0;
+            margin: -10px;
+            background-color: $colorPrimaryDark;
+        }
+
+        &.visible{
+            max-height: 1000px;
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+
+    .waiting_timeline{
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid white;
+        margin: 20px 0 0 0;
+        max-width: 100vw;
+        overflow: hidden;
+
+
+        .forest{
+            width: 50px;
+            height: 50px;
+        }
+
+        .house{
+            width: 50px;
+            height: 50px;
+        }
+
+        .otto{
+            position: absolute;
+            bottom: 0;
+            left: 0%;
+            width: 40px;
+            height: 40px;
+            animation: rotate 2s ease-in-out infinite;
+            transition: left 1s ease-in-out;
+        }
+    }
+}

@@ -1,0 +1,226 @@
+.section.section--admin{
+    margin-top: 70px;
+    .title_wrap{
+        display: flex;
+        width: auto;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .title_image{
+        width: 50px;
+        height: auto;
+        padding-right: 10px;
+    }
+
+    .title{
+        display: inline;
+        flex-shrink: 0;
+        text-align: left;
+        font-size: 40px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .current_status_screen{
+        margin: 10px auto;
+    }
+
+    .togglebutton_group{
+        position: fixed;
+        top: -1px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        background-color: $colorPrimaryLight;
+        z-index: 1;
+
+        .togglebutton{
+            padding: 10px 20px;
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+
+            &.active{
+                border: 1px solid $green-color;
+                background-color: $green-color;
+                box-shadow: 0 0 5px 2px lightgreen;
+                z-index: 1;
+            }
+
+            &.inactive{
+                background-color: $main-button-color;
+            }
+
+            &:first-of-type{
+                border-radius: 20px 0 0 20px;
+            }
+
+            &:last-of-type{
+                border-radius: 0 20px 20px 0;
+            }
+        }
+    }
+
+    .toggleview{
+        overflow: hidden;
+
+        &.groupsadmin{
+            .groupslist{
+                margin: 10px auto;
+        
+                &.groupids{
+                    width: 30%;
+                    flex-shrink: 0;
+                }
+
+                .groupslist_row{
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    max-width: 480px;
+                    height: 40px;
+                    border: 1px solid white;
+                    overflow: hidden;
+                    margin: 0 auto;
+            
+                    &.past{
+                        color: gray;
+                        border: 1px solid gray;
+                    }
+            
+                    &.current{
+                        border: 1px solid green;
+                        background-color: darkgreen;
+                    }
+            
+                    &.visible{
+                        height: auto;
+                    }
+            
+                    .groupslist_entry{
+                        &.groupids{
+                            width: 140px;
+                            flex-shrink: 0;
+                            display: flex;
+                            flex-wrap: wrap;
+                        }
+                    }
+    
+                    &.past{
+    
+                        kbd {
+                            opacity: 0.5;
+                            background-color: lightgray;
+    
+                            &.checkedin{
+                                background-color: rgb(46, 82, 48);
+                                color: lightgray;
+                            }
+                        } 
+                    }
+                }
+            }
+
+            .group_change_form{
+                margin: 20px 0;
+                padding: 10px;
+                border: 1px solid black;
+            }
+        }
+
+        &.entranceadmin{
+            max-width: 600px;
+            margin: 0 auto;
+            .next_group{
+                .textbutton {
+                    display: block;
+                    opacity: 0;
+                    max-height: 0px;
+                    overflow: hidden;
+                    pointer-events: none;
+                    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, margin 0.5s ease-in-out;
+                }
+
+                &.visible{
+                    .textbutton{
+                        pointer-events: all;
+                        opacity: 1;
+                        max-height: 100px;
+                        margin-bottom: 50px;
+                    }
+                }
+            }
+
+            .entrance_cards{
+                padding: 0px 40px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .entrance_card{
+                    &.guestids{
+                        width: 30%;
+
+                        a{
+                            display: block;
+                            margin: 20px 0;
+
+                            kbd{
+                                font-size: 16px;
+                            }
+                        }
+                    }
+                    &.admin{
+                        width: 65%;
+                        
+                        .roundbutton{
+                            display: block;
+                            background-color: $colorPrimary;
+                            padding: 20px 20px;
+                            font-size: 25px;
+
+                            &:first-of-type{
+                                border-radius: 20px 20px 0 0;
+                            }
+
+                            &:last-of-type{
+                                border-radius: 0 0 20px 20px;
+                            }
+
+                            &:hover{
+                                background-color: $colorPrimaryLight;
+                            }
+                        }
+
+                        .big_number{
+                            display: block;
+                            background-color: $colorPrimaryLight;
+                            padding: 10px 20px;
+                            font-size: 25px;
+                        }
+                    }
+                }
+            }
+
+            .next_group_time{
+                margin: 20px 0;
+                display: block;
+                text-align: center;
+            }
+        }
+    }
+
+    .options{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 300px;
+        gap: 5px;
+        margin: 10px auto;
+    }
+}

@@ -39,20 +39,19 @@ input[type="text"]{
 }
 
 input[type="submit"]{
-    background-color: rgb(0, 56, 56);
-    padding: 10px;
-    border-radius: 50px;
+    background-color: $colorPrimary;
+    padding: 10px 20px;
+    border-radius: 20px;
     text-decoration: none;
     color: white;
+    display: inline-block;
+    margin: 5px 0;
+    appearance: none;
     border-style: none;
-    height: 20px;
-    box-sizing: content-box;
-    margin-left: 10px;
-}
-
-input[type="submit"]:hover{
-    background-color: rgb(0, 94, 94);
-    cursor: pointer;
+    &:hover{
+        background-color: rgb(0, 94, 94);
+        cursor: pointer;
+    }
 }
 
 .form-group label{
@@ -184,5 +183,3 @@ content: "";
         border-radius: 10px;
     }
 }
-
-
