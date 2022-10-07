@@ -748,6 +748,28 @@ input[type=submit]:hover {
     perspective-origin: 40% 50%;
   }
 }
+@-webkit-keyframes rotate {
+  0% {
+    transform: translateX(-50%) rotate(-10deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(10deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(-10deg);
+  }
+}
+@keyframes rotate {
+  0% {
+    transform: translateX(-50%) rotate(-10deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(10deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(-10deg);
+  }
+}
 /* Display Page */
 .section.section--display {
   height: 100%;
@@ -1203,6 +1225,7 @@ input[type=submit]:hover {
   opacity: 0;
   transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
   z-index: 20;
+  pointer-events: none;
 }
 .section.section--queue .feedback_card .socials {
   display: block;
@@ -1213,6 +1236,32 @@ input[type=submit]:hover {
 .section.section--queue .feedback_card.visible {
   max-height: 1000px;
   opacity: 1;
+  pointer-events: all;
+}
+.section.section--queue .waiting_timeline {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid white;
+  margin: 20px 0 0 0;
+}
+.section.section--queue .waiting_timeline .forest {
+  width: 50px;
+  height: 50px;
+}
+.section.section--queue .waiting_timeline .house {
+  width: 50px;
+  height: 50px;
+}
+.section.section--queue .waiting_timeline .otto {
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+  width: 40px;
+  height: 40px;
+  -webkit-animation: rotate 2s ease-in-out infinite;
+          animation: rotate 2s ease-in-out infinite;
+  transition: left 1s ease-in-out;
 }
 
 .title_wrap {
@@ -1318,8 +1367,7 @@ input[type=submit]:hover {
 }
 
 .footer {
-  border-top: 1px solid white;
-  margin-top: 40px;
+  margin-top: 10px;
 }
 .footer .bottomline {
   font-weight: 100;

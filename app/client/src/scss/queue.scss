@@ -76,6 +76,7 @@
         opacity: 0;
         transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
         z-index: 20;
+        pointer-events: none;
 
         .socials{
             display: block;
@@ -87,6 +88,36 @@
         &.visible{
             max-height: 1000px;
             opacity: 1;
+            pointer-events: all;
+        }
+    }
+
+    .waiting_timeline{
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid white;
+        margin: 20px 0 0 0;
+
+
+        .forest{
+            width: 50px;
+            height: 50px;
+        }
+
+        .house{
+            width: 50px;
+            height: 50px;
+        }
+
+        .otto{
+            position: absolute;
+            bottom: 0;
+            left: 0%;
+            width: 40px;
+            height: 40px;
+            animation: rotate 2s ease-in-out infinite;
+            transition: left 1s ease-in-out;
         }
     }
 }

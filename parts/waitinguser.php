@@ -31,7 +31,11 @@
                     <a href="leavequeue.php" class="button leavequeue">Warteschlange verlassen</a>
                 </div>
 
-                <p>SLIDER!</p>
+                <div class="waiting_timeline">
+                    <img class="forest" src="app/client/src/images/timeline/timeline_trees.svg">
+                    <img class="otto" id="walking_otto" src="app/client/src/images/timeline/timeline_otto.svg">
+                    <img class="house" src="app/client/src/images/timeline/timeline_house.svg">
+                </div>
 
                 <?php feedbackUser($guestid); ?>
             </div>

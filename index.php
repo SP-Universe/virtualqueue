@@ -18,7 +18,6 @@
     } else {
         getLayoutForWaitingUser($guestid, $guestgroup);
     }
-    close_connection();
     include 'layout/footer.php';
 ?>
 
@@ -27,6 +26,7 @@
 </audio>
 
 <script> 
+console.log("Test");
     var audioplayed = false;
     var guestgroup;
     var currentgroup;
@@ -41,10 +41,13 @@
     const closedafterBannerElement = document.querySelector('#closedafter_banner');
 
     const feedbackCard = document.querySelector('#feedback_card');
+    const walkingOtto = document.querySelector('#walking_otto');
 
     const estimatedTimeElement = document.querySelector('#estimated_time');
     const placeinlineNumberElement = document.querySelector('#queue_number');
-    console.log("elements found");
+
+    var ottosPosition = 0;
+    var percentCompleted = 0;
 
     document.addEventListener("DOMContentLoaded", function (event) {
         //Show hide
@@ -151,7 +154,26 @@
 
             } else if (parseInt(data.current_group) > parseInt(guestgroup)){
                 audioplayed = false;
-            }            
+            }
+            var groupsbefore = guestgroup - data.current_group;
+            var groupsbeforeinitially = <?php echo get_data_from_guest($guestid, "initgroupsbefore");?>;
+            percentCompleted = 100 - ((groupsbefore/groupsbeforeinitially)*100);
+            if(percentCompleted > 100){
+                percentCompleted = 100;
+            } else if(percentCompleted < 0){
+                percentCompleted = 0;
+            }
+        }
+    }
+
+    function ottoWalking(){
+        if(percentCompleted > ottosPosition)
+        {
+            ottosPosition++;
+            walkingOtto.style.left = ottosPosition + "%";
+        } else if(percentCompleted < ottosPosition){
+            ottosPosition--;
+            walkingOtto.style.left = ottosPosition + "%";
         }
     }
 
@@ -170,6 +192,11 @@
         reloadData();
     }, 3000);
 
+    setInterval(function(){ 
+        ottoWalking();
+    }, 10);
+
     reloadData();
 
 </script>
+<?php close_connection(); ?>

@@ -42,3 +42,17 @@
         perspective-origin: 40% 50%;
     }
 }
+
+@keyframes rotate {
+    0% {
+        transform: translateX(-50%) rotate(-10deg);
+    }
+
+    50% {
+        transform: translateX(-50%) rotate(10deg);
+    }
+
+    100% {
+        transform: translateX(-50%) rotate(-10deg);
+    }
+}
