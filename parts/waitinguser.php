@@ -78,12 +78,17 @@
                         </div>
                     </div>
                     </div>
+                    
+                    <div class="form-group">
+                        <label>Wie hast du von unserem Halloweenhaus gehört?</label> 
+                        <textarea rows="2" cols="1" class="form-control" name="text"></textarea>
+                    </div>
 
                     <div class="form-group">
                         <label>Was könnten wir nächstes Jahr verbessern?</label> 
-                        <textarea rows="3" cols="33" class="form-control" name="text"></textarea>
+                        <textarea rows="3" cols="1" class="form-control" name="text"></textarea>
                     </div>
-
+                    
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" name="submit" value="Feedback senden">
                     </div>

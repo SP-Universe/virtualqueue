@@ -33,7 +33,7 @@
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#102C4D">
 
-    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon-32x32.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="../app/client/src/images/favicon-32x32.png" />
     <link rel="stylesheet" href="../app/client/dist/css/styles.css">
 </head>
 <body>
@@ -217,12 +217,26 @@
                     <a href="next_group.php?view=display" class="button textbutton"><p>Ja wirklich!</p></a>
                 </div>
 
-                <p class="next_group_time" id="admin_next_group_countdown">00:00 till next group</p>
+                <p class="next_group_time" id="admin_next_group_countdown">00:00 bis zum nächstem Einlass</p>
+                <?php 
+                    $checkedinusers = 0;
+                    $totalusers = $max_vq_users_per_group + $min_sq_users_per_group;
+                    $guestids = get_all_ids_from_group($current_group);
+                    if($guestids != null){
+                        foreach ($guestids as $gid) {
+                            if(get_data_from_guest($gid['guestid'], "checkedin") == "checkedin")
+                            {
+                                $checkedinusers += get_data_from_guest($gid['guestid'], "guestcount");
+                            }
+                        }
+                        $checkedinusers += get_data_from_setting("display_guest_count");
+                    }
+                ?>
 
                 <div class="entrance_cards">
                     <div class="entrance_card guestids">
                         <?php
-                        $guestids = get_all_ids_from_group($current_group); 
+                         
                         if($guestids != null){
                             foreach($guestids as $gid){
                                 ?>
@@ -239,7 +253,9 @@
                         <p class="big_number admin"><?php echo get_data_from_setting("display_guest_count");?>/<?php echo ($min_sq_users_per_group + $max_vq_users_per_group) - get_data_from_group($current_group, "vq_guests");?> SQ</p>
                         <a href="change_guestcount.php?method=increase" class="roundbutton">+</a>
                     </div>
+                    
                 </div>
+                <p><?php echo $checkedinusers ?> von <?php echo $totalusers ?> Personen sind eingelassen </p>
 
                 
             </div>
@@ -280,11 +296,11 @@ const guestcountDisplayElement = document.querySelector('#guestcount_display');
 
 let showHideElements = [...document.querySelectorAll('[data-behaviour="showhide"]')];
 
-var countDownDate = new Date("Oct 5, <?php echo get_data_from_group($current_group + 1, 'time');?>").getTime();
+var countDownDate = new Date("Oct 21, <?php echo get_data_from_group($current_group + 1, 'time');?>").getTime();
 
 setInterval(function() {
     var now = new Date().getTime();
-    var distance = countDownDate - now;
+    var distance = now - countDownDate;
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));

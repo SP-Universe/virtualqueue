@@ -1238,6 +1238,16 @@ input[type=submit]:hover {
   opacity: 1;
   pointer-events: all;
 }
+.section.section--queue .feedback_card::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-color: rgb(0, 40, 40);
+}
 .section.section--queue .waiting_timeline {
   position: relative;
   display: flex;
