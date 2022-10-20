@@ -158,10 +158,10 @@ console.log("Test");
             var groupsbefore = guestgroup - data.current_group;
             var groupsbeforeinitially = <?php echo get_data_from_guest($guestid, "initgroupsbefore");?>;
             percentCompleted = 100 - ((groupsbefore/groupsbeforeinitially)*100);
-            if(percentCompleted > 100){
-                percentCompleted = 100;
-            } else if(percentCompleted < 0){
-                percentCompleted = 0;
+            if(percentCompleted > 90){
+                percentCompleted = 97;
+            } else if(percentCompleted < 20){
+                percentCompleted = 3;
             }
         }
     }
