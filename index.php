@@ -81,56 +81,67 @@ console.log("Test");
                 showclosedBannerElement.style.visibility='hidden';
                 maintenanceBannerElement.style.visibility='hidden';
                 closedafterBannerElement.style.visibility='hidden';
-                estimatedTimeElement.innerText = "--:--";
+                if(estimatedTimeElement != null){
+                    estimatedTimeElement.innerText = "--:--";
+                }
                 break;
             case "showclosed":
                 closedbeforeBannerElement.style.visibility='hidden';
                 showclosedBannerElement.style.visibility='visible';
                 maintenanceBannerElement.style.visibility='hidden';
                 closedafterBannerElement.style.visibility='hidden';
-                estimatedTimeElement.innerText = "--:--";
+                if(estimatedTimeElement != null){
+                    estimatedTimeElement.innerText = "--:--";
+                }
                 break;
             case "open":
                 closedbeforeBannerElement.style.visibility='hidden';
                 showclosedBannerElement.style.visibility='hidden';
                 maintenanceBannerElement.style.visibility='hidden';
                 closedafterBannerElement.style.visibility='hidden';
-                estimatedTimeElement.innerText = "--:--";
+                if(estimatedTimeElement != null){
+                    estimatedTimeElement.innerText = "--:--";
+                }
                 break;
             case "maintenance":
                 closedbeforeBannerElement.style.visibility='hidden';
                 showclosedBannerElement.style.visibility='hidden';
                 maintenanceBannerElement.style.visibility='visible';
                 closedafterBannerElement.style.visibility='hidden';
-                estimatedTimeElement.innerText = "--:--";
+                if(estimatedTimeElement != null){
+                    estimatedTimeElement.innerText = "--:--";
+                }
                 break;
             case "closedafter":
                 closedbeforeBannerElement.style.visibility='hidden';
                 showclosedBannerElement.style.visibility='hidden';
                 maintenanceBannerElement.style.visibility='hidden';
                 closedafterBannerElement.style.visibility='visible';
-                estimatedTimeElement.innerText = "--:--";
+                if(estimatedTimeElement != null){
+                    estimatedTimeElement.innerText = "--:--";
+                }
                 break;
         }
     }
 
     function showData(data) {
-        if("<?php echo $guestid;?>" != "") {
+        var guestid = "<?php echo $guestid;?>";
+        if(guestid != "") {
             let options = {hour: "2-digit", minute: "2-digit"};
             var time = data.estimatedtime;
             time = time.substring(0, time.length - 3);
 
-            if(data.current_group == <?php echo $guestgroup;?>){
+            if(data.current_group == guestid){
                 placeinlineNumberElement.innerText = "Du bist dran!";
                 placeinlineNumberElement.parentElement.classList.add("your_turn");
                 estimatedTimeElement.innerText = "Jetzt!";
                 feedbackCard.classList.remove("visible");
-            } else if (data.current_group < <?php echo $guestgroup;?>){
+            } else if (data.current_group < guestid){
                 placeinlineNumberElement.innerText = guestgroup - data.current_group;
                 placeinlineNumberElement.parentElement.classList.remove("your_turn");
                 estimatedTimeElement.innerText = time;
                 feedbackCard.classList.remove("visible");
-            } else if (data.current_group > <?php echo $guestgroup;?>){
+            } else if (data.current_group > guestid){
                 placeinlineNumberElement.innerText = guestgroup - data.current_group;
                 placeinlineNumberElement.parentElement.classList.remove("your_turn");
                 estimatedTimeElement.innerText = time;
@@ -156,7 +167,7 @@ console.log("Test");
                 audioplayed = false;
             }
             var groupsbefore = guestgroup - data.current_group;
-            var groupsbeforeinitially = <?php echo get_data_from_guest($guestid, "initgroupsbefore");?>;
+            var groupsbeforeinitially = <?php if(get_data_from_guest($guestid, "initgroupsbefore") == null){echo 0;} else { echo get_data_from_guest($guestid, "initgroupsbefore");};?>;
             percentCompleted = 100 - ((groupsbefore/groupsbeforeinitially)*100);
             if(percentCompleted > 90){
                 percentCompleted = 97;
