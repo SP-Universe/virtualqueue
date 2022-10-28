@@ -1014,6 +1014,12 @@ input[type=submit]:hover {
   margin: 20px 0;
   padding: 10px;
   border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+.section.section--admin .toggleview.groupsadmin .group_change_form input[type=text] {
+  width: 50%;
+  margin: 0 auto;
 }
 .section.section--admin .toggleview.entranceadmin {
   max-width: 600px;
@@ -1294,7 +1300,7 @@ input[type=submit]:hover {
   top: 0;
   left: 0;
   right: 0;
-  width: 100vw;
+  width: 100%;
   margin: 0;
   background-color: rgb(0, 56, 56);
   -webkit-backdrop-filter: blur(3px);
@@ -1319,6 +1325,7 @@ input[type=submit]:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   z-index: 50;
 }
 

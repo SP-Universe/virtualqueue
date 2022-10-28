@@ -130,6 +130,13 @@
                 margin: 20px 0;
                 padding: 10px;
                 border: 1px solid black;
+                display: flex;
+                flex-direction: column;
+
+                input[type="text"]{
+                    width: 50%;
+                    margin: 0 auto;
+                }
             }
         }
 

@@ -175,18 +175,18 @@
                     <div class="options">
                         <div class="options_value">
                             <p>Gruppe</p>
-                            <input type="number" value="<?php echo $current_group;?>" name="group">
+                            <input type="number" onfocus="disableReload()" onblur="enableReload()" value="<?php echo $current_group;?>" name="group">
                         </div>
                         <div class="options_value">
                             <p>Max VQ</p>
-                            <input onchange="calculateTotalShowSize()" type="number" value="<?php echo $max_vq_users_per_group;?>" id="max_vq" name="max_vq">
+                            <input onchange="calculateTotalShowSize()" onfocus="disableReload()" onblur="enableReload()" type="number" value="<?php echo $max_vq_users_per_group;?>" id="max_vq" name="max_vq">
                         </div>
                         <div class="options_value">
                             <p>Min SQ</p>
-                            <input onchange="calculateTotalShowSize()" type="number" value="<?php echo $min_sq_users_per_group;?>" id="min_sq" name="min_sq">
+                            <input onchange="calculateTotalShowSize()" onfocus="disableReload()" onblur="enableReload()" type="number" value="<?php echo $min_sq_users_per_group;?>" id="min_sq" name="min_sq">
                         </div>
                         <div class="options_value">
-                            <p id="guestcount_display">(20 People per Show)</p>
+                            <p id="guestcount_display">(20 Gäste per Show)</p>
                         </div>
                     </div>
                     
@@ -194,18 +194,22 @@
                 </form>
 
                 <form class="add_guest_form" method="post" action="add_guest.php">
-                    <input type="number" value="1" name="new_guests">
+                    <input type="number" value="1" name="new_guests" onfocus="disableReload()" onblur="enableReload()">
                     <input type="submit" value="Add guest" accesskey="s" name="submit">
                 </form>
                 
                 <form class="group_change_form" method="post" action="change_status.php">
-                    <select id="status" name="status">
-                        <option value="closedbefore" <?php if($current_status === "closedbefore"){echo'selected';}?>>closedbefore</option>
-                        <option value="showclosed" <?php if($current_status === "showclosed"){echo'selected';}?>>showclosed</option>
-                        <option value="open" <?php if($current_status === "open"){echo'selected';}?>>open</option>
-                        <option value="maintenance" <?php if($current_status === "maintenance"){echo'selected';}?>>maintenance</option>
-                        <option value="closedafter" <?php if($current_status === "closedafter"){echo'selected';}?>>closedafter</option>
+                    <select id="status" name="status" onfocus="disableReload()" onblur="enableReload()">
+                        <option value="beforehalloween" <?php if($current_status === "beforehalloween"){echo'selected';}?>>Vor Halloween</option>
+                        <option value="closedbefore" <?php if($current_status === "closedbefore"){echo'selected';}?>>Gesamt geschlossen</option>
+                        <option value="showclosed" <?php if($current_status === "showclosed"){echo'selected';}?>>Nur Queue offen</option>
+                        <option value="open" <?php if($current_status === "open"){echo'selected';}?>>Geöffnet</option>
+                        <option value="maintenance" <?php if($current_status === "maintenance"){echo'selected';}?>>Technische Probleme</option>
+                        <option value="closedafter" <?php if($current_status === "closedafter"){echo'selected';}?>>Nach Show geschlossen</option>
+                        <option value="custommessage" <?php if($current_status === "custommessage"){echo'selected';}?>>Custom Nachricht</option>
                     </select>
+                    <label for="custommessage">Custom Nachricht</label>
+                    <input type="text" id="custom_message" name="custom_message" value="<?php echo get_data_from_setting("custom_message");?>" onfocus="disableReload()" onblur="enableReload()">
                     <input type="submit" value="Change status" accesskey="s" name="submit">
                 </form>
             </div>
@@ -298,6 +302,8 @@ let showHideElements = [...document.querySelectorAll('[data-behaviour="showhide"
 
 var countDownDate = new Date("Oct 21, <?php echo get_data_from_group($current_group + 1, 'time');?>").getTime();
 
+var enablereload = true;
+
 setInterval(function() {
     var now = new Date().getTime();
     var distance = now - countDownDate;
@@ -307,6 +313,14 @@ setInterval(function() {
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
     document.getElementById("admin_next_group_countdown").innerHTML = "<p>" + minutes + ":" + seconds + " bis zum nächstem Einlass</p>";
 }, 1000);
+
+function enableReload(){
+    enablereload = true;
+}
+
+function disableReload(){
+    enablereload = false;
+}
 
 function calculateTotalShowSize(){
     var minSQ = guestcountForm.elements["min_sq"];
@@ -376,12 +390,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
 });
 
+
+
 setInterval(function(){ 
-    if(view == "groups"){
+    if(view == "groups" && enablereload == true){
         window.location.reload();
         updateDisplay();
     }
-}, 30000);
+}, 5000);
 
 updateDisplay();
 calculateTotalShowSize();

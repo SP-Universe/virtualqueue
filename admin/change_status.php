@@ -16,6 +16,10 @@
             $status = $_POST['status'];
             set_data_for_settings("current_status", $status);
         }
+        if(isset($_POST['custom_message'])){
+            $custom_message = $_POST['custom_message'];
+            set_data_for_settings("custom_message", $custom_message);
+        }
     } else {
         echo'FORBIDDEN!';
     }

@@ -36,7 +36,7 @@
             echo "Error creating guesttable: " . $conn->error;
         }
 
-        $sql = "CREATE TABLE IF NOT EXISTS " . $table_settings . " (id INT(6) AUTO_INCREMENT PRIMARY KEY, identifier VARCHAR(50) NOT NULL, data VARCHAR(50))";
+        $sql = "CREATE TABLE IF NOT EXISTS " . $table_settings . " (id INT(6) AUTO_INCREMENT PRIMARY KEY, identifier VARCHAR(50) NOT NULL, data VARCHAR(250))";
         if ($conn->query($sql) === FALSE) {
             echo "Error creating settingstable: " . $conn->error;
         }
