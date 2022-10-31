@@ -3,16 +3,20 @@
         ?>
     <div id="slider">
         <ul>
-            <li><img src="../app/client/src/images/info_pages/info_1.jpeg" alt="info_page 1"></li>
-            <li><img src="../app/client/src/images/info_pages/info_2.jpeg" alt="info_page 2"></li>
-            <li><img src="../app/client/src/images/info_pages/info_3.jpeg" alt="info_page 3"></li>
-            <li><img src="../app/client/src/images/info_pages/info_4.jpeg" alt="info_page 4"></li>
-            <li><img src="../app/client/src/images/info_pages/info_5.jpeg" alt="info_page 5"></li>
-            <li><img src="../app/client/src/images/info_pages/info_6.jpeg" alt="info_page 6"></li>
-            <li><img src="../app/client/src/images/info_pages/info_7.jpeg" alt="info_page 7"></li>
-            <li><img src="../app/client/src/images/info_pages/info_8.jpeg" alt="info_page 8"></li>
-            <li><img src="../app/client/src/images/info_pages/info_9.jpeg" alt="info_page 9"></li>
+            <li><img src="../app/client/src/images/info_pages/info_01.jpeg" alt="info_page 1"></li>
+            <li><img src="../app/client/src/images/info_pages/info_02.jpeg" alt="info_page 2"></li>
+            <li><img src="../app/client/src/images/info_pages/info_03.jpeg" alt="info_page 3"></li>
+            <li><img src="../app/client/src/images/info_pages/info_04.jpeg" alt="info_page 4"></li>
+            <li><img src="../app/client/src/images/info_pages/info_05.jpeg" alt="info_page 5"></li>
+            <li><img src="../app/client/src/images/info_pages/info_06.jpeg" alt="info_page 6"></li>
+            <li><img src="../app/client/src/images/info_pages/info_07.jpeg" alt="info_page 7"></li>
+            <li><img src="../app/client/src/images/info_pages/info_08.jpeg" alt="info_page 8"></li>
+            <li><img src="../app/client/src/images/info_pages/info_09.jpeg" alt="info_page 9"></li>
             <li><img src="../app/client/src/images/info_pages/info_10.jpg" alt="info_page 10"></li>
+            <li><img src="../app/client/src/images/info_pages/info_11.jpg" alt="info_page 11"></li>
+            <li><img src="../app/client/src/images/info_pages/info_12.jpg" alt="info_page 12"></li>
+            <li><img src="../app/client/src/images/info_pages/info_13.jpg" alt="info_page 13"></li>
+            <li><img src="../app/client/src/images/info_pages/info_14.jpg" alt="info_page 14"></li>
         </ul>  
     </div>
 
