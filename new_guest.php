@@ -16,7 +16,7 @@
             echo'<a href="userpage.php?new_guests=' . $i . '" class="button">' . $i . '</a>';
         } ?>
     </div>
-    <p>(Wenn ihr mehr als 10 Personen seid, müsst ihr euch bitte aufteilen)</p>
+    <p>(Wenn ihr mehr als <?php echo $max_vq_users_per_group; ?> Personen seid, müsst ihr euch bitte aufteilen)</p>
 
 <?php
     include 'layout/footer.php';
