@@ -170,17 +170,17 @@ console.log("Test");
             var time = data.estimatedtime;
             time = time.substring(0, time.length - 3);
 
-            if(data.current_group == guestid){
+            if(data.current_group == data.usergroup){
                 placeinlineNumberElement.innerText = "Du bist dran!";
                 placeinlineNumberElement.parentElement.classList.add("your_turn");
                 estimatedTimeElement.innerText = "Jetzt!";
                 feedbackCard.classList.remove("visible");
-            } else if (data.current_group < guestid){
+            } else if (data.current_group < data.usergroup){
                 placeinlineNumberElement.innerText = guestgroup - data.current_group;
                 placeinlineNumberElement.parentElement.classList.remove("your_turn");
                 estimatedTimeElement.innerText = time;
                 feedbackCard.classList.remove("visible");
-            } else if (data.current_group > guestid){
+            } else if (data.current_group > data.usergroup){
                 placeinlineNumberElement.innerText = guestgroup - data.current_group;
                 placeinlineNumberElement.parentElement.classList.remove("your_turn");
                 estimatedTimeElement.innerText = time;
