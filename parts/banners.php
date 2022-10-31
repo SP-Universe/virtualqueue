@@ -2,7 +2,7 @@
     function getBanner(){
         ?>
             <div class="closed_banner" id="beforehalloween_banner" style="visibility: hidden;">
-                <p>Unsere virtuelle Warteschlange öffnet erst an Halloween selbst. Bitte versuch es später erneut!</p>
+                <p>Unsere virtuelle Warteschlange öffnet im Laufe des Tages. Bitte versuch es später erneut!</p>
                 <br>
                 <a href="https://halloweenhaus-schmalenbeck.de" class="button">Zurück zu unserer Website</a>
             </div>
