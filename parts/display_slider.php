@@ -12,11 +12,11 @@
             <li><img src="../app/client/src/images/info_pages/info_07.jpeg" alt="info_page 7"></li>
             <li><img src="../app/client/src/images/info_pages/info_08.jpeg" alt="info_page 8"></li>
             <li><img src="../app/client/src/images/info_pages/info_09.jpeg" alt="info_page 9"></li>
-            <li><img src="../app/client/src/images/info_pages/info_10.jpg" alt="info_page 10"></li>
-            <li><img src="../app/client/src/images/info_pages/info_11.jpg" alt="info_page 11"></li>
-            <li><img src="../app/client/src/images/info_pages/info_12.jpg" alt="info_page 12"></li>
-            <li><img src="../app/client/src/images/info_pages/info_13.jpg" alt="info_page 13"></li>
-            <li><img src="../app/client/src/images/info_pages/info_14.jpg" alt="info_page 14"></li>
+            <li><img src="../app/client/src/images/info_pages/info_10.jpeg" alt="info_page 10"></li>
+            <li><img src="../app/client/src/images/info_pages/info_11.jpeg" alt="info_page 11"></li>
+            <li><img src="../app/client/src/images/info_pages/info_12.jpeg" alt="info_page 12"></li>
+            <li><img src="../app/client/src/images/info_pages/info_13.jpeg" alt="info_page 13"></li>
+            <li><img src="../app/client/src/images/info_pages/info_14.jpeg" alt="info_page 14"></li>
         </ul>  
     </div>
 
